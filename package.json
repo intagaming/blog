@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "next": "latest",
+    "prettier": "^2.3.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
