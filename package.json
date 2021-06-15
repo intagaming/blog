@@ -14,8 +14,16 @@
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.4.1",
     "autoprefixer": "^10.0.4",
+    "babel-plugin-superjson-next": "^0.3.0",
+    "gray-matter": "^4.0.3",
     "postcss": "^8.1.10",
+    "probe-image-size": "^7.2.1",
+    "rehype-stringify": "^8.0.0",
+    "remark": "^13.0.0",
+    "remark-rehype": "^8.1.0",
+    "superjson": "^1.7.4",
     "tailwindcss": "^2.1.1"
   }
 }

@@ -1,24 +1,36 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { getAllPosts, getPostHtmlBySlug } from "../lib/posts";
+import Layout from "../components/layout";
+import Image from "next/image";
 
-export default function PostOrPage({ post } = props) {
+export default function PostOrPage({ post }) {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
+  const { html, data } = post;
   return (
-    <>
-      <article>
-        <h1>{post.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
-      </article>
-    </>
+    <Layout>
+      <div className={"flex justify-center mt-20"}>
+        <article className={"prose"}>
+          <h1>{data.title}</h1>
+          <Image
+            src={data.thumbnail.url}
+            alt={"post thumbnail"}
+            width={data.thumbnail.dimensions.width}
+            height={data.thumbnail.dimensions.height}
+            layout={"responsive"}
+          />
+          <div dangerouslySetInnerHTML={{ __html: html }} />
+        </article>
+      </div>
+    </Layout>
   );
 }
 
 export async function getStaticPaths() {
-  // const posts = await getPosts();
-  const posts = [];
+  const posts = getAllPosts();
 
   const paths = posts.map((post) => ({
     params: {
@@ -33,8 +45,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(ctx) {
-  // const post = await getSinglePost(ctx.params.slug);
-  const post = null;
+  const post = getPostHtmlBySlug(ctx.params.slug);
 
   if (!post) {
     return {
