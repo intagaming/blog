@@ -1,5 +1,5 @@
 import Link from "next/link";
-import TopNavigation from "../components/navbar";
+import TopNavigation from "../components/topnav";
 import { getAllPosts } from "../lib/posts";
 import Layout from "../components/layout";
 

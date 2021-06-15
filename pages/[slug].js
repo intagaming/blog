@@ -1,15 +1,17 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { getAllPosts, getPostHtmlBySlug } from "../lib/posts";
+import { getAllPosts, getPostNodeBySlug } from "../lib/posts";
 import Layout from "../components/layout";
 import Image from "next/image";
+import rehype2react from "rehype-react";
+import rehype from "rehype";
 
 export default function PostOrPage({ post }) {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
-  const { html, data } = post;
+  const { htmlNode, data } = post;
   return (
     <Layout>
       <div className={"flex justify-center mt-20"}>
@@ -22,7 +24,28 @@ export default function PostOrPage({ post }) {
             height={data.thumbnail.dimensions.height}
             layout={"responsive"}
           />
-          <div dangerouslySetInnerHTML={{ __html: html }} />
+          <div>
+            {rehype()
+              .data("settings", { fragment: true })
+              .use(rehype2react, {
+                createElement: React.createElement,
+                Fragment: React.Fragment,
+                components: {
+                  Image: (props) => (
+                    <Image
+                      {
+                        ...props.node.properties // img tag attribute
+                      }
+                      {
+                        ...props.node.imageDimensions // width and height
+                      }
+                    />
+                  ),
+                },
+                passNode: true,
+              })
+              .stringify(htmlNode)}
+          </div>
         </article>
       </div>
     </Layout>
@@ -45,7 +68,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(ctx) {
-  const post = getPostHtmlBySlug(ctx.params.slug);
+  const post = getPostNodeBySlug(ctx.params.slug);
 
   if (!post) {
     return {

@@ -1,4 +1,4 @@
-import TopNavigation from "./navbar";
+import TopNavigation from "./topnav";
 import React from "react";
 
 export default function Layout(props) {
