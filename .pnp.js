@@ -47,6 +47,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["gray-matter", "npm:4.0.3"],
             ["next", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:11.0.0"],
             ["postcss", "npm:8.3.4"],
+            ["prettier", "npm:2.3.1"],
             ["probe-image-size", "npm:7.2.1"],
             ["react", "npm:17.0.2"],
             ["react-dom", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:17.0.2"],
@@ -3930,6 +3931,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["prettier", [
+        ["npm:2.3.1", {
+          "packageLocation": "./.yarn/cache/prettier-npm-2.3.1-f8593fac45-9b4a695b87.zip/node_modules/prettier/",
+          "packageDependencies": [
+            ["prettier", "npm:2.3.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["pretty-hrtime", [
         ["npm:1.0.3", {
           "packageLocation": "./.yarn/cache/pretty-hrtime-npm-1.0.3-32fd75fcbd-efb9d4987e.zip/node_modules/pretty-hrtime/",
@@ -5523,6 +5533,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["gray-matter", "npm:4.0.3"],
             ["next", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:11.0.0"],
             ["postcss", "npm:8.3.4"],
+            ["prettier", "npm:2.3.1"],
             ["probe-image-size", "npm:7.2.1"],
             ["react", "npm:17.0.2"],
             ["react-dom", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:17.0.2"],

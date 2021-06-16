@@ -23,6 +23,7 @@
     "babel-plugin-superjson-next": "^0.3.0",
     "gray-matter": "^4.0.3",
     "postcss": "^8.1.10",
+    "prettier": "^2.3.1",
     "probe-image-size": "^7.2.1",
     "rehype": "^11.0.0",
     "rehype-react": "^6.2.0",
