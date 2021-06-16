@@ -3,5 +3,7 @@
     "**/.yarn": true,
     "**/.pnp.*": true
   },
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.js"
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+  "editor.fontFamily": "FiraCode NF, Consolas, 'Courier New', monospace",
+  "eslint.nodePath": ".yarn/sdks"
 }
