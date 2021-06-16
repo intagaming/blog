@@ -1,12 +1,14 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { getAllPosts, getPostNodeBySlug } from "../lib/posts";
 import Layout from "../components/layout";
-import Image from "next/image";
 import rehype2react from "rehype-react";
 import rehype from "rehype";
+import NextImage from "../components/nextImage";
+import Image from "next/image";
 
-export default function PostOrPage({ post }) {
+const PostOrPage = ({ post }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -31,16 +33,7 @@ export default function PostOrPage({ post }) {
                 createElement: React.createElement,
                 Fragment: React.Fragment,
                 components: {
-                  Image: (props) => (
-                    <Image
-                      {
-                        ...props.node.properties // img tag attribute
-                      }
-                      {
-                        ...props.node.imageDimensions // width and height
-                      }
-                    />
-                  ),
+                  Image: NextImage,
                 },
                 passNode: true,
               })
@@ -50,7 +43,13 @@ export default function PostOrPage({ post }) {
       </div>
     </Layout>
   );
-}
+};
+
+PostOrPage.propTypes = {
+  post: PropTypes.object,
+};
+
+export default PostOrPage;
 
 export async function getStaticPaths() {
   const posts = getAllPosts();

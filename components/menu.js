@@ -1,6 +1,6 @@
-import { useState } from "react";
+import PropTypes from "prop-types";
 
-export default function Menu({ onClick }) {
+const Menu = ({ onClick }) => {
   return (
     <span className="cursor-pointer" onClick={onClick}>
       <svg
@@ -19,4 +19,10 @@ export default function Menu({ onClick }) {
       </svg>
     </span>
   );
-}
+};
+
+Menu.propTypes = {
+  onClick: PropTypes.func,
+};
+
+export default Menu;

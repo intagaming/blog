@@ -1,3 +1,5 @@
-export default function PostCard() {
+const PostCard = () => {
   return <div></div>;
-}
+};
+
+export default PostCard;

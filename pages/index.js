@@ -1,9 +1,9 @@
+import PropTypes from "prop-types";
 import Link from "next/link";
-import TopNavigation from "../components/topnav";
 import { getAllPosts } from "../lib/posts";
 import Layout from "../components/layout";
 
-export default function Home({ posts }) {
+const Home = ({ posts }) => {
   return (
     <Layout>
       <div>
@@ -17,9 +17,15 @@ export default function Home({ posts }) {
       </div>
     </Layout>
   );
-}
+};
 
-export async function getStaticProps(ctx) {
+Home.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object),
+};
+
+export default Home;
+
+export async function getStaticProps() {
   const posts = getAllPosts();
 
   if (!posts) {
