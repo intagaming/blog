@@ -10,7 +10,7 @@ const Home = ({ posts }) => {
         <ul>
           {posts.map((post) => (
             <li key={post.slug}>
-              <Link href={"/" + post.slug}>{post.data.title}</Link>
+              <Link href={"/" + post.slug}>{post.title}</Link>
             </li>
           ))}
         </ul>
@@ -26,7 +26,7 @@ Home.propTypes = {
 export default Home;
 
 export async function getStaticProps() {
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
 
   if (!posts) {
     return {

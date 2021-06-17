@@ -13,17 +13,17 @@ const PostOrPage = ({ post }) => {
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
-  const { htmlNode, data } = post;
+  const { htmlNode, post: postJson } = post;
   return (
     <Layout>
       <div className={"flex justify-center mt-20"}>
         <article className={"prose"}>
-          <h1>{data.title}</h1>
+          <h1>{postJson.title}</h1>
           <Image
-            src={data.thumbnail.url}
-            alt={"post thumbnail"}
-            width={data.thumbnail.dimensions.width}
-            height={data.thumbnail.dimensions.height}
+            src={postJson.cover.url}
+            alt={postJson.cover.alternativeText}
+            width={postJson.cover.width}
+            height={postJson.cover.height}
             layout={"responsive"}
           />
           <div>
@@ -52,7 +52,7 @@ PostOrPage.propTypes = {
 export default PostOrPage;
 
 export async function getStaticPaths() {
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
 
   const paths = posts.map((post) => ({
     params: {
@@ -67,7 +67,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(ctx) {
-  const post = getPostNodeBySlug(ctx.params.slug);
+  const post = await getPostNodeBySlug(ctx.params.slug);
 
   if (!post) {
     return {
