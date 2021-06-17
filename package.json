@@ -24,6 +24,7 @@
     "autoprefixer": "^10.0.4",
     "babel-plugin-superjson-next": "^0.3.0",
     "eslint": "^7.28.0",
+    "eslint-config-next": "^11.0.0",
     "eslint-plugin-react": "latest",
     "gray-matter": "^4.0.3",
     "postcss": "^8.1.10",
