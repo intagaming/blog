@@ -17,7 +17,9 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "unified": "^9.2.1"
+    "remark": "^13.0.0",
+    "unified": "^9.2.1",
+    "unist-util-find": "^1.0.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.4.1",

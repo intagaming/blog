@@ -3526,6 +3526,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.iteratee@npm:^4.5.0":
+  version: 4.7.0
+  resolution: "lodash.iteratee@npm:4.7.0"
+  checksum: 1d2f0f09764d0cc1b9cc93796e71d6693e2a48f3d2254dc508dc5dd774c8a02e9d47237a2a52a2d795c19c88d9a0be7051185755b48d3be16db268213c0cb3e6
+  languageName: node
+  linkType: hard
+
 "lodash.memoize@npm:^4.1.2":
   version: 4.1.2
   resolution: "lodash.memoize@npm:4.1.2"
@@ -3579,6 +3586,13 @@ __metadata:
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 4983720b9abca930a4a46f18db163d7dad8dd00dbed6db0cc7b499b33b717cce69f80928b27bbb1ff2cbd3b19d251ee90669a8b5ea466072ca81c2ebe91e7468
+  languageName: node
+  linkType: hard
+
+"longest-streak@npm:^2.0.0":
+  version: 2.0.4
+  resolution: "longest-streak@npm:2.0.4"
+  checksum: ba5ebac14700c0a5f88a312be789b651c35bfed84bd5e2b4f04ac0898add697c36ede401d0b17dfaac0956171027b61ad49ad866ac949ae1d36f9e4ced60cbe1
   languageName: node
   linkType: hard
 
@@ -3680,6 +3694,20 @@ __metadata:
     unist-util-position: ^3.0.0
     unist-util-visit: ^2.0.0
   checksum: fded0c9b69b69b15128228884cf2387ea9968402e1e3696f33b9806d41de4692ec6a0de385def6dd83be7359a72bff6ba0d5a364c52b0a228e38b5e61fd497d1
+  languageName: node
+  linkType: hard
+
+"mdast-util-to-markdown@npm:^0.6.0":
+  version: 0.6.5
+  resolution: "mdast-util-to-markdown@npm:0.6.5"
+  dependencies:
+    "@types/unist": ^2.0.0
+    longest-streak: ^2.0.0
+    mdast-util-to-string: ^2.0.0
+    parse-entities: ^2.0.0
+    repeat-string: ^1.0.0
+    zwitch: ^1.0.0
+  checksum: c5db77398cdab7bf8a3dcf81f47eaefc7ee267006f9de89c9db9e56d24194bcf1165610dbc8ae61d3f8ba2f92b351b2fc9516b4eb870b78108cc135a43f028b0
   languageName: node
   linkType: hard
 
@@ -5358,6 +5386,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"remark-stringify@npm:^9.0.0":
+  version: 9.0.1
+  resolution: "remark-stringify@npm:9.0.1"
+  dependencies:
+    mdast-util-to-markdown: ^0.6.0
+  checksum: 34f5807981f59d6878f4dc5b67c8af908c5736886cc4f7d959e583c8dcb47d7693f09253510a46fdb1d60d3dbb2551f815666c433473bb38cd495df2abfecdcd
+  languageName: node
+  linkType: hard
+
 "remark-unwrap-images@npm:^2.1.0":
   version: 2.1.0
   resolution: "remark-unwrap-images@npm:2.1.0"
@@ -5365,6 +5402,24 @@ __metadata:
     hast-util-whitespace: ^1.0.0
     unist-util-visit: ^2.0.0
   checksum: 7557791d5ecf040b64e4d2f20a7873260d9ac73bd5eb31d04dd737ad8171e62003f848248183742fe46616359ad28e8443c201f1e3c03156fe1070d537a05728
+  languageName: node
+  linkType: hard
+
+"remark@npm:^13.0.0":
+  version: 13.0.0
+  resolution: "remark@npm:13.0.0"
+  dependencies:
+    remark-parse: ^9.0.0
+    remark-stringify: ^9.0.0
+    unified: ^9.1.0
+  checksum: eac686868cbf71a59a24e3b5a5946439ce124dbc6b26bb5da5197ad1eaf91290950fef46eb4a7ffecd7fcf17bb84ae0d1a4e2719b15fbeaf2372e059a0b81572
+  languageName: node
+  linkType: hard
+
+"repeat-string@npm:^1.0.0":
+  version: 1.6.1
+  resolution: "repeat-string@npm:1.6.1"
+  checksum: 99c431ba7bef7a5d39819d562ebca89206368b45f73213677a3b562e25b5dd272d9e6a2ca8105001df14b6fc8cc71f0b10258c86e16cf8a256318fac1ddc8a77
   languageName: node
   linkType: hard
 
@@ -6348,7 +6403,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"unified@npm:^9.0.0, unified@npm:^9.2.1":
+"unified@npm:^9.0.0, unified@npm:^9.1.0, unified@npm:^9.2.1":
   version: 9.2.1
   resolution: "unified@npm:9.2.1"
   dependencies:
@@ -6391,6 +6446,16 @@ resolve@^2.0.0-next.3:
   version: 2.0.3
   resolution: "unist-builder@npm:2.0.3"
   checksum: 64f9231bac9050b65d8cb97bc64e93782f93551e4a6a4e75ff89f580fa92740520bbd9ec44b7917c29785d498a3f432c326c5f55bd44e8949b98f5f63b14ec44
+  languageName: node
+  linkType: hard
+
+"unist-util-find@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "unist-util-find@npm:1.0.2"
+  dependencies:
+    lodash.iteratee: ^4.5.0
+    unist-util-visit: ^1.1.0
+  checksum: 3401e41606f757a5d01fa63915ffb9a25f439e272b96d24db03fbccd8311cc7f0a37de4586450ebc8a4fcf9077fcebc7a65047f982f5895aa3bf6ddbc153cb7e
   languageName: node
   linkType: hard
 
@@ -6450,7 +6515,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"unist-util-visit@npm:^1.3.0":
+"unist-util-visit@npm:^1.1.0, unist-util-visit@npm:^1.3.0":
   version: 1.4.1
   resolution: "unist-util-visit@npm:1.4.1"
   dependencies:
@@ -6734,12 +6799,14 @@ resolve@^2.0.0-next.3:
     react-dom: ^17.0.1
     rehype: ^11.0.0
     rehype-react: ^6.2.0
+    remark: ^13.0.0
     remark-parse: ^9.0.0
     remark-rehype: ^8.1.0
     remark-unwrap-images: ^2.1.0
     superjson: ^1.7.4
     tailwindcss: canary
     unified: ^9.2.1
+    unist-util-find: ^1.0.2
     unist-util-visit: ^2.0.3
   languageName: unknown
   linkType: soft
@@ -6783,5 +6850,12 @@ resolve@^2.0.0-next.3:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: 096c3b40beb2804659539be1605a35c58eb0c85285f94b77b3e924f42ee265c1a40bf9f4153770039517146b469a964d51742395f35ca8135fc9f7e4982b785d
+  languageName: node
+  linkType: hard
+
+"zwitch@npm:^1.0.0":
+  version: 1.0.5
+  resolution: "zwitch@npm:1.0.5"
+  checksum: 5005166809cfe1f87a75aa8186a606414482c9c7fccff523a621a94ea4b22c7e60599c0cf47669df9946c4a1dea342ebf5d512cbeeacd567814382fee122a3a0
   languageName: node
   linkType: hard

@@ -1,19 +1,25 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { getAllPosts } from "../lib/posts";
+import { getLatestPosts } from "../lib/postOrPage";
 import Layout from "../components/layout";
+import PostCard from "../components/postcard";
 
 const Home = ({ posts }) => {
   return (
     <Layout>
-      <div>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.slug}>
-              <Link href={"/" + post.slug}>{post.title}</Link>
-            </li>
-          ))}
-        </ul>
+      <p className="px-[4vw] my-10">
+        My blog rants about universities and document thought process.
+        <Link href="/about">
+          <span className="text-indigo-600 cursor-pointer">
+            {" "}
+            Read more about me.
+          </span>
+        </Link>
+      </p>
+      <div className="px-[4vw] mb-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.map((post) => (
+          <PostCard key={post.slug} post={post} />
+        ))}
       </div>
     </Layout>
   );
@@ -26,7 +32,7 @@ Home.propTypes = {
 export default Home;
 
 export async function getStaticProps() {
-  const posts = await getAllPosts();
+  const posts = await getLatestPosts();
 
   if (!posts) {
     return {

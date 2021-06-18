@@ -8,10 +8,6 @@ const navLinks = [
     title: "About",
     href: "/about",
   },
-  {
-    title: "Collections",
-    href: "/collections",
-  },
 ];
 
 const TopNavigation = () => {
@@ -29,10 +25,14 @@ const TopNavigation = () => {
           (extend ? " h-full" : "")
         }
       >
-        <div className={"bg-black flex justify-between items-center px-4 h-10"}>
+        <div
+          className={
+            "bg-black flex justify-between items-center px-4 h-10 md:h-14"
+          }
+        >
           <div className={"flex gap-6 cursor-pointer"}>
             <Link href="/">
-              <span className={"md:text-xl md:font-bold"}>An7&apos;s Blog</span>
+              <span className={"md:text-lg md:font-bold"}>An7&apos;s Blog</span>
             </Link>
           </div>
           <div className={"md:hidden"}>
@@ -55,7 +55,7 @@ const TopNavigation = () => {
         </ul>
         <ul
           className={
-            "pr-10 bg-black md:flex h-20 md:h-auto justify-center items-center gap-6 text-3xl md:text-2xl" +
+            "md:pr-10 bg-black md:flex h-20 md:h-auto justify-center items-center gap-6 text-3xl md:text-2xl" +
             (!extend ? " hidden" : " flex")
           }
         >
