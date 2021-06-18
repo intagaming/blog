@@ -41,6 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@fortawesome/free-brands-svg-icons", "npm:5.15.3"],
             ["@fortawesome/free-solid-svg-icons", "npm:5.15.3"],
             ["@fortawesome/react-fontawesome", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:0.1.14"],
+            ["@tailwindcss/aspect-ratio", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:0.2.1"],
             ["@tailwindcss/typography", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:0.4.1"],
             ["autoprefixer", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:10.2.6"],
             ["babel-plugin-superjson-next", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:0.3.0"],
@@ -453,6 +454,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@rushstack-eslint-patch-npm-1.0.6-175d9af5dd-cc01301f09.zip/node_modules/@rushstack/eslint-patch/",
           "packageDependencies": [
             ["@rushstack/eslint-patch", "npm:1.0.6"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@tailwindcss/aspect-ratio", [
+        ["npm:0.2.1", {
+          "packageLocation": "./.yarn/cache/@tailwindcss-aspect-ratio-npm-0.2.1-c98daaf341-90739254f6.zip/node_modules/@tailwindcss/aspect-ratio/",
+          "packageDependencies": [
+            ["@tailwindcss/aspect-ratio", "npm:0.2.1"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:0.2.1", {
+          "packageLocation": "./.yarn/$$virtual/@tailwindcss-aspect-ratio-virtual-28c63cc22f/0/cache/@tailwindcss-aspect-ratio-npm-0.2.1-c98daaf341-90739254f6.zip/node_modules/@tailwindcss/aspect-ratio/",
+          "packageDependencies": [
+            ["@tailwindcss/aspect-ratio", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:0.2.1"],
+            ["@types/tailwindcss", null],
+            ["tailwindcss", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:2.2.0-canary.16"]
+          ],
+          "packagePeers": [
+            "@types/tailwindcss",
+            "tailwindcss"
           ],
           "linkType": "HARD",
         }]
@@ -8329,6 +8352,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@fortawesome/free-brands-svg-icons", "npm:5.15.3"],
             ["@fortawesome/free-solid-svg-icons", "npm:5.15.3"],
             ["@fortawesome/react-fontawesome", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:0.1.14"],
+            ["@tailwindcss/aspect-ratio", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:0.2.1"],
             ["@tailwindcss/typography", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:0.4.1"],
             ["autoprefixer", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:10.2.6"],
             ["babel-plugin-superjson-next", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:0.3.0"],

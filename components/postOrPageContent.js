@@ -14,14 +14,12 @@ const PostOrPageContent = ({ postOrPage }) => {
         <h1>{json.title}</h1>
         {json.author && <AuthorAndBrief post={json} />}
         {json.cover && (
-          <div className="mt-6">
+          <div className="mt-6 aspect-w-3 aspect-h-2">
             <Image
-              className="rounded-sm"
+              className="rounded-sm object-contain"
               src={json.cover.url}
               alt={json.cover.alternativeText}
-              width={json.cover.width}
-              height={json.cover.height}
-              layout={"responsive"}
+              layout={"fill"}
             />
           </div>
         )}

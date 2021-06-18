@@ -19,14 +19,14 @@ const PostCard = ({ post }) => {
     <article>
       <Link href={"/" + post.slug}>
         <div className="cursor-pointer">
-          <Image
-            className="rounded-sm"
-            src={post.cover.url}
-            alt={post.cover.alternativeText}
-            width={post.cover.width}
-            height={post.cover.height}
-            layout={"responsive"}
-          />
+          <div className="aspect-w-3 aspect-h-2">
+            <Image
+              className="rounded-sm object-cover"
+              src={post.cover.url}
+              alt={post.cover.alternativeText}
+              layout={"fill"}
+            />
+          </div>
           <h2 className="mt-6 text-xl font-bold">{post.title}</h2>
           <p className="mt-2 text-gray-500">{excerpt}</p>
         </div>

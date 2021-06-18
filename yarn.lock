@@ -308,6 +308,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tailwindcss/aspect-ratio@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "@tailwindcss/aspect-ratio@npm:0.2.1"
+  peerDependencies:
+    tailwindcss: ">=2.0.0"
+  checksum: 90739254f6e77adf8bca2785103124891945b449d1ba4d222c11767bd6c532a3f3b9b441f875ceac28f90ba09f2697af66cc02fed4ed48125911953cc77b65a8
+  languageName: node
+  linkType: hard
+
 "@tailwindcss/typography@npm:^0.4.1":
   version: 0.4.1
   resolution: "@tailwindcss/typography@npm:0.4.1"
@@ -6783,6 +6792,7 @@ resolve@^2.0.0-next.3:
     "@fortawesome/free-brands-svg-icons": ^5.15.3
     "@fortawesome/free-solid-svg-icons": ^5.15.3
     "@fortawesome/react-fontawesome": ^0.1.14
+    "@tailwindcss/aspect-ratio": ^0.2.1
     "@tailwindcss/typography": ^0.4.1
     autoprefixer: ^10.0.4
     babel-plugin-superjson-next: ^0.3.0
