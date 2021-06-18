@@ -30,9 +30,9 @@ const TopNavigation = () => {
             "bg-black flex justify-between items-center px-4 h-10 md:h-14"
           }
         >
-          <div className={"flex gap-6 cursor-pointer"}>
+          <div className={"cursor-pointer"}>
             <Link href="/">
-              <span className={"md:text-lg md:font-bold"}>An7&apos;s Blog</span>
+              <span className={"md:text-lg md:font-bold"}>An Hoang</span>
             </Link>
           </div>
           <div className={"md:hidden"}>
@@ -60,18 +60,18 @@ const TopNavigation = () => {
           }
         >
           <li key={"fb"}>
-            <Link href={"https://facebook.com/an.xuanhoang"}>
+            <a href={"https://facebook.com/an.xuanhoang"}>
               <span className={"cursor-pointer"}>
                 <FontAwesomeIcon icon={["fab", "facebook"]} />
               </span>
-            </Link>
+            </a>
           </li>
           <li key={"github"}>
-            <Link href={"https://github.com/intagaming/blog"}>
+            <a href={"https://github.com/intagaming/blog"}>
               <span className={"cursor-pointer"}>
-                <FontAwesomeIcon icon={["fab", "github"]} />{" "}
+                <FontAwesomeIcon icon={["fab", "github"]} />
               </span>
-            </Link>
+            </a>
           </li>
         </ul>
       </div>

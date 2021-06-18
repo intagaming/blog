@@ -9,7 +9,7 @@ import AuthorAndBrief from "./authorAndBrief";
 const PostOrPageContent = ({ postOrPage }) => {
   const { htmlNode, json } = postOrPage;
   return (
-    <div className={"flex justify-center md:mt-20 mt-10 mx-2"}>
+    <div className={"flex justify-center md:mt-20 my-10 mx-2"}>
       <article className={"prose w-full"}>
         <h1>{json.title}</h1>
         {json.author && <AuthorAndBrief post={json} />}
