@@ -1,3 +1,5 @@
-# Personal Blog project
+# Personal Blog
 
-This is my NextJS + Netlify CMS + Tailwind CSS Blog project, with the objective of being my first 100% complete website. Also, a personal blog is my preferred place for documenting the learning process along the way.
+This is my NextJS + Tailwind CSS + Strapi Blog project, with the objective of being my first 100% complete website. See [https://blog-an7.vercel.app/about](https://blog-an7.vercel.app/about)
+
+The Strapi project repository will be published soon.
