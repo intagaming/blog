@@ -10,10 +10,14 @@ const PostCard = ({ post }) => {
   remark()
     .use(() => {
       return (tree) => {
-        excerpt = find(tree, { type: "paragraph" }).children[0].value ?? "abc";
+        excerpt = find(tree, { type: "paragraph" }).children[0].value ?? "";
       };
     })
     .processSync(post.content);
+
+  if (excerpt.length > 120) {
+    excerpt = excerpt.substring(0, 120) + "...";
+  }
 
   return (
     <article>
