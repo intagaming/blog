@@ -15,7 +15,6 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "next": "latest",
-    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "remark": "^13.0.0",
@@ -24,12 +23,19 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.4.1",
+    "@types/hast": "^2.3.1",
+    "@types/node": "^15.12.4",
+    "@types/probe-image-size": "^7.0.0",
+    "@types/react": "^17.0.11",
+    "@types/unist": "^2.0.3",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "@yarnpkg/pnpify": "^3.0.0-rc.6",
     "autoprefixer": "^10.0.4",
     "babel-plugin-superjson-next": "^0.3.0",
     "eslint": "^7.28.0",
     "eslint-config-next": "^11.0.0",
     "eslint-plugin-react": "latest",
-    "gray-matter": "^4.0.3",
     "postcss": "^8.1.10",
     "prettier": "^2.3.1",
     "probe-image-size": "^7.2.1",
@@ -40,6 +46,7 @@
     "remark-unwrap-images": "^2.1.0",
     "superjson": "^1.7.4",
     "tailwindcss": "canary",
+    "typescript": "^4.3.4",
     "unist-util-visit": "^2.0.3"
   }
 }
