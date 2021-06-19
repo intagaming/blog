@@ -20,7 +20,7 @@ const Home = ({ posts }: Props): JSX.Element => {
           My blog rants about universities and document thought process.
           <br />
           <Link href="/about">
-            <span className="text-indigo-600 cursor-pointer">
+            <span className="text-blue-500 hover:bg-white/25 cursor-pointer underline">
               {" "}
               Read more about me.
             </span>
