@@ -8,6 +8,10 @@ const navLinks = [
     title: "About",
     href: "/about",
   },
+  {
+    title: "Contact",
+    href: "/contact",
+  },
 ];
 
 const TopNavigation = (): JSX.Element => {
