@@ -70,5 +70,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { postOrPageWithNode },
+    revalidate: 30,
   };
 };
