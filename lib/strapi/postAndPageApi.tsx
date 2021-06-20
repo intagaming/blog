@@ -8,6 +8,7 @@ import { fetchAPI } from "./api";
 import { Node } from "unist";
 import { ImageElement } from "../../types/hast";
 import { PostOrPage, PostOrPageWithNode } from "../../types/postOrPage";
+import remarkGfm from "remark-gfm";
 
 export const getPostBySlug = async (
   slug: string
@@ -27,7 +28,7 @@ export const getHtmlNodeFromMarkdown = async (
   markdown: string
 ): Promise<Node> => {
   // The only way to return a Node object is to get a Node and process it.
-  const mdNode = unified().use(remarkParse).parse(markdown);
+  const mdNode = unified().use(remarkParse).use(remarkGfm).parse(markdown);
 
   // Process the node
   const htmlNode = await unified()
