@@ -17,9 +17,11 @@ const NextImage = ({ node }: Props): JSX.Element => {
   }
 
   return (
-    <div className="aspect-w-3 aspect-h-2">
-      <Image className="object-contain" {...node.properties} layout={"fill"} />
-    </div>
+    <Image
+      {...node.properties}
+      {...node.imageDimensions}
+      layout={"responsive"}
+    />
   );
 };
 
