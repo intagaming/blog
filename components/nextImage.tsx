@@ -16,7 +16,11 @@ const NextImage = ({ node }: Props): JSX.Element => {
     );
   }
 
-  return <Image {...node.properties} {...node.imageDimensions} />;
+  return (
+    <div className="aspect-w-3 aspect-h-2">
+      <Image className="object-contain" {...node.properties} layout={"fill"} />
+    </div>
+  );
 };
 
 export default NextImage;
