@@ -26,7 +26,7 @@ const PostCard = ({ post }: Props): JSX.Element => {
   return (
     <article>
       <Link href={"/" + post.slug}>
-        <div className="cursor-pointer">
+        <a>
           <div className="aspect-w-3 aspect-h-2">
             <Image
               className="rounded-sm object-cover"
@@ -37,7 +37,7 @@ const PostCard = ({ post }: Props): JSX.Element => {
           </div>
           <h2 className="mt-6 text-xl font-bold">{post.title}</h2>
           <p className="mt-2 text-gray-500">{excerpt}</p>
-        </div>
+        </a>
       </Link>
       <AuthorAndBrief post={post} size="sm" />
       <hr className="sm:hidden mt-12" />

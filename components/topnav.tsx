@@ -47,11 +47,11 @@ const TopNavigation = (): JSX.Element => {
             "bg-black flex justify-between items-center px-4 h-10 md:h-14"
           }
         >
-          <div className={"cursor-pointer"}>
-            <Link href="/">
+          <Link href="/">
+            <a>
               <span className={"md:text-lg md:font-bold"}>An Hoang</span>
-            </Link>
-          </div>
+            </a>
+          </Link>
           <div className={"md:hidden"}>
             <Menu onClick={menuClick} />
           </div>
@@ -63,9 +63,11 @@ const TopNavigation = (): JSX.Element => {
           }
         >
           {navLinks.map((link) => (
-            <li key={link.href} className={"cursor-pointer"}>
+            <li key={link.href}>
               <Link href={link.href}>
-                <span className={"opacity-70"}>{link.title}</span>
+                <a>
+                  <span className={"opacity-70"}>{link.title}</span>
+                </a>
               </Link>
             </li>
           ))}
