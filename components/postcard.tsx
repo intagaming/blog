@@ -1,27 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import remark from "remark";
-import find from "unist-util-find";
 import AuthorAndBrief from "./authorAndBrief";
 import { PostOrPage } from "../types/postOrPage";
+import { getPostExcerpt } from "../lib/postOrPage";
 
 type Props = {
   post: PostOrPage;
 };
 
 const PostCard = ({ post }: Props): JSX.Element => {
-  let excerpt: string;
-  remark()
-    .use(() => {
-      return (tree) => {
-        excerpt = find(tree, { type: "paragraph" }).children[0].value ?? "";
-      };
-    })
-    .processSync(post.content);
-
-  if (excerpt.length > 120) {
-    excerpt = excerpt.substring(0, 120) + "...";
-  }
+  const excerpt = getPostExcerpt(post);
 
   return (
     <article>

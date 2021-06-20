@@ -6,7 +6,9 @@ export interface PostOrPage {
   slug: string;
   content: string;
   published_at: string;
-  cover: StrapiImage;
+  created_at: string;
+  updated_at: string;
+  cover?: StrapiImage;
   author?: {
     avatar: StrapiImage;
     fullName: string;

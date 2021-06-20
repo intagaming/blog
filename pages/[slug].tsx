@@ -10,21 +10,54 @@ import { PostOrPageWithNode } from "../types/postOrPage";
 import Layout from "../components/layout";
 import PostOrPageContent from "../components/postOrPageContent";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { NextSeo } from "next-seo";
+import { getPostExcerpt } from "../lib/postOrPage";
 
 type Props = {
   postOrPageWithNode: PostOrPageWithNode;
+  domainUrl: string;
 };
 
-const PostAndPage = ({ postOrPageWithNode }: Props): JSX.Element => {
+const PostAndPage = ({ postOrPageWithNode, domainUrl }: Props): JSX.Element => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
+  const { postOrPage } = postOrPageWithNode;
+  const excerpt = getPostExcerpt(postOrPage);
 
   return (
-    <Layout>
-      <PostOrPageContent postOrPageWithNode={postOrPageWithNode} />
-    </Layout>
+    <>
+      <NextSeo
+        title={postOrPage.title}
+        description={excerpt || "A blog by An Hoang."}
+        canonical={`${domainUrl}`}
+        openGraph={{
+          title: `${postOrPage.title} | An Hoang`,
+          type: "article",
+          url: `${domainUrl}/${postOrPage.slug}`,
+          description: excerpt || "A blog by An Hoang.",
+          images: [
+            {
+              url:
+                postOrPage.cover?.url ||
+                "https://res.cloudinary.com/an7/image/upload/v1624203392/banner_c88bc0724c.png",
+              width: postOrPage.cover?.width || 1920,
+              height: postOrPage.cover?.height || 1080,
+              alt: postOrPage.cover?.alternativeText || "An Hoang",
+            },
+          ],
+          article: {
+            publishedTime: postOrPage.published_at,
+            modifiedTime: postOrPage.updated_at,
+            authors: ["https://hxann.com/about"],
+          },
+        }}
+      />
+      <Layout>
+        <PostOrPageContent postOrPageWithNode={postOrPageWithNode} />
+      </Layout>
+    </>
   );
 };
 
@@ -54,6 +87,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const domainUrl = process.env.DOMAIN_URL || "http://localhost:3000";
+
   const slug = params.slug;
   if (Array.isArray(slug)) return; // TypeScript sake
 
@@ -69,7 +104,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   return {
-    props: { postOrPageWithNode },
+    props: { postOrPageWithNode, domainUrl },
     revalidate: 30,
   };
 };
