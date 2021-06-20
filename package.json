@@ -9,15 +9,12 @@
     "lint": "eslint . --ext .js"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-brands-svg-icons": "^5.15.3",
-    "@fortawesome/free-solid-svg-icons": "^5.15.3",
-    "@fortawesome/react-fontawesome": "^0.1.14",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "next": "latest",
     "next-seo": "^4.26.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-icons": "^4.2.0",
     "remark": "^13.0.0",
     "remark-gfm": "^1.0.0",
     "unified": "^9.2.1",

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Menu from "./menu";
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
+import { FaFacebook, FaGithub } from "react-icons/fa";
 
 const navLinks = [
   {
@@ -81,14 +81,14 @@ const TopNavigation = (): JSX.Element => {
           <li key={"fb"}>
             <a href={"https://facebook.com/an.xuanhoang"}>
               <span className={"cursor-pointer"}>
-                <FontAwesomeIcon icon={["fab", "facebook"]} />
+                <FaFacebook />
               </span>
             </a>
           </li>
           <li key={"github"}>
             <a href={"https://github.com/intagaming/blog"}>
               <span className={"cursor-pointer"}>
-                <FontAwesomeIcon icon={["fab", "github"]} />
+                <FaGithub />
               </span>
             </a>
           </li>
