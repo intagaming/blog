@@ -21,7 +21,6 @@ const Home = ({ posts }: Props): JSX.Element => {
           <br />
           <Link href="/about">
             <span className="text-blue-500 hover:bg-white/25 cursor-pointer underline">
-              {" "}
               Read more about me.
             </span>
           </Link>
