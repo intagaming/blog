@@ -82,10 +82,12 @@ const optimizeImages = () => {
     const promises = [];
 
     visit(tree, { tagName: "img" }, (node: ImageElement) => {
-      promises.push(async () => {
-        node.tagName = "Image";
-        node.imageDimensions = await getDimensions(node.properties.src);
-      });
+      promises.push(
+        (async () => {
+          node.tagName = "Image";
+          node.imageDimensions = await getDimensions(node.properties.src);
+        })()
+      );
     });
 
     await Promise.allSettled(promises);
