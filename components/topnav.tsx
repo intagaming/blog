@@ -39,7 +39,7 @@ const TopNavigation = (): JSX.Element => {
       <div
         className={
           "fixed text-white w-screen flex flex-col md:flex-row z-50" +
-          (extend ? " h-full" : "")
+          (extend ? " h-full md:h-auto" : "")
         }
       >
         <div
@@ -58,7 +58,7 @@ const TopNavigation = (): JSX.Element => {
         </div>
         <ul
           className={
-            "md:px-4 md:flex flex-col md:flex-row md:flex-1 md:justify-start gap-6 md:gap-4 justify-center items-center bg-black text-2xl md:text-base" +
+            "md:px-6 md:flex flex-col md:flex-row md:flex-1 md:justify-start gap-6 justify-center items-center bg-black text-2xl md:text-base" +
             (extend ? " flex flex-1" : " hidden")
           }
         >
