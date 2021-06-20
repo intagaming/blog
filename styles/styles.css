@@ -1,9 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-    font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/*
+  My hot take on the "Next.js vertical image on horizontal screen" problem.
+    Apply .vertical-image-div to a div wrapped outside
+    <Image className="vertical-image" layout="fill"> tag.
+ */
+.vertical-image-div > div {
+  position: unset !important;
+}
+
+/* This is hard-coded, which is *probably* not good(?) */
+@screen md {
+  .vertical-image-div > div {
+    position: absolute !important;
+  }
+}
+
+.vertical-image {
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
 }
