@@ -12,7 +12,7 @@ const AuthorAndBrief = ({ post, size }: Props): JSX.Element => {
     day: "numeric",
     year: "numeric",
   });
-  const minuteRead = Math.ceil(post.content.split(/\s+/).length / 225);
+  const minuteRead = Math.ceil(post.content.split(/\s+/).length / 145);
 
   return (
     <div className="mt-6 flex gap-4">
