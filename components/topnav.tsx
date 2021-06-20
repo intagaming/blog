@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Menu from "./menu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 
 const navLinks = [
   {
@@ -16,10 +17,22 @@ const navLinks = [
 
 const TopNavigation = (): JSX.Element => {
   const [extend, setExtend] = useState(false);
+  const router = useRouter();
 
   const menuClick = () => {
     setExtend((extend) => !extend);
   };
+
+  useEffect(() => {
+    const onRouteStart = () => {
+      setExtend(false);
+    };
+    router.events.on("routeChangeStart", onRouteStart);
+
+    return () => {
+      router.events.off("routeChangeStart", onRouteStart);
+    };
+  }, []);
 
   return (
     <>
