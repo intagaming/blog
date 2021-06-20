@@ -14,7 +14,7 @@ const PostOrPageContent = ({ postOrPageWithNode }: Props): JSX.Element => {
   const { node, postOrPage } = postOrPageWithNode;
   return (
     <div className={"flex justify-center md:mt-20 my-10 mx-4"}>
-      <article className={"prose w-full md:prose-xl"}>
+      <article className={"prose w-full md:prose-lg"}>
         <h1>{postOrPage.title}</h1>
         {postOrPage.author && <AuthorAndBrief post={postOrPage} />}
         {postOrPage.cover && (
