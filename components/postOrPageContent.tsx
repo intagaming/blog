@@ -36,7 +36,9 @@ const PostOrPageContent = ({
         )}
         <div>
           {rehype()
-            .data("settings", { fragment: true })
+            .data("settings", {
+              fragment: true,
+            })
             .use(rehype2react, {
               createElement: React.createElement,
               Fragment: React.Fragment,
