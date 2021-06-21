@@ -54,6 +54,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:7.24.0"],
             ["next", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:11.0.0"],
             ["next-seo", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:4.26.0"],
+            ["next-sitemap", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:1.6.116"],
             ["postcss", "npm:8.3.4"],
             ["prettier", "npm:2.3.1"],
             ["probe-image-size", "npm:7.2.1"],
@@ -182,6 +183,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["esutils", "npm:2.0.3"],
             ["lodash", "npm:4.17.21"],
             ["to-fast-properties", "npm:2.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@corex/deepmerge", [
+        ["npm:2.6.20", {
+          "packageLocation": "./.yarn/cache/@corex-deepmerge-npm-2.6.20-f821a851ac-c0d01da581.zip/node_modules/@corex/deepmerge/",
+          "packageDependencies": [
+            ["@corex/deepmerge", "npm:2.6.20"]
           ],
           "linkType": "HARD",
         }]
@@ -4730,6 +4740,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["matcher", [
+        ["npm:4.0.0", {
+          "packageLocation": "./.yarn/cache/matcher-npm-4.0.0-418060075c-457f90baba.zip/node_modules/matcher/",
+          "packageDependencies": [
+            ["matcher", "npm:4.0.0"],
+            ["escape-string-regexp", "npm:4.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["md5.js", [
         ["npm:1.3.5", {
           "packageLocation": "./.yarn/cache/md5.js-npm-1.3.5-130901125a-ca0b260ea2.zip/node_modules/md5.js/",
@@ -5330,6 +5350,31 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "next",
             "react-dom",
             "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["next-sitemap", [
+        ["npm:1.6.116", {
+          "packageLocation": "./.yarn/cache/next-sitemap-npm-1.6.116-07934b2c83-5a23415eb7.zip/node_modules/next-sitemap/",
+          "packageDependencies": [
+            ["next-sitemap", "npm:1.6.116"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:1.6.116", {
+          "packageLocation": "./.yarn/$$virtual/next-sitemap-virtual-7edc37104d/0/cache/next-sitemap-npm-1.6.116-07934b2c83-5a23415eb7.zip/node_modules/next-sitemap/",
+          "packageDependencies": [
+            ["next-sitemap", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:1.6.116"],
+            ["@corex/deepmerge", "npm:2.6.20"],
+            ["@types/next", null],
+            ["matcher", "npm:4.0.0"],
+            ["minimist", "npm:1.2.5"],
+            ["next", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:11.0.0"]
+          ],
+          "packagePeers": [
+            "@types/next",
+            "next"
           ],
           "linkType": "HARD",
         }]
@@ -8298,6 +8343,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:7.24.0"],
             ["next", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:11.0.0"],
             ["next-seo", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:4.26.0"],
+            ["next-sitemap", "virtual:5a41d63ced7c4f3ae08c7690f4ba4fff0ae2e698eaa7b59c2abb6f6fbf46481bd354e2a6e0b2ed9addc4f3d04d62154d636f3a41471518403d6c74e57dc94d07#npm:1.6.116"],
             ["postcss", "npm:8.3.4"],
             ["prettier", "npm:2.3.1"],
             ["probe-image-size", "npm:7.2.1"],
