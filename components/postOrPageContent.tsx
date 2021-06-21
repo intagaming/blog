@@ -6,6 +6,7 @@ import NextImage from "./nextImage";
 import AuthorAndBrief from "./authorAndBrief";
 import { PostOrPageWithNode } from "../types/postOrPage";
 import { DiscussionEmbed } from "disqus-react";
+import "highlight.js/styles/github-dark.css";
 
 type Props = {
   postOrPageWithNode: PostOrPageWithNode;

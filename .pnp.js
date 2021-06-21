@@ -54,6 +54,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:7.28.0"],
             ["eslint-config-next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:11.0.0"],
             ["eslint-plugin-react", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:7.24.0"],
+            ["highlight.js", "npm:11.0.1"],
             ["next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:11.0.0"],
             ["next-seo", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.26.0"],
             ["next-sitemap", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:1.6.116"],
@@ -65,6 +66,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:17.0.2"],
             ["react-icons", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.2.0"],
             ["rehype", "npm:11.0.0"],
+            ["rehype-highlight", "npm:4.1.0"],
             ["rehype-react", "npm:6.2.0"],
             ["remark", "npm:13.0.0"],
             ["remark-gfm", "npm:1.0.0"],
@@ -1152,6 +1154,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:7.28.0"],
             ["eslint-config-next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:11.0.0"],
             ["eslint-plugin-react", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:7.24.0"],
+            ["highlight.js", "npm:11.0.1"],
             ["next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:11.0.0"],
             ["next-seo", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.26.0"],
             ["next-sitemap", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:1.6.116"],
@@ -1163,6 +1166,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:17.0.2"],
             ["react-icons", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.2.0"],
             ["rehype", "npm:11.0.0"],
+            ["rehype-highlight", "npm:4.1.0"],
             ["rehype-react", "npm:6.2.0"],
             ["remark", "npm:13.0.0"],
             ["remark-gfm", "npm:1.0.0"],
@@ -3309,6 +3313,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["fault", [
+        ["npm:1.0.4", {
+          "packageLocation": "./.yarn/cache/fault-npm-1.0.4-2788bc13e3-6b8ef4f743.zip/node_modules/fault/",
+          "packageDependencies": [
+            ["fault", "npm:1.0.4"],
+            ["format", "npm:0.2.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["file-entry-cache", [
         ["npm:6.0.1", {
           "packageLocation": "./.yarn/cache/file-entry-cache-npm-6.0.1-31965cf0af-af83a41214.zip/node_modules/file-entry-cache/",
@@ -3385,6 +3399,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/foreach-npm-2.0.5-9fbfc73114-890d6c3dec.zip/node_modules/foreach/",
           "packageDependencies": [
             ["foreach", "npm:2.0.5"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["format", [
+        ["npm:0.2.2", {
+          "packageLocation": "./.yarn/cache/format-npm-0.2.2-679f3acc64-0740f52121.zip/node_modules/format/",
+          "packageDependencies": [
+            ["format", "npm:0.2.2"]
           ],
           "linkType": "HARD",
         }]
@@ -3764,6 +3787,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["hast-util-to-text", [
+        ["npm:2.0.1", {
+          "packageLocation": "./.yarn/cache/hast-util-to-text-npm-2.0.1-2541ca4a18-4f945792aa.zip/node_modules/hast-util-to-text/",
+          "packageDependencies": [
+            ["hast-util-to-text", "npm:2.0.1"],
+            ["hast-util-is-element", "npm:1.1.0"],
+            ["repeat-string", "npm:1.6.1"],
+            ["unist-util-find-after", "npm:3.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["hast-util-whitespace", [
         ["npm:1.0.4", {
           "packageLocation": "./.yarn/cache/hast-util-whitespace-npm-1.0.4-43bb1ff3d0-4acef9a83d.zip/node_modules/hast-util-whitespace/",
@@ -3792,6 +3827,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/he-npm-1.2.0-3b73a2ff07-212122003c.zip/node_modules/he/",
           "packageDependencies": [
             ["he", "npm:1.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["highlight.js", [
+        ["npm:10.7.3", {
+          "packageLocation": "./.yarn/cache/highlight.js-npm-10.7.3-247e67d5c0-2b7bc9890d.zip/node_modules/highlight.js/",
+          "packageDependencies": [
+            ["highlight.js", "npm:10.7.3"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:11.0.1", {
+          "packageLocation": "./.yarn/cache/highlight.js-npm-11.0.1-9ebc38fba8-1c9f474ab8.zip/node_modules/highlight.js/",
+          "packageDependencies": [
+            ["highlight.js", "npm:11.0.1"]
           ],
           "linkType": "HARD",
         }]
@@ -4760,6 +4811,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/lowercase-keys-npm-2.0.0-1876065a32-4da67f4186.zip/node_modules/lowercase-keys/",
           "packageDependencies": [
             ["lowercase-keys", "npm:2.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lowlight", [
+        ["npm:1.20.0", {
+          "packageLocation": "./.yarn/cache/lowlight-npm-1.20.0-771a13490e-619bbc4853.zip/node_modules/lowlight/",
+          "packageDependencies": [
+            ["lowlight", "npm:1.20.0"],
+            ["fault", "npm:1.0.4"],
+            ["highlight.js", "npm:10.7.3"]
           ],
           "linkType": "HARD",
         }]
@@ -6738,6 +6800,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["rehype-highlight", [
+        ["npm:4.1.0", {
+          "packageLocation": "./.yarn/cache/rehype-highlight-npm-4.1.0-581fdd8624-8c8c47421c.zip/node_modules/rehype-highlight/",
+          "packageDependencies": [
+            ["rehype-highlight", "npm:4.1.0"],
+            ["hast-util-to-text", "npm:2.0.1"],
+            ["lowlight", "npm:1.20.0"],
+            ["unist-util-visit", "npm:2.0.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["rehype-parse", [
         ["npm:7.0.1", {
           "packageLocation": "./.yarn/cache/rehype-parse-npm-7.0.1-6af956500f-a78b6eb59c.zip/node_modules/rehype-parse/",
@@ -8044,6 +8118,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["unist-util-find", "npm:1.0.2"],
             ["lodash.iteratee", "npm:4.7.0"],
             ["unist-util-visit", "npm:1.4.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["unist-util-find-after", [
+        ["npm:3.0.0", {
+          "packageLocation": "./.yarn/cache/unist-util-find-after-npm-3.0.0-7381434645-afad28f7bc.zip/node_modules/unist-util-find-after/",
+          "packageDependencies": [
+            ["unist-util-find-after", "npm:3.0.0"],
+            ["unist-util-is", "npm:4.1.0"]
           ],
           "linkType": "HARD",
         }]

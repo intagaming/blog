@@ -9,6 +9,7 @@ import { Node } from "unist";
 import { ImageElement } from "../../types/hast";
 import { PostOrPage, PostOrPageWithNode } from "../../types/postOrPage";
 import remarkGfm from "remark-gfm";
+import highlight from "rehype-highlight";
 
 export const getPostBySlug = async (
   slug: string
@@ -35,6 +36,7 @@ export const getHtmlNodeFromMarkdown = async (
     .use(remarkUnwrapImages) // Unwrap the paragraph around the <img>
     .use(remark2rehype) // Converts to html processor
     .use(optimizeImages) // Prep the <img> to be "NextJS Image compatible"
+    .use(highlight)
     .run(mdNode); // Mdast -> Hast
 
   return htmlNode;
