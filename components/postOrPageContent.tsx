@@ -7,6 +7,7 @@ import AuthorAndBrief from "./authorAndBrief";
 import { PostOrPageWithNode } from "../types/postOrPage";
 import { DiscussionEmbed } from "disqus-react";
 import "highlight.js/styles/github-dark.css";
+import MyLink from "./mylink";
 
 type Props = {
   postOrPageWithNode: PostOrPageWithNode;
@@ -41,6 +42,7 @@ const PostOrPageContent = ({
               Fragment: React.Fragment,
               components: {
                 Image: NextImage,
+                a: MyLink,
               },
               passNode: true,
             })
