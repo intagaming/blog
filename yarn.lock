@@ -435,7 +435,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prop-types@npm:*":
+"@types/prop-types@npm:*, @types/prop-types@npm:^15":
   version: 15.7.3
   resolution: "@types/prop-types@npm:15.7.3"
   checksum: bd0eab69d5120ad3784d0c9985f902653d5924707a7f2b3702a330e762dfd61b6494954cb54ad0c52b918ffd6f1e7e27c9270e4442bc15250de348596f2f60cb
@@ -823,6 +823,53 @@ __metadata:
   checksum: 4eed9ee72e752d34a99541d04a608030db17735672ec334563b7cbc5936cb879a394e8f75789174690c7cd58ec2610c8363cb7480c23c15a9ca4424911cd683d
   languageName: node
   linkType: hard
+
+"an-hoang-blog@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "an-hoang-blog@workspace:."
+  dependencies:
+    "@tailwindcss/aspect-ratio": ^0.2.1
+    "@tailwindcss/typography": ^0.4.1
+    "@types/hast": ^2.3.1
+    "@types/node": ^15.12.4
+    "@types/probe-image-size": ^7.0.0
+    "@types/prop-types": ^15
+    "@types/react": ^17.0.11
+    "@types/unist": ^2.0.3
+    "@typescript-eslint/eslint-plugin": latest
+    "@typescript-eslint/parser": latest
+    "@yarnpkg/pnpify": ^3.0.0-rc.6
+    autoprefixer: ^10.0.4
+    babel-plugin-superjson-next: ^0.3.0
+    disqus-react: ^1.1.0
+    eslint: ^7.28.0
+    eslint-config-next: ^11.0.0
+    eslint-plugin-react: latest
+    next: latest
+    next-seo: ^4.26.0
+    next-sitemap: ^1.6.116
+    postcss: ^8.1.10
+    prettier: ^2.3.1
+    probe-image-size: ^7.2.1
+    prop-types: ^15.7.2
+    react: ^17.0.1
+    react-dom: ^17.0.1
+    react-icons: ^4.2.0
+    rehype: ^11.0.0
+    rehype-react: ^6.2.0
+    remark: ^13.0.0
+    remark-gfm: ^1.0.0
+    remark-parse: ^9.0.0
+    remark-rehype: ^8.1.0
+    remark-unwrap-images: ^2.1.0
+    superjson: ^1.7.4
+    tailwindcss: ^2.2.2
+    typescript: ^4.3.4
+    unified: ^9.2.1
+    unist-util-find: ^1.0.2
+    unist-util-visit: ^2.0.3
+  languageName: unknown
+  linkType: soft
 
 "anser@npm:1.4.9":
   version: 1.4.9
@@ -1997,6 +2044,16 @@ __metadata:
   dependencies:
     path-type: ^4.0.0
   checksum: 687fa3bd604f264042f325d9460e1298447fb32782f30cddc47cb302b742684d13e8ffce4c6f455e0ae92099d71e29f72387379c10b8fd3f6f1bf8992d7c0997
+  languageName: node
+  linkType: hard
+
+"disqus-react@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "disqus-react@npm:1.1.0"
+  peerDependencies:
+    react: ^15.6.1 || ^16.0.0 || ^17.0.0
+    react-dom: ^15.6.1 || ^16.0.0 || ^17.0.0
+  checksum: ca0f704dffa3bb772c23e35d2a4b4db5da41cc9391bd574cca70260c0335b5bea03eacd8e79bd904be461b97fd61aa215e7730d8362819dd23e832c73eb80c72
   languageName: node
   linkType: hard
 
@@ -6995,50 +7052,6 @@ typescript@^4.3.4:
   checksum: 4f850f84da84b7471d7b92f55e381e7ba286210470fe77a61e02464ef66d10e96057a0d137bc013fbbedb7363a26e79c0e8b21d99bb572467d3fee0465b8fd27
   languageName: node
   linkType: hard
-
-"with-tailwindcss@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "with-tailwindcss@workspace:."
-  dependencies:
-    "@tailwindcss/aspect-ratio": ^0.2.1
-    "@tailwindcss/typography": ^0.4.1
-    "@types/hast": ^2.3.1
-    "@types/node": ^15.12.4
-    "@types/probe-image-size": ^7.0.0
-    "@types/react": ^17.0.11
-    "@types/unist": ^2.0.3
-    "@typescript-eslint/eslint-plugin": latest
-    "@typescript-eslint/parser": latest
-    "@yarnpkg/pnpify": ^3.0.0-rc.6
-    autoprefixer: ^10.0.4
-    babel-plugin-superjson-next: ^0.3.0
-    eslint: ^7.28.0
-    eslint-config-next: ^11.0.0
-    eslint-plugin-react: latest
-    next: latest
-    next-seo: ^4.26.0
-    next-sitemap: ^1.6.116
-    postcss: ^8.1.10
-    prettier: ^2.3.1
-    probe-image-size: ^7.2.1
-    react: ^17.0.1
-    react-dom: ^17.0.1
-    react-icons: ^4.2.0
-    rehype: ^11.0.0
-    rehype-react: ^6.2.0
-    remark: ^13.0.0
-    remark-gfm: ^1.0.0
-    remark-parse: ^9.0.0
-    remark-rehype: ^8.1.0
-    remark-unwrap-images: ^2.1.0
-    superjson: ^1.7.4
-    tailwindcss: ^2.2.2
-    typescript: ^4.3.4
-    unified: ^9.2.1
-    unist-util-find: ^1.0.2
-    unist-util-visit: ^2.0.3
-  languageName: unknown
-  linkType: soft
 
 "word-wrap@npm:^1.2.3":
   version: 1.2.3

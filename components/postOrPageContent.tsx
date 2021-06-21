@@ -5,15 +5,20 @@ import rehype from "rehype";
 import NextImage from "./nextImage";
 import AuthorAndBrief from "./authorAndBrief";
 import { PostOrPageWithNode } from "../types/postOrPage";
+import { DiscussionEmbed } from "disqus-react";
 
 type Props = {
   postOrPageWithNode: PostOrPageWithNode;
+  domainUrl: string; // For Disqus
 };
 
-const PostOrPageContent = ({ postOrPageWithNode }: Props): JSX.Element => {
+const PostOrPageContent = ({
+  postOrPageWithNode,
+  domainUrl,
+}: Props): JSX.Element => {
   const { node, postOrPage } = postOrPageWithNode;
   return (
-    <div className={"flex justify-center md:mt-20 my-10 mx-4"}>
+    <div className={"flex flex-col items-center md:mt-20 my-10 mx-4"}>
       <article className={"prose w-full md:prose-lg"}>
         <h1>{postOrPage.title}</h1>
         {postOrPage.author && <AuthorAndBrief post={postOrPage} />}
@@ -40,6 +45,16 @@ const PostOrPageContent = ({ postOrPageWithNode }: Props): JSX.Element => {
             })
             .stringify(node)}
         </div>
+        <hr />
+        <p>Have a question or a discussion? Come, I&apos;m reading all day.</p>
+        <DiscussionEmbed
+          shortname={process.env.DISQUS_SHORTNAME || "an7"}
+          config={{
+            url: `${domainUrl}/${postOrPage.slug}`,
+            identifier: postOrPage.slug,
+            title: postOrPage.title,
+          }}
+        />
       </article>
     </div>
   );

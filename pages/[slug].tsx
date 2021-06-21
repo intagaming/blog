@@ -67,7 +67,10 @@ const PostAndPage = ({ postOrPageWithNode, domainUrl }: Props): JSX.Element => {
         description={excerpt || "A blog by An Hoang."}
       />
       <Layout>
-        <PostOrPageContent postOrPageWithNode={postOrPageWithNode} />
+        <PostOrPageContent
+          postOrPageWithNode={postOrPageWithNode}
+          domainUrl={domainUrl}
+        />
       </Layout>
     </>
   );
