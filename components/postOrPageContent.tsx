@@ -20,7 +20,7 @@ const PostOrPageContent = ({
   const { node, postOrPage } = postOrPageWithNode;
   return (
     <div className={"flex flex-col items-center md:mt-20 my-10 mx-4"}>
-      <article className={"prose w-full md:prose-lg"}>
+      <article className={"prose w-full md:prose-lg prose-indigo"}>
         <h1>{postOrPage.title}</h1>
         {postOrPage.author && <AuthorAndBrief post={postOrPage} />}
         {postOrPage.cover && (
