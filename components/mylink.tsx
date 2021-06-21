@@ -6,7 +6,7 @@ import AnimatedLinkSpan from "./animatedLinkSpan";
 type Props = {
   href: LinkProps["href"];
   children: ReactNode;
-  node: Element;
+  node?: Element;
 };
 
 const MyLink = ({ href, children }: Props): JSX.Element => {
