@@ -10,7 +10,7 @@ import { PostOrPageWithNode } from "../types/postOrPage";
 import Layout from "../components/layout";
 import PostOrPageContent from "../components/postOrPageContent";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { NextSeo } from "next-seo";
+import { NextSeo, BlogJsonLd } from "next-seo";
 import { getPostExcerpt } from "../lib/postOrPage";
 
 type Props = {
@@ -53,6 +53,18 @@ const PostAndPage = ({ postOrPageWithNode, domainUrl }: Props): JSX.Element => {
             authors: ["https://hxann.com/about"],
           },
         }}
+      />
+      <BlogJsonLd
+        url={`${domainUrl}/${postOrPage.slug}`}
+        title={`${postOrPage.title} | An Hoang`}
+        images={[
+          postOrPage.cover?.url ||
+            "https://res.cloudinary.com/an7/image/upload/v1624203392/banner_c88bc0724c.png",
+        ]}
+        datePublished={postOrPage.published_at}
+        dateModified={postOrPage.updated_at}
+        authorName={postOrPage.author?.fullName || "An Hoang"}
+        description={excerpt || "A blog by An Hoang."}
       />
       <Layout>
         <PostOrPageContent postOrPageWithNode={postOrPageWithNode} />
