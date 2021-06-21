@@ -18,7 +18,7 @@ const MyLink = ({ href, children }: Props): JSX.Element => {
     <Link href={href}>
       <animated.a
         onMouseOver={() => {
-          api.start({ opacity: 0.6 });
+          api.start({ opacity: 0.4 });
         }}
         onMouseLeave={() => {
           api.start({ opacity: 0 });
@@ -26,11 +26,11 @@ const MyLink = ({ href, children }: Props): JSX.Element => {
         style={{
           cursor: "pointer",
           backgroundColor: opacity.to(
-            (opacity) => `hsl(63, 75%, 59%, ${opacity})`
+            (opacity) => `hsl(21, 27%, 45%, ${opacity})`
           ),
         }}
       >
-        <span>{children}</span>
+        <span className="text-indigo-600 underline">{children}</span>
       </animated.a>
     </Link>
   );

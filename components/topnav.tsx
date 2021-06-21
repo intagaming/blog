@@ -49,7 +49,11 @@ const TopNavigation = (): JSX.Element => {
         >
           <Link href="/">
             <a>
-              <span className={"md:text-lg md:font-bold"}>An Hoang</span>
+              <span className={"md:text-lg md:font-bold px-2"}>
+                <span className="text-indigo-600 font-extrabold">&lt;</span>An
+                Hoang
+                <span className="text-indigo-600 font-extrabold">/&gt;</span>
+              </span>
             </a>
           </Link>
           <div className={"md:hidden"}>
@@ -58,7 +62,7 @@ const TopNavigation = (): JSX.Element => {
         </div>
         <ul
           className={
-            "md:px-6 md:flex flex-col md:flex-row md:flex-1 md:justify-start gap-6 justify-center items-center bg-black text-2xl md:text-base" +
+            "md:flex flex-col md:flex-row md:flex-1 md:justify-start gap-6 justify-center items-center bg-black text-2xl md:text-base" +
             (extend ? " flex flex-1" : " hidden")
           }
         >
