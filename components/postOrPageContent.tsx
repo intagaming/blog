@@ -8,6 +8,7 @@ import { PostOrPageData } from "../types/postOrPage";
 import { DiscussionEmbed } from "disqus-react";
 import "highlight.js/styles/github-dark.css";
 import MyLinkNodeWrapper from "./myLinkNodeWrapper";
+import TableOfContents from "../components/tableOfContents";
 
 type Props = {
   postOrPageData: PostOrPageData;
@@ -19,9 +20,11 @@ const PostOrPageContent = ({
   domainUrl,
 }: Props): JSX.Element => {
   const { node, postOrPage } = postOrPageData;
+  const proseClasses =
+    "prose prose-md lg:prose-lg xl:prose-xl prose-indigo w-full";
   return (
-    <div className={"flex flex-col items-center md:mt-20 my-10 mx-4"}>
-      <article className={"prose w-full md:prose-lg prose-indigo"}>
+    <article className={"md:mt-20 mt-10 mb-10 px-4 flex flex-col items-center"}>
+      <div className={proseClasses}>
         <h1>{postOrPage.title}</h1>
         {postOrPage.author && <AuthorAndBrief post={postOrPage} />}
         {postOrPage.cover && (
@@ -34,7 +37,12 @@ const PostOrPageContent = ({
             />
           </div>
         )}
-        <div>
+      </div>
+
+      <div className="relative w-full lg:w-auto">
+        <TableOfContents toc={postOrPageData.toc} />
+
+        <div className={proseClasses + " mx-auto"}>
           {rehype()
             .data("settings", {
               fragment: true,
@@ -50,6 +58,8 @@ const PostOrPageContent = ({
             })
             .stringify(node)}
         </div>
+      </div>
+      <div className={proseClasses}>
         <hr />
         <p>Have a question or a discussion? Come, I&apos;m reading all day.</p>
         <DiscussionEmbed
@@ -60,8 +70,8 @@ const PostOrPageContent = ({
             title: postOrPage.title,
           }}
         />
-      </article>
-    </div>
+      </div>
+    </article>
   );
 };
 
