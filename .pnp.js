@@ -65,6 +65,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:17.0.2"],
             ["react-dom", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:17.0.2"],
             ["react-icons", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.2.0"],
+            ["react-spring", "npm:9.2.3"],
             ["rehype", "npm:11.0.0"],
             ["rehype-highlight", "npm:4.1.0"],
             ["rehype-react", "npm:6.2.0"],
@@ -410,6 +411,263 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@npmcli/move-file", "npm:1.1.2"],
             ["mkdirp", "npm:1.0.4"],
             ["rimraf", "npm:3.0.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@react-spring/animated", [
+        ["npm:9.2.3", {
+          "packageLocation": "./.yarn/cache/@react-spring-animated-npm-9.2.3-405f39d213-fa9ef222f4.zip/node_modules/@react-spring/animated/",
+          "packageDependencies": [
+            ["@react-spring/animated", "npm:9.2.3"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3", {
+          "packageLocation": "./.yarn/$$virtual/@react-spring-animated-virtual-894bfd4cc3/0/cache/@react-spring-animated-npm-9.2.3-405f39d213-fa9ef222f4.zip/node_modules/@react-spring/animated/",
+          "packageDependencies": [
+            ["@react-spring/animated", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/shared", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/types", "npm:9.2.3"],
+            ["@types/react", null],
+            ["react", null]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@react-spring/core", [
+        ["npm:9.2.3", {
+          "packageLocation": "./.yarn/unplugged/@react-spring-core-virtual-abf63e1c5a/node_modules/@react-spring/core/",
+          "packageDependencies": [
+            ["@react-spring/core", "npm:9.2.3"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3", {
+          "packageLocation": "./.yarn/unplugged/@react-spring-core-virtual-abf63e1c5a/node_modules/@react-spring/core/",
+          "packageDependencies": [
+            ["@react-spring/core", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/animated", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/shared", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/types", "npm:9.2.3"],
+            ["@types/react", null],
+            ["react", null]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@react-spring/konva", [
+        ["npm:9.2.3", {
+          "packageLocation": "./.yarn/cache/@react-spring-konva-npm-9.2.3-b497f6c06c-7f32446638.zip/node_modules/@react-spring/konva/",
+          "packageDependencies": [
+            ["@react-spring/konva", "npm:9.2.3"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3", {
+          "packageLocation": "./.yarn/$$virtual/@react-spring-konva-virtual-23aaa112c2/0/cache/@react-spring-konva-npm-9.2.3-b497f6c06c-7f32446638.zip/node_modules/@react-spring/konva/",
+          "packageDependencies": [
+            ["@react-spring/konva", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/animated", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/core", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/shared", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/types", "npm:9.2.3"],
+            ["@types/konva", null],
+            ["@types/react", null],
+            ["@types/react-konva", null],
+            ["konva", null],
+            ["react", null],
+            ["react-konva", null]
+          ],
+          "packagePeers": [
+            "@types/konva",
+            "@types/react-konva",
+            "@types/react",
+            "konva",
+            "react-konva",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@react-spring/native", [
+        ["npm:9.2.3", {
+          "packageLocation": "./.yarn/cache/@react-spring-native-npm-9.2.3-0105d5937b-a89073961d.zip/node_modules/@react-spring/native/",
+          "packageDependencies": [
+            ["@react-spring/native", "npm:9.2.3"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3", {
+          "packageLocation": "./.yarn/$$virtual/@react-spring-native-virtual-485afaeaa0/0/cache/@react-spring-native-npm-9.2.3-0105d5937b-a89073961d.zip/node_modules/@react-spring/native/",
+          "packageDependencies": [
+            ["@react-spring/native", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/animated", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/core", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/shared", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/types", "npm:9.2.3"],
+            ["@types/react", null],
+            ["@types/react-native", null],
+            ["react", null],
+            ["react-native", null]
+          ],
+          "packagePeers": [
+            "@types/react-native",
+            "@types/react",
+            "react-native",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@react-spring/rafz", [
+        ["npm:9.2.3", {
+          "packageLocation": "./.yarn/cache/@react-spring-rafz-npm-9.2.3-288025dd76-08c1c5a0cd.zip/node_modules/@react-spring/rafz/",
+          "packageDependencies": [
+            ["@react-spring/rafz", "npm:9.2.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@react-spring/shared", [
+        ["npm:9.2.3", {
+          "packageLocation": "./.yarn/cache/@react-spring-shared-npm-9.2.3-48e5a420d6-356b9597e8.zip/node_modules/@react-spring/shared/",
+          "packageDependencies": [
+            ["@react-spring/shared", "npm:9.2.3"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3", {
+          "packageLocation": "./.yarn/$$virtual/@react-spring-shared-virtual-095299c529/0/cache/@react-spring-shared-npm-9.2.3-48e5a420d6-356b9597e8.zip/node_modules/@react-spring/shared/",
+          "packageDependencies": [
+            ["@react-spring/shared", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/rafz", "npm:9.2.3"],
+            ["@react-spring/types", "npm:9.2.3"],
+            ["@types/react", null],
+            ["react", null]
+          ],
+          "packagePeers": [
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@react-spring/three", [
+        ["npm:9.2.3", {
+          "packageLocation": "./.yarn/cache/@react-spring-three-npm-9.2.3-aa8d8337c9-aede16ac6b.zip/node_modules/@react-spring/three/",
+          "packageDependencies": [
+            ["@react-spring/three", "npm:9.2.3"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3", {
+          "packageLocation": "./.yarn/$$virtual/@react-spring-three-virtual-95bf482dbf/0/cache/@react-spring-three-npm-9.2.3-aa8d8337c9-aede16ac6b.zip/node_modules/@react-spring/three/",
+          "packageDependencies": [
+            ["@react-spring/three", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/animated", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/core", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/shared", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/types", "npm:9.2.3"],
+            ["@react-three/fiber", null],
+            ["@types/react", null],
+            ["@types/react-three__fiber", null],
+            ["@types/three", null],
+            ["react", null],
+            ["three", null]
+          ],
+          "packagePeers": [
+            "@react-three/fiber",
+            "@types/react-three__fiber",
+            "@types/react",
+            "@types/three",
+            "react",
+            "three"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@react-spring/types", [
+        ["npm:9.2.3", {
+          "packageLocation": "./.yarn/cache/@react-spring-types-npm-9.2.3-9e8b20b58d-c1917fe12b.zip/node_modules/@react-spring/types/",
+          "packageDependencies": [
+            ["@react-spring/types", "npm:9.2.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@react-spring/web", [
+        ["npm:9.2.3", {
+          "packageLocation": "./.yarn/cache/@react-spring-web-npm-9.2.3-d8010755d2-001f317c99.zip/node_modules/@react-spring/web/",
+          "packageDependencies": [
+            ["@react-spring/web", "npm:9.2.3"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3", {
+          "packageLocation": "./.yarn/$$virtual/@react-spring-web-virtual-c6dfe7b9f0/0/cache/@react-spring-web-npm-9.2.3-d8010755d2-001f317c99.zip/node_modules/@react-spring/web/",
+          "packageDependencies": [
+            ["@react-spring/web", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/animated", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/core", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/shared", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/types", "npm:9.2.3"],
+            ["@types/react", null],
+            ["@types/react-dom", null],
+            ["react", null],
+            ["react-dom", null]
+          ],
+          "packagePeers": [
+            "@types/react-dom",
+            "@types/react",
+            "react-dom",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@react-spring/zdog", [
+        ["npm:9.2.3", {
+          "packageLocation": "./.yarn/cache/@react-spring-zdog-npm-9.2.3-d363f58f2a-245e7eabce.zip/node_modules/@react-spring/zdog/",
+          "packageDependencies": [
+            ["@react-spring/zdog", "npm:9.2.3"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3", {
+          "packageLocation": "./.yarn/$$virtual/@react-spring-zdog-virtual-84bf669efa/0/cache/@react-spring-zdog-npm-9.2.3-d363f58f2a-245e7eabce.zip/node_modules/@react-spring/zdog/",
+          "packageDependencies": [
+            ["@react-spring/zdog", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/animated", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/core", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/shared", "virtual:abf63e1c5af8f5483035c5db3b95a39627a61abb6a82fe6ab498f914e9c53a287c73034180e7d175b3185bf18e5d4d637287d29e52ffb6b8dfc27140a2cb4253#npm:9.2.3"],
+            ["@react-spring/types", "npm:9.2.3"],
+            ["@types/react", null],
+            ["@types/react-dom", null],
+            ["@types/react-zdog", null],
+            ["@types/zdog", null],
+            ["react", null],
+            ["react-dom", null],
+            ["react-zdog", null],
+            ["zdog", null]
+          ],
+          "packagePeers": [
+            "@types/react-dom",
+            "@types/react-zdog",
+            "@types/react",
+            "@types/zdog",
+            "react-dom",
+            "react-zdog",
+            "react",
+            "zdog"
           ],
           "linkType": "HARD",
         }]
@@ -1165,6 +1423,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:17.0.2"],
             ["react-dom", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:17.0.2"],
             ["react-icons", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.2.0"],
+            ["react-spring", "npm:9.2.3"],
             ["rehype", "npm:11.0.0"],
             ["rehype-highlight", "npm:4.1.0"],
             ["rehype-react", "npm:6.2.0"],
@@ -6677,6 +6936,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/react-refresh-npm-0.8.3-9b3fb3900b-38f06df8e0.zip/node_modules/react-refresh/",
           "packageDependencies": [
             ["react-refresh", "npm:0.8.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["react-spring", [
+        ["npm:9.2.3", {
+          "packageLocation": "./.yarn/cache/react-spring-npm-9.2.3-65a3b15920-8daaeba7a6.zip/node_modules/react-spring/",
+          "packageDependencies": [
+            ["react-spring", "npm:9.2.3"],
+            ["@react-spring/core", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/konva", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/native", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/three", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/web", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"],
+            ["@react-spring/zdog", "virtual:65a3b15920fcd400a19f66c86dd294f19bda1a57677a3d0655c05dc2d13f3fd5c4637f31ab535cf16ae3defe978734f1ca4d09a3f79e2add59ba066bcafd5274#npm:9.2.3"]
           ],
           "linkType": "HARD",
         }]

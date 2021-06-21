@@ -5,6 +5,7 @@ import Layout from "../components/layout";
 import PostCard from "../components/postcard";
 import { GetStaticProps } from "next";
 import { NextSeo } from "next-seo";
+import MyLink from "../components/mylink";
 
 type Props = {
   posts: PostOrPage[];
@@ -41,13 +42,7 @@ const Home = ({ posts, domainUrl }: Props): JSX.Element => {
           <p className="text-gray-300 ">
             My blog rants about universities and document thought process.
             <br />
-            <Link href="/about">
-              <a>
-                <span className="text-blue-500 hover:bg-white/25 underline">
-                  Read more about me.
-                </span>
-              </a>
-            </Link>
+            <MyLink href="/about">Read more about me.</MyLink>
           </p>
         </div>
         <div className="px-[4vw] py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
