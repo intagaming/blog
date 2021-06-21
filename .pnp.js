@@ -55,6 +55,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:11.0.0"],
             ["eslint-plugin-react", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:7.24.0"],
             ["highlight.js", "npm:11.0.1"],
+            ["mdast-util-toc", "npm:5.1.0"],
             ["next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:11.0.0"],
             ["next-seo", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.26.0"],
             ["next-sitemap", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:1.6.116"],
@@ -73,11 +74,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["remark-gfm", "npm:1.0.0"],
             ["remark-parse", "npm:9.0.0"],
             ["remark-rehype", "npm:8.1.0"],
+            ["remark-slug", "npm:6.0.0"],
             ["remark-unwrap-images", "npm:2.1.0"],
             ["superjson", "npm:1.7.4"],
             ["tailwindcss", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:2.2.2"],
             ["typescript", "patch:typescript@npm%3A4.3.4#builtin<compat/typescript>::version=4.3.4&hash=ddfc1b"],
             ["unified", "npm:9.2.1"],
+            ["unist-builder", "npm:2.0.3"],
             ["unist-util-find", "npm:1.0.2"],
             ["unist-util-visit", "npm:2.0.3"]
           ],
@@ -1413,6 +1416,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:11.0.0"],
             ["eslint-plugin-react", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:7.24.0"],
             ["highlight.js", "npm:11.0.1"],
+            ["mdast-util-toc", "npm:5.1.0"],
             ["next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:11.0.0"],
             ["next-seo", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.26.0"],
             ["next-sitemap", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:1.6.116"],
@@ -1431,11 +1435,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["remark-gfm", "npm:1.0.0"],
             ["remark-parse", "npm:9.0.0"],
             ["remark-rehype", "npm:8.1.0"],
+            ["remark-slug", "npm:6.0.0"],
             ["remark-unwrap-images", "npm:2.1.0"],
             ["superjson", "npm:1.7.4"],
             ["tailwindcss", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:2.2.2"],
             ["typescript", "patch:typescript@npm%3A4.3.4#builtin<compat/typescript>::version=4.3.4&hash=ddfc1b"],
             ["unified", "npm:9.2.1"],
+            ["unist-builder", "npm:2.0.3"],
             ["unist-util-find", "npm:1.0.2"],
             ["unist-util-visit", "npm:2.0.3"]
           ],
@@ -2953,6 +2959,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["emoji-regex", [
+        ["npm:6.1.1", {
+          "packageLocation": "./.yarn/cache/emoji-regex-npm-6.1.1-6e6007f685-1d35436f24.zip/node_modules/emoji-regex/",
+          "packageDependencies": [
+            ["emoji-regex", "npm:6.1.1"]
+          ],
+          "linkType": "HARD",
+        }],
         ["npm:8.0.0", {
           "packageLocation": "./.yarn/cache/emoji-regex-npm-8.0.0-213764015c-87cf3f89ef.zip/node_modules/emoji-regex/",
           "packageDependencies": [
@@ -3784,6 +3797,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["get-stream", "npm:5.2.0"],
             ["pump", "npm:3.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["github-slugger", [
+        ["npm:1.3.0", {
+          "packageLocation": "./.yarn/cache/github-slugger-npm-1.3.0-2930f57d90-1f5961777b.zip/node_modules/github-slugger/",
+          "packageDependencies": [
+            ["github-slugger", "npm:1.3.0"],
+            ["emoji-regex", "npm:6.1.1"]
           ],
           "linkType": "HARD",
         }]
@@ -5287,10 +5310,33 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["mdast-util-to-string", [
+        ["npm:1.1.0", {
+          "packageLocation": "./.yarn/cache/mdast-util-to-string-npm-1.1.0-9a11069485-0d5ebe2cb5.zip/node_modules/mdast-util-to-string/",
+          "packageDependencies": [
+            ["mdast-util-to-string", "npm:1.1.0"]
+          ],
+          "linkType": "HARD",
+        }],
         ["npm:2.0.0", {
           "packageLocation": "./.yarn/cache/mdast-util-to-string-npm-2.0.0-3a5d9c4970-cd5d5e3a84.zip/node_modules/mdast-util-to-string/",
           "packageDependencies": [
             ["mdast-util-to-string", "npm:2.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["mdast-util-toc", [
+        ["npm:5.1.0", {
+          "packageLocation": "./.yarn/cache/mdast-util-toc-npm-5.1.0-bf797490c9-08b9143215.zip/node_modules/mdast-util-toc/",
+          "packageDependencies": [
+            ["mdast-util-toc", "npm:5.1.0"],
+            ["@types/mdast", "npm:3.0.3"],
+            ["@types/unist", "npm:2.0.3"],
+            ["extend", "npm:3.0.2"],
+            ["github-slugger", "npm:1.3.0"],
+            ["mdast-util-to-string", "npm:2.0.0"],
+            ["unist-util-is", "npm:4.1.0"],
+            ["unist-util-visit", "npm:2.0.3"]
           ],
           "linkType": "HARD",
         }]
@@ -7157,6 +7203,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["remark-rehype", "npm:8.1.0"],
             ["mdast-util-to-hast", "npm:10.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["remark-slug", [
+        ["npm:6.0.0", {
+          "packageLocation": "./.yarn/cache/remark-slug-npm-6.0.0-252bf0c8d7-90471e3768.zip/node_modules/remark-slug/",
+          "packageDependencies": [
+            ["remark-slug", "npm:6.0.0"],
+            ["github-slugger", "npm:1.3.0"],
+            ["mdast-util-to-string", "npm:1.1.0"],
+            ["unist-util-visit", "npm:2.0.3"]
           ],
           "linkType": "HARD",
         }]

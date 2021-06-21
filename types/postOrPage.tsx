@@ -15,7 +15,8 @@ export interface PostOrPage {
   };
 }
 
-export interface PostOrPageWithNode {
+export interface PostOrPageData {
   postOrPage: PostOrPage;
   node: Node;
+  toc?: Node;
 }

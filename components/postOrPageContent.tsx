@@ -4,21 +4,21 @@ import rehype2react from "rehype-react";
 import rehype from "rehype";
 import NextImage from "./nextImage";
 import AuthorAndBrief from "./authorAndBrief";
-import { PostOrPageWithNode } from "../types/postOrPage";
+import { PostOrPageData } from "../types/postOrPage";
 import { DiscussionEmbed } from "disqus-react";
 import "highlight.js/styles/github-dark.css";
 import MyLinkNodeWrapper from "./myLinkNodeWrapper";
 
 type Props = {
-  postOrPageWithNode: PostOrPageWithNode;
+  postOrPageData: PostOrPageData;
   domainUrl: string; // For Disqus
 };
 
 const PostOrPageContent = ({
-  postOrPageWithNode,
+  postOrPageData,
   domainUrl,
 }: Props): JSX.Element => {
-  const { node, postOrPage } = postOrPageWithNode;
+  const { node, postOrPage } = postOrPageData;
   return (
     <div className={"flex flex-col items-center md:mt-20 my-10 mx-4"}>
       <article className={"prose w-full md:prose-lg prose-indigo"}>

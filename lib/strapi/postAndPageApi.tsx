@@ -7,9 +7,17 @@ import remarkUnwrapImages from "remark-unwrap-images";
 import { fetchAPI } from "./api";
 import { Node } from "unist";
 import { ImageElement } from "../../types/hast";
-import { PostOrPage, PostOrPageWithNode } from "../../types/postOrPage";
+import {
+  PostOrPage,
+  PostOrPageData as PostOrPageData,
+} from "../../types/postOrPage";
 import remarkGfm from "remark-gfm";
 import highlight from "rehype-highlight";
+import mdastUtilToc from "mdast-util-toc";
+import slug from "remark-slug";
+import remark from "remark";
+import u from "unist-builder";
+import rehype from "rehype";
 
 export const getPostBySlug = async (
   slug: string
@@ -34,34 +42,54 @@ export const getHtmlNodeFromMarkdown = async (
   // Process the node
   const htmlNode = await unified()
     .use(remarkUnwrapImages) // Unwrap the paragraph around the <img>
+    .use(slug)
     .use(remark2rehype) // Converts to html processor
     .use(optimizeImages) // Prep the <img> to be "NextJS Image compatible"
-    .use(highlight)
+    .use(highlight) // Highlight <pre> and <code> tags
     .run(mdNode); // Mdast -> Hast
 
   return htmlNode;
+};
+
+/**
+ * @param markdown Markdown string
+ * @returns Table of Contents
+ */
+const getTocHastFromMarkdown = async (markdown: string) => {
+  const mdNode = unified().use(remarkParse).use(remarkGfm).parse(markdown);
+  const tocResult = mdastUtilToc(mdNode);
+  const newMdast = await remark().run(u("root", tocResult.map));
+  return rehype()
+    .data("settings", {
+      fragment: true,
+    })
+    .use(remark2rehype)
+    .runSync(newMdast);
 };
 
 /*
  * This converts the *content* field from markdown to html node (hast).
  * Also returns the post data json.
  */
-export const getPostWithHtmlNodeBySlug = async (
+export const getPostDataBySlug = async (
   slug: string
-): Promise<PostOrPageWithNode | null> => {
+): Promise<PostOrPageData | null> => {
   const json = await getPostBySlug(slug);
   if (!json) return null;
   const node = await getHtmlNodeFromMarkdown(json.content);
-  return { node, postOrPage: json };
+  const toc = await getTocHastFromMarkdown(json.content);
+
+  return { node, postOrPage: json, toc };
 };
 
-export const getPageWithHtmlNodeBySlug = async (
+export const getPageDataBySlug = async (
   slug: string
-): Promise<PostOrPageWithNode | null> => {
+): Promise<PostOrPageData | null> => {
   const json = await getPageBySlug(slug);
   if (!json) return null;
   const node = await getHtmlNodeFromMarkdown(json.content);
-  return { node, postOrPage: json };
+  const toc = await getTocHastFromMarkdown(json.content);
+  return { node, postOrPage: json, toc };
 };
 
 export const getAllPosts = async (): Promise<PostOrPage[] | null> => {
