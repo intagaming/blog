@@ -1,3 +1,4 @@
+import { Element } from "hast";
 import { Node } from "unist";
 import { StrapiImage } from "./strapiTypes";
 
@@ -18,5 +19,5 @@ export interface PostOrPage {
 export interface PostOrPageData {
   postOrPage: PostOrPage;
   node: Node;
-  toc?: Node;
+  toc?: Element;
 }

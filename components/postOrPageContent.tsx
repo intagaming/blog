@@ -20,7 +20,7 @@ const PostOrPageContent = ({ postOrPageData }: Props): JSX.Element => {
   return (
     <article
       className={
-        "md:pt-20 pt-10 pb-10 px-4 flex flex-col items-center bg-white dark:bg-[#121212]"
+        "md:pt-20 pt-10 pb-10 px-4 flex flex-col items-center bg-white dark:bg-[#121212] min-h-[65vh]"
       }
     >
       <div className={proseClasses}>
