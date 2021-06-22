@@ -3,6 +3,7 @@ import Menu from "./menu";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FaFacebook, FaGithub } from "react-icons/fa";
+import ThemeToggle from "./themeToggle";
 
 const navLinks = [
   {
@@ -38,7 +39,7 @@ const TopNavigation = (): JSX.Element => {
     <>
       <div
         className={
-          "fixed text-white w-screen flex flex-col md:flex-row z-50" +
+          "nightwind-prevent-block fixed text-white w-screen flex flex-col md:flex-row z-50" +
           (extend ? " h-full md:h-auto" : "")
         }
       >
@@ -49,7 +50,7 @@ const TopNavigation = (): JSX.Element => {
         >
           <Link href="/">
             <a>
-              <span className={"md:text-lg md:font-bold px-2"}>
+              <span className={"md:text-lg md:font-bold px-2 text-white"}>
                 <span className="text-indigo-600 font-extrabold">&lt;</span>An
                 Hoang
                 <span className="text-indigo-600 font-extrabold">/&gt;</span>
@@ -70,7 +71,7 @@ const TopNavigation = (): JSX.Element => {
             <li key={link.href}>
               <Link href={link.href}>
                 <a>
-                  <span className={"opacity-70"}>{link.title}</span>
+                  <span className={"opacity-70 text-white"}>{link.title}</span>
                 </a>
               </Link>
             </li>
@@ -82,16 +83,19 @@ const TopNavigation = (): JSX.Element => {
             (!extend ? " hidden" : " flex")
           }
         >
-          <li key={"fb"}>
+          <li>
+            <ThemeToggle />
+          </li>
+          <li>
             <a href={"https://facebook.com/an.xuanhoang"}>
-              <span className={"cursor-pointer"}>
+              <span className={"cursor-pointer text-white"}>
                 <FaFacebook />
               </span>
             </a>
           </li>
-          <li key={"github"}>
+          <li>
             <a href={"https://github.com/intagaming/blog"}>
-              <span className={"cursor-pointer"}>
+              <span className={"cursor-pointer text-white"}>
                 <FaGithub />
               </span>
             </a>

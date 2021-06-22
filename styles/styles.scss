@@ -35,32 +35,13 @@ body {
   height: unset !important;
 }
 
+// Anchor scroll offset
 :target {
   scroll-margin-top: 5rem;
 }
 
+// Styling ToC's generated elements
 .toc {
-  @apply mx-auto w-[65ch] max-w-full lg:absolute lg:left-full lg:h-full lg:ml-4;
-
-  @screen lg {
-    width: calc((100vw - 65ch) / 2 - 5rem);
-  }
-
-  @screen xl {
-    width: calc((100vw - 65ch) / 2 - 8rem);
-  }
-
-  aside {
-    @apply text-gray-300 bg-black p-4 rounded-md mb-5 text-sm overflow-hidden max-h-[75vh] overflow-y-auto lg:my-0 lg:sticky lg:top-20;
-  }
-
-  h2 {
-    @apply pb-4;
-    &::before {
-      content: ">_ ";
-    }
-  }
-
   ul ul {
     padding-left: 2ch;
   }
@@ -68,7 +49,7 @@ body {
   a {
     &::before {
       content: "[x] ";
-      @apply text-indigo-600 font-bold;
+      @apply text-indigo-600 dark:text-indigo-600 font-bold;
     }
   }
 }

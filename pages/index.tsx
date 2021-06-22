@@ -34,7 +34,7 @@ const Home = ({ posts, domainUrl }: Props): JSX.Element => {
         }}
       />
       <Layout>
-        <div className="bg-black px-[6vw] py-20 flex flex-col gap-6 md:items-center">
+        <div className="nightwind-prevent nightwind-prevent-block bg-black px-[6vw] py-20 flex flex-col gap-6 md:items-center">
           <span className="text-3xl text-white font-bold text-center">
             Hello!
           </span>
@@ -44,7 +44,7 @@ const Home = ({ posts, domainUrl }: Props): JSX.Element => {
             <MyLink href="/about">Read more about me.</MyLink>
           </p>
         </div>
-        <div className="px-[4vw] py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="bg-white dark:bg-[#121212] px-[4vw] py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}

@@ -23,7 +23,11 @@ const PostOrPageContent = ({
   const proseClasses =
     "prose prose-md lg:prose-lg xl:prose-xl prose-indigo w-full";
   return (
-    <article className={"md:mt-20 mt-10 mb-10 px-4 flex flex-col items-center"}>
+    <article
+      className={
+        "md:pt-20 pt-10 pb-10 px-4 flex flex-col items-center bg-white dark:bg-[#121212]"
+      }
+    >
       <div className={proseClasses}>
         <h1>{postOrPage.title}</h1>
         {postOrPage.author && <AuthorAndBrief post={postOrPage} />}
