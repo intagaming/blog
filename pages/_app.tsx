@@ -1,4 +1,4 @@
-import "../styles/styles.css";
+import "../styles/styles.scss";
 import { AppProps } from "next/dist/next-server/lib/router/router";
 import { DefaultSeo } from "next-seo";
 

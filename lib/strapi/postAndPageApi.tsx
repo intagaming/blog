@@ -18,6 +18,7 @@ import slug from "remark-slug";
 import remark from "remark";
 import u from "unist-builder";
 import rehype from "rehype";
+import { hastRemoveLiParagraph } from "../unified";
 
 export const getPostBySlug = async (
   slug: string
@@ -64,6 +65,7 @@ const getTocHastFromMarkdown = async (markdown: string) => {
       fragment: true,
     })
     .use(remark2rehype)
+    .use(hastRemoveLiParagraph)
     .runSync(newMdast);
 };
 

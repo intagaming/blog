@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getLatestPosts } from "../lib/strapi/postAndPageApi";
 import { PostOrPage } from "../types/postOrPage";
 import Layout from "../components/layout";

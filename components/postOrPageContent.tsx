@@ -39,7 +39,7 @@ const PostOrPageContent = ({
         )}
       </div>
 
-      <div className="w-full lg:relative lg:w-auto">
+      <div className="w-full mt-10 lg:relative lg:w-auto">
         <TableOfContents toc={postOrPageData.toc} />
 
         <div className={proseClasses + " mx-auto"}>

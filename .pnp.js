@@ -44,6 +44,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/probe-image-size", "npm:7.0.0"],
             ["@types/prop-types", "npm:15.7.3"],
             ["@types/react", "npm:17.0.11"],
+            ["@types/sass", "npm:1.16.0"],
             ["@types/unist", "npm:2.0.3"],
             ["@typescript-eslint/eslint-plugin", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.27.0"],
             ["@typescript-eslint/parser", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.27.0"],
@@ -76,6 +77,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["remark-rehype", "npm:8.1.0"],
             ["remark-slug", "npm:6.0.0"],
             ["remark-unwrap-images", "npm:2.1.0"],
+            ["sass", "npm:1.35.1"],
             ["superjson", "npm:1.7.4"],
             ["tailwindcss", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:2.2.2"],
             ["typescript", "patch:typescript@npm%3A4.3.4#builtin<compat/typescript>::version=4.3.4&hash=ddfc1b"],
@@ -921,6 +923,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@types/sass", [
+        ["npm:1.16.0", {
+          "packageLocation": "./.yarn/cache/@types-sass-npm-1.16.0-aca7a96a6f-e95d14da2d.zip/node_modules/@types/sass/",
+          "packageDependencies": [
+            ["@types/sass", "npm:1.16.0"],
+            ["@types/node", "npm:15.12.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@types/scheduler", [
         ["npm:0.16.1", {
           "packageLocation": "./.yarn/cache/@types-scheduler-npm-0.16.1-9a58541608-0124c2e4de.zip/node_modules/@types/scheduler/",
@@ -1405,6 +1417,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/probe-image-size", "npm:7.0.0"],
             ["@types/prop-types", "npm:15.7.3"],
             ["@types/react", "npm:17.0.11"],
+            ["@types/sass", "npm:1.16.0"],
             ["@types/unist", "npm:2.0.3"],
             ["@typescript-eslint/eslint-plugin", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.27.0"],
             ["@typescript-eslint/parser", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.27.0"],
@@ -1437,6 +1450,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["remark-rehype", "npm:8.1.0"],
             ["remark-slug", "npm:6.0.0"],
             ["remark-unwrap-images", "npm:2.1.0"],
+            ["sass", "npm:1.35.1"],
             ["superjson", "npm:1.7.4"],
             ["tailwindcss", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:2.2.2"],
             ["typescript", "patch:typescript@npm%3A4.3.4#builtin<compat/typescript>::version=4.3.4&hash=ddfc1b"],
@@ -5703,7 +5717,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node-sass", null],
             ["@types/react", "npm:17.0.11"],
             ["@types/react-dom", null],
-            ["@types/sass", null],
+            ["@types/sass", "npm:1.16.0"],
             ["assert", "npm:2.0.0"],
             ["ast-types", "npm:0.13.2"],
             ["browserify-zlib", "npm:0.2.0"],
@@ -5742,7 +5756,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:17.0.2"],
             ["react-is", "npm:17.0.2"],
             ["react-refresh", "npm:0.8.3"],
-            ["sass", null],
+            ["sass", "npm:1.35.1"],
             ["stream-browserify", "npm:3.0.0"],
             ["stream-http", "npm:3.1.1"],
             ["string_decoder", "npm:1.3.0"],
@@ -7392,6 +7406,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/safer-buffer-npm-2.1.2-8d5c0b705e-549ba83f5b.zip/node_modules/safer-buffer/",
           "packageDependencies": [
             ["safer-buffer", "npm:2.1.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["sass", [
+        ["npm:1.35.1", {
+          "packageLocation": "./.yarn/cache/sass-npm-1.35.1-b1de82f460-ceeb2ebd09.zip/node_modules/sass/",
+          "packageDependencies": [
+            ["sass", "npm:1.35.1"],
+            ["chokidar", "npm:3.5.2"]
           ],
           "linkType": "HARD",
         }]

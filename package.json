@@ -22,6 +22,7 @@
     "rehype-highlight": "^4.1.0",
     "remark": "^13.0.0",
     "remark-gfm": "^1.0.0",
+    "sass": "^1.35.1",
     "unified": "^9.2.1",
     "unist-util-find": "^1.0.2"
   },
@@ -32,6 +33,7 @@
     "@types/probe-image-size": "^7.0.0",
     "@types/prop-types": "^15",
     "@types/react": "^17.0.11",
+    "@types/sass": "^1",
     "@types/unist": "^2.0.3",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
