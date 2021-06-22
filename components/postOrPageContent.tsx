@@ -5,20 +5,15 @@ import rehype from "rehype";
 import NextImage from "./nextImage";
 import AuthorAndBrief from "./authorAndBrief";
 import { PostOrPageData } from "../types/postOrPage";
-import { DiscussionEmbed } from "disqus-react";
 import "highlight.js/styles/github-dark.css";
 import MyLinkNodeWrapper from "./myLinkNodeWrapper";
 import TableOfContents from "../components/tableOfContents";
 
 type Props = {
   postOrPageData: PostOrPageData;
-  domainUrl: string; // For Disqus
 };
 
-const PostOrPageContent = ({
-  postOrPageData,
-  domainUrl,
-}: Props): JSX.Element => {
+const PostOrPageContent = ({ postOrPageData }: Props): JSX.Element => {
   const { node, postOrPage } = postOrPageData;
   const proseClasses =
     "prose prose-md lg:prose-lg xl:prose-xl prose-indigo w-full";
@@ -62,18 +57,6 @@ const PostOrPageContent = ({
             })
             .stringify(node)}
         </div>
-      </div>
-      <div className={proseClasses}>
-        <hr />
-        <p>Have a question or a discussion? Come, I&apos;m reading all day.</p>
-        <DiscussionEmbed
-          shortname={process.env.DISQUS_SHORTNAME || "an7"}
-          config={{
-            url: `${domainUrl}/${postOrPage.slug}`,
-            identifier: postOrPage.slug,
-            title: postOrPage.title,
-          }}
-        />
       </div>
     </article>
   );

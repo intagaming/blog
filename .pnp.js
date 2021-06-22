@@ -52,7 +52,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@yarnpkg/pnpify", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:3.0.0-rc.6"],
             ["autoprefixer", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:10.2.6"],
             ["babel-plugin-superjson-next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:0.3.0"],
-            ["disqus-react", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:1.1.0"],
             ["eslint", "npm:7.28.0"],
             ["eslint-config-next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:11.0.0"],
             ["eslint-plugin-react", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:7.24.0"],
@@ -1468,7 +1467,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@yarnpkg/pnpify", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:3.0.0-rc.6"],
             ["autoprefixer", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:10.2.6"],
             ["babel-plugin-superjson-next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:0.3.0"],
-            ["disqus-react", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:1.1.0"],
             ["eslint", "npm:7.28.0"],
             ["eslint-config-next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:11.0.0"],
             ["eslint-plugin-react", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:7.24.0"],
@@ -2920,32 +2918,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["dir-glob", "npm:3.0.1"],
             ["path-type", "npm:4.0.0"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["disqus-react", [
-        ["npm:1.1.0", {
-          "packageLocation": "./.yarn/cache/disqus-react-npm-1.1.0-b0f03e999e-ca0f704dff.zip/node_modules/disqus-react/",
-          "packageDependencies": [
-            ["disqus-react", "npm:1.1.0"]
-          ],
-          "linkType": "SOFT",
-        }],
-        ["virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:1.1.0", {
-          "packageLocation": "./.yarn/$$virtual/disqus-react-virtual-d637eb8db3/0/cache/disqus-react-npm-1.1.0-b0f03e999e-ca0f704dff.zip/node_modules/disqus-react/",
-          "packageDependencies": [
-            ["disqus-react", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:1.1.0"],
-            ["@types/react", "npm:17.0.11"],
-            ["@types/react-dom", null],
-            ["react", "npm:17.0.2"],
-            ["react-dom", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:17.0.2"]
-          ],
-          "packagePeers": [
-            "@types/react-dom",
-            "@types/react",
-            "react-dom",
-            "react"
           ],
           "linkType": "HARD",
         }]
