@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "JetBrains Mono", monospace;
 }
@@ -29,4 +33,8 @@ body {
   width: 100% !important;
   position: relative !important;
   height: unset !important;
+}
+
+:target {
+  scroll-margin-top: 5rem;
 }
