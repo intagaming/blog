@@ -13,7 +13,6 @@ export const hastRemoveLiParagraph: Plugin<[]> = () => {
       //   "tagName: " + node.tagName + "; parent.tagName: " + parent?.tagName
       // );
       if (node.tagName === "p" && parent?.tagName === "li") {
-        console.log(node);
         [].splice.call(parent.children, index, 1, ...node.children);
       }
     });

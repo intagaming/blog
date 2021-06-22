@@ -21,4 +21,9 @@ module.exports = {
   rules: {
     "react/react-in-jsx-scope": "off", // NextJS does import React.
   },
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
 };
