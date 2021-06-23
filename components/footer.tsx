@@ -9,7 +9,10 @@ const Footer = (): JSX.Element => {
         <span className="text-indigo-600 font-bold">/&gt; </span>
         with <FaHeart className="inline-block" color="red" />
       </p>
-      <p>Checkout the source code on GitHub</p>
+      <p>
+        This <i className="italic">personal</i> blog is open source. Check it
+        out.
+      </p>
       <ul className={"flex gap-4 text-2xl mt-8"}>
         <li key={"fb"}>
           <a href={"https://facebook.com/an.xuanhoang"}>
