@@ -7,9 +7,13 @@ import AuthorAndBrief from "./authorAndBrief";
 import { PostOrPageData } from "../types/postOrPage";
 import "highlight.js/styles/github-dark.css";
 import MyLinkNodeWrapper from "./myLinkNodeWrapper";
-import TableOfContents, { HeadingData } from "../components/tableOfContents";
-import { useInView } from "react-intersection-observer";
+import TableOfContents, {
+  SetHeadingIntersectDataStore,
+} from "../components/tableOfContents";
 import { TocMapping } from "../lib/tableOfContents";
+import PostOrPageHeading, {
+  HeadingIntersectFunction,
+} from "./postOrPageHeading";
 
 type Props = {
   postOrPageData: PostOrPageData;
@@ -21,22 +25,37 @@ const PostOrPageContent = ({
   tocMapping,
 }: Props): JSX.Element => {
   const { node, postOrPage, toc } = postOrPageData;
-  const proseClasses =
-    "prose prose-md lg:prose-lg xl:prose-xl prose-indigo w-full";
 
-  // Map h tag to their state of being on the screen.
-  // Powered by react-intersection-observer
-  const headingData: { [key: string]: HeadingData } = {};
+  // We need this state setting method in order to
+  // update the intersect data in <TableOfContents/>.
+  let setHeadingIntersectDataStore: SetHeadingIntersectDataStore;
+  const onTocMount = (f: SetHeadingIntersectDataStore) => {
+    setHeadingIntersectDataStore = f;
+  };
+
+  // On heading intersecting the view (called by PostOrPageHeading)
+  const onIntersect: HeadingIntersectFunction = (headingId, inView, entry) => {
+    // Seems like <InView/>'s onChange prop (which triggers this) is
+    // being called after <TableOfContents/> is mounted, which guarantees
+    // this function to be available.
+    setHeadingIntersectDataStore((headingData) => {
+      return {
+        ...headingData,
+        [headingId]: { inView, entry },
+      };
+    });
+  };
 
   const createElementWrapper = (...args) => {
-    if (["h1", "h2", "h3", "h4", "h5", "h6"].includes(args[0])) {
-      const { ref, inView, entry } = useInView();
-      args[1].ref = ref;
-      headingData[args[1].id] = { inView, entry };
+    // We need to pass onIntersect into PostOrPageHeading
+    if (args[0] === PostOrPageHeading) {
+      args[1].onIntersect = onIntersect;
     }
     return React.createElement.apply(null, args);
   };
 
+  const proseClasses =
+    "prose prose-md lg:prose-lg xl:prose-xl prose-indigo w-full";
   return (
     <article
       className={
@@ -61,7 +80,7 @@ const PostOrPageContent = ({
       <div className="w-full mt-10 lg:relative lg:w-auto">
         <TableOfContents
           toc={toc}
-          headingData={headingData}
+          onMount={onTocMount}
           tocMapping={tocMapping}
         />
 
@@ -76,6 +95,12 @@ const PostOrPageContent = ({
               components: {
                 Image: NextImage,
                 a: MyLinkNodeWrapper,
+                h1: PostOrPageHeading,
+                h2: PostOrPageHeading,
+                h3: PostOrPageHeading,
+                h4: PostOrPageHeading,
+                h5: PostOrPageHeading,
+                h6: PostOrPageHeading,
               },
               passNode: true,
             })
