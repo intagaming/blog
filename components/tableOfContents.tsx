@@ -28,7 +28,7 @@ const TableOfContents = ({
 }: Props): JSX.Element => {
   // This board/panel is like a circuit breaker, full of flip flops.
   // In this case, it's an active state breaker for <li>s.
-  const [headerActiveBoard, setHeaderActiveBoard] = useState({});
+  const [headingActiveBoard, setHeadingActiveBoard] = useState({});
 
   const defaultBoard = {}; // The default board with all = false.
   const createElementWrapper = (...args) => {
@@ -37,7 +37,7 @@ const TableOfContents = ({
         if (i.type === "a") {
           const id = i.props.href.slice(1);
           defaultBoard[id] = false;
-          args[1].active = headerActiveBoard[id]; // Attaching props to custom li.
+          args[1].active = headingActiveBoard[id]; // Attaching props to custom li.
           break;
         }
       }
@@ -46,13 +46,13 @@ const TableOfContents = ({
   };
 
   const resetBoard = () => {
-    setHeaderActiveBoard(defaultBoard);
+    setHeadingActiveBoard(defaultBoard);
   };
 
   // Propagates the highlight like h4 -> h3 -> h2
   const highlight = (id: string) => {
     // Might be a good idea to store the final board first. (Too many re-render thingy.)
-    setHeaderActiveBoard((board) => {
+    setHeadingActiveBoard((board) => {
       board[id] = true;
       return board;
     });
@@ -62,7 +62,7 @@ const TableOfContents = ({
     }
   };
 
-  // Each time a header appears on the screen, we reevaluate.
+  // Each time a heading appears on the screen, we reevaluate.
   useEffect(() => {
     let reset = false; // We only reset if there's one in view. Otherwise keep old state.
     let allOffScreen = true;
@@ -87,8 +87,8 @@ const TableOfContents = ({
       id: string;
       headingData: HeadingData;
     }[] = [];
-    for (const id in headerActiveBoard) {
-      if (headerActiveBoard[id]) {
+    for (const id in headingActiveBoard) {
+      if (headingActiveBoard[id]) {
         actives.push({ id, headingData: headingData[id] });
       }
     }
