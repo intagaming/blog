@@ -7,7 +7,7 @@ import AuthorAndBrief from "./authorAndBrief";
 import { PostOrPageData } from "../types/postOrPage";
 import "highlight.js/styles/github-dark.css";
 import MyLinkNodeWrapper from "./myLinkNodeWrapper";
-import TableOfContents from "../components/tableOfContents";
+import TableOfContents, { HeadingData } from "../components/tableOfContents";
 import { useInView } from "react-intersection-observer";
 import { TocMapping } from "../lib/tableOfContents";
 
@@ -26,13 +26,13 @@ const PostOrPageContent = ({
 
   // Map h tag to their state of being on the screen.
   // Powered by react-intersection-observer
-  const headerInViews = {};
+  const headingData: { [key: string]: HeadingData } = {};
 
   const createElementWrapper = (...args) => {
     if (["h1", "h2", "h3", "h4", "h5", "h6"].includes(args[0])) {
-      const { ref, inView } = useInView();
+      const { ref, inView, entry } = useInView();
       args[1].ref = ref;
-      headerInViews[args[1].id] = inView;
+      headingData[args[1].id] = { inView, entry };
     }
     return React.createElement.apply(null, args);
   };
@@ -61,7 +61,7 @@ const PostOrPageContent = ({
       <div className="w-full mt-10 lg:relative lg:w-auto">
         <TableOfContents
           toc={toc}
-          headerInViews={headerInViews}
+          headingData={headingData}
           tocMapping={tocMapping}
         />
 

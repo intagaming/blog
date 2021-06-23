@@ -7,17 +7,23 @@ import TocLi from "./tocLi";
 import { TocMapping } from "../lib/tableOfContents";
 import { useState } from "react";
 
+export type HeadingData = {
+  inView: boolean;
+  entry: IntersectionObserverEntry;
+};
+
 type Props = {
   toc: Element;
-  headerInViews: {
-    [key: string]: boolean;
+  headingData: {
+    [key: string]: HeadingData;
   };
+
   tocMapping: TocMapping;
 };
 
 const TableOfContents = ({
   toc,
-  headerInViews,
+  headingData,
   tocMapping,
 }: Props): JSX.Element => {
   // This board/panel is like a circuit breaker, full of flip flops.
@@ -45,27 +51,77 @@ const TableOfContents = ({
 
   // Propagates the highlight like h4 -> h3 -> h2
   const highlight = (id: string) => {
-    resetBoard();
     // Might be a good idea to store the final board first. (Too many re-render thingy.)
     setHeaderActiveBoard((board) => {
       board[id] = true;
       return board;
     });
-    const parentId = tocMapping[id];
-    if (parentId) {
-      highlight(parentId);
+    const mapping = tocMapping[id];
+    if (mapping.parent) {
+      highlight(mapping.parent);
     }
   };
 
   // Each time a header appears on the screen, we reevaluate.
-  // Which means if there's none, there's no update, and we keep last (<li> active) state.
   useEffect(() => {
-    for (const id in headerInViews) {
-      if (headerInViews[id]) {
+    let reset = false; // We only reset if there's one in view. Otherwise keep old state.
+    let allOffScreen = true;
+    for (const id in headingData) {
+      if (headingData[id].inView) {
+        if (!reset) {
+          resetBoard();
+          reset = true;
+        }
+        allOffScreen = false;
         highlight(id);
       }
     }
-  }, [headerInViews]);
+
+    // If it's all off-screen, we need to reevaluate, because they might be scrolling backwards.
+    // Check the position of the deepest level heading (because they're reading the deepest level heading's content).
+    // If it's above the screen, we're ok. Otherwise, back it off a notch.
+    if (!allOffScreen) return;
+
+    // Find all actives
+    const actives: {
+      id: string;
+      headingData: HeadingData;
+    }[] = [];
+    for (const id in headerActiveBoard) {
+      if (headerActiveBoard[id]) {
+        actives.push({ id, headingData: headingData[id] });
+      }
+    }
+
+    // This condition is strange. If they're triggered because
+    // they're all off-screen, they must be turned on before(?)
+    if (actives.length === 0) return;
+
+    type ActiveData = {
+      id: string;
+      headingData: HeadingData;
+    };
+
+    let child: ActiveData = actives.pop();
+    let active: ActiveData;
+    while ((active = actives.pop()) !== undefined) {
+      if (tocMapping[active.id].parent === child.id) {
+        // If current's parent is the children
+        child = active; // Switch the position.
+      }
+    }
+
+    // We found the child. Now check if it's above the screen (which is ok, we ignore)
+    if (child.headingData.entry.boundingClientRect.top <= 0) {
+      return;
+    }
+
+    // It's below the screen. Back it off.
+    resetBoard();
+    const last = tocMapping[child.id].last;
+    if (!last) return; // Except we don't have anything to back off to.
+    highlight(last);
+  }, [headingData]);
 
   return (
     toc.children.length > 0 && (

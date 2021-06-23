@@ -55,7 +55,7 @@ body {
 
   .tocActive {
     &::before {
-      content: "[v] ";
+      content: "[o] ";
       @apply text-green-600 dark:text-green-600 font-bold;
     }
   }
