@@ -115,7 +115,7 @@ const TableOfContents = ({
     }
 
     // We found the child. Now check if it's above the screen (which is ok, we ignore)
-    if (child.headingData.entry.boundingClientRect.top <= 0) {
+    if (child.headingData.entry?.boundingClientRect.top <= 0) {
       return;
     }
 
