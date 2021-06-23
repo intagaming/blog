@@ -64,6 +64,9 @@ const TableOfContents = ({
 
   // Each time a heading appears on the screen, we reevaluate.
   useEffect(() => {
+    if (toc.children.length === 0) {
+      return;
+    }
     let reset = false; // We only reset if there's one in view. Otherwise keep old state.
     let allOffScreen = true;
     for (const id in headingData) {
