@@ -20,6 +20,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
+    "react-intersection-observer": "^8.32.0",
     "react-spring": "^9.2.3",
     "rehype-highlight": "^4.1.0",
     "remark": "^13.0.0",

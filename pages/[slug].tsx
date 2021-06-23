@@ -12,13 +12,19 @@ import PostOrPageContent from "../components/postOrPageContent";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { NextSeo, BlogJsonLd } from "next-seo";
 import { getPostExcerpt } from "../lib/postOrPage";
+import { getTocMapping, TocMapping } from "../lib/tableOfContents";
 
 type Props = {
   postOrPageData: PostOrPageData;
   domainUrl: string;
+  tocMapping: TocMapping;
 };
 
-const PostAndPage = ({ postOrPageData, domainUrl }: Props): JSX.Element => {
+const PostAndPage = ({
+  postOrPageData,
+  domainUrl,
+  tocMapping,
+}: Props): JSX.Element => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -67,7 +73,10 @@ const PostAndPage = ({ postOrPageData, domainUrl }: Props): JSX.Element => {
         description={excerpt || "A blog by An Hoang."}
       />
       <Layout>
-        <PostOrPageContent postOrPageData={postOrPageData} />
+        <PostOrPageContent
+          postOrPageData={postOrPageData}
+          tocMapping={tocMapping}
+        />
       </Layout>
     </>
   );
@@ -115,8 +124,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
+  const tocMapping = getTocMapping(postOrPageData.toc);
+
   return {
-    props: { postOrPageData, domainUrl },
+    props: { postOrPageData, domainUrl, tocMapping },
     revalidate: 30,
   };
 };

@@ -18,7 +18,8 @@ import slug from "remark-slug";
 import remark from "remark";
 import u from "unist-builder";
 import rehype from "rehype";
-import { hastRemoveLiParagraph } from "../unified";
+import { hastRemoveLiParagraph, removeTextNewlineNode } from "../unified";
+import { Element } from "hast";
 
 export const getPostBySlug = async (
   slug: string
@@ -56,17 +57,20 @@ export const getHtmlNodeFromMarkdown = async (
  * @param markdown Markdown string
  * @returns Table of Contents
  */
-const getTocHastFromMarkdown = async (markdown: string) => {
+const getTocHastFromMarkdown = async (markdown: string): Promise<Element> => {
   const mdNode = unified().use(remarkParse).use(remarkGfm).parse(markdown);
   const tocResult = mdastUtilToc(mdNode);
   const newMdast = await remark().run(u("root", tocResult.map));
-  return rehype()
+  const toc = rehype()
     .data("settings", {
       fragment: true,
     })
     .use(remark2rehype)
     .use(hastRemoveLiParagraph)
-    .runSync(newMdast);
+    .use(removeTextNewlineNode)
+    .runSync(newMdast) as Element;
+
+  return toc;
 };
 
 /*

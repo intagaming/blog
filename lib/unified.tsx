@@ -8,12 +8,30 @@ import { Element } from "hast";
 
 export const hastRemoveLiParagraph: Plugin<[]> = () => {
   return (tree: Node) => {
-    visit(tree, (node: Element, index, parent) => {
+    visit(tree, (node, index, parent) => {
       // console.log(
       //   "tagName: " + node.tagName + "; parent.tagName: " + parent?.tagName
       // );
       if (node.tagName === "p" && parent?.tagName === "li") {
-        [].splice.call(parent.children, index, 1, ...node.children);
+        [].splice.call(
+          parent.children,
+          index,
+          1,
+          ...(node as Element).children
+        );
+      }
+    });
+
+    return tree;
+  };
+};
+
+export const removeTextNewlineNode: Plugin<[]> = () => {
+  return (tree: Node) => {
+    visit(tree, (node, index, parent) => {
+      if (node.type === "text" && node.value === "\n") {
+        [].splice.call(parent.children, index, 1);
+        return index;
       }
     });
 

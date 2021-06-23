@@ -8,15 +8,35 @@ import { PostOrPageData } from "../types/postOrPage";
 import "highlight.js/styles/github-dark.css";
 import MyLinkNodeWrapper from "./myLinkNodeWrapper";
 import TableOfContents from "../components/tableOfContents";
+import { useInView } from "react-intersection-observer";
+import { TocMapping } from "../lib/tableOfContents";
 
 type Props = {
   postOrPageData: PostOrPageData;
+  tocMapping: TocMapping;
 };
 
-const PostOrPageContent = ({ postOrPageData }: Props): JSX.Element => {
-  const { node, postOrPage } = postOrPageData;
+const PostOrPageContent = ({
+  postOrPageData,
+  tocMapping,
+}: Props): JSX.Element => {
+  const { node, postOrPage, toc } = postOrPageData;
   const proseClasses =
     "prose prose-md lg:prose-lg xl:prose-xl prose-indigo w-full";
+
+  // Map h tag to their state of being on the screen.
+  // Powered by react-intersection-observer
+  const headerInViews = {};
+
+  const createElementWrapper = (...args) => {
+    if (["h1", "h2", "h3", "h4", "h5", "h6"].includes(args[0])) {
+      const { ref, inView } = useInView();
+      args[1].ref = ref;
+      headerInViews[args[1].id] = inView;
+    }
+    return React.createElement.apply(null, args);
+  };
+
   return (
     <article
       className={
@@ -39,7 +59,11 @@ const PostOrPageContent = ({ postOrPageData }: Props): JSX.Element => {
       </div>
 
       <div className="w-full mt-10 lg:relative lg:w-auto">
-        <TableOfContents toc={postOrPageData.toc} />
+        <TableOfContents
+          toc={toc}
+          headerInViews={headerInViews}
+          tocMapping={tocMapping}
+        />
 
         <div className={proseClasses + " mx-auto"}>
           {rehype()
@@ -47,7 +71,7 @@ const PostOrPageContent = ({ postOrPageData }: Props): JSX.Element => {
               fragment: true,
             })
             .use(rehype2react, {
-              createElement: React.createElement,
+              createElement: createElementWrapper,
               Fragment: React.Fragment,
               components: {
                 Image: NextImage,

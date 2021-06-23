@@ -46,10 +46,17 @@ body {
     padding-left: 2ch;
   }
 
-  a {
+  li {
     &::before {
       content: "[x] ";
       @apply text-indigo-600 dark:text-indigo-600 font-bold;
+    }
+  }
+
+  .tocActive {
+    &::before {
+      content: "[v] ";
+      @apply text-green-600 dark:text-green-600 font-bold;
     }
   }
 }
