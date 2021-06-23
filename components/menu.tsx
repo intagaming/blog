@@ -1,27 +1,35 @@
-import { MouseEventHandler } from "react";
+import { Switch } from "@headlessui/react";
 
 type Props = {
-  onClick: MouseEventHandler<HTMLSpanElement>;
+  onClick(checked: boolean): void;
+  checked: boolean;
 };
 
-const Menu = ({ onClick }: Props): JSX.Element => {
+const Menu = ({ checked, onClick }: Props): JSX.Element => {
   return (
-    <span className="cursor-pointer" onClick={onClick}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M4 6h16M4 12h16M4 18h16"
-        />
-      </svg>
-    </span>
+    <Switch
+      checked={checked}
+      className="text-white focus:outline-none flex items-center"
+      onChange={onClick}
+    >
+      <span className="sr-only">Menu toggle</span>
+      <span className="transform">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className={`h-6 w-6 ${checked ? "rotate-90" : 0} transition`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </span>
+    </Switch>
   );
 };
 

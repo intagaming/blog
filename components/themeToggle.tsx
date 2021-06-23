@@ -59,11 +59,6 @@ export default function ThemeToggle(): JSX.Element {
           </svg>
         )}
       </span>
-      {/* <span
-        className={`${
-          enabled ? "translate-x-6" : "translate-x-1"
-        } nightwind-prevent inline-block w-4 h-4 transform bg-white rounded-full transition ease-in-out duration-200`}
-      /> */}
     </Switch>
   );
 }

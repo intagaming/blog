@@ -57,8 +57,9 @@ const TopNavigation = (): JSX.Element => {
               </span>
             </a>
           </Link>
-          <div className={"md:hidden"}>
-            <Menu onClick={menuClick} />
+          <div className={"flex gap-6 md:hidden"}>
+            <ThemeToggle />
+            <Menu onClick={menuClick} checked={extend} />
           </div>
         </div>
         <ul
@@ -83,7 +84,7 @@ const TopNavigation = (): JSX.Element => {
             (!extend ? " hidden" : " flex")
           }
         >
-          <li>
+          <li className="hidden md:inline-block">
             <ThemeToggle />
           </li>
           <li>

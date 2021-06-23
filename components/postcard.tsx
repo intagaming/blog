@@ -28,7 +28,7 @@ const PostCard = ({ post }: Props): JSX.Element => {
         </a>
       </Link>
       <AuthorAndBrief post={post} size="sm" />
-      <hr className="sm:hidden mt-12" />
+      <hr className="sm:hidden mt-12 border-gray-300" />
     </article>
   );
 };

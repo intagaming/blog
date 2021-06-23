@@ -2,14 +2,14 @@ import { FaHeart, FaFacebook, FaGithub } from "react-icons/fa";
 
 const Footer = (): JSX.Element => {
   return (
-    <footer className="nightwind-prevent-block nightwind-prevent bg-black text-white py-20 flex flex-col items-center">
+    <footer className="nightwind-prevent-block nightwind-prevent bg-black text-white py-20 px-10 flex flex-col items-center text-center">
       <p>
         Made by
         <span className="text-indigo-600 font-bold"> &lt;</span>An Hoang
         <span className="text-indigo-600 font-bold">/&gt; </span>
         with <FaHeart className="inline-block" color="red" />
       </p>
-      <p>
+      <p className="mt-6">
         This <i className="italic">personal</i> blog is open source. Check it
         out.
       </p>
