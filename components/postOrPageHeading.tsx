@@ -28,8 +28,13 @@ const PostOrPageHeading = ({
         const props = {
           ref,
           ...node.properties,
+          className: "heading",
         };
-        return <HeadingTag {...props}>{children}</HeadingTag>;
+        return (
+          <a href={"#" + node.properties.id} className="!no-underline">
+            <HeadingTag {...props}>{children}</HeadingTag>
+          </a>
+        );
       }}
     </InView>
   );
