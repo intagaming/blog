@@ -33,7 +33,7 @@ const TopNavigation = (): JSX.Element => {
     return () => {
       router.events.off("routeChangeStart", onRouteStart);
     };
-  }, []);
+  }, [router.events]);
 
   return (
     <>
