@@ -1,10 +1,19 @@
 import { Element } from "hast";
-import { ImageDimension } from "./ImageDimension";
+import { ImageDimensions } from "./ImageDimensions";
 
 export interface ImageElement extends Element {
   tagName: "img" | "Image";
   properties: {
     src: string;
-  };
-  imageDimensions: ImageDimension;
+  } & (
+    | {
+        placeholder?: "empty";
+        blurDataURL?: never;
+      }
+    | {
+        placeholder: "blur";
+        blurDataURL: string;
+      }
+  );
+  imageDimensions: ImageDimensions;
 }

@@ -1,5 +1,5 @@
 import remark2rehype from "remark-rehype";
-import { getDimensions } from "../images";
+import { getDimensions, getPlaceholder } from "../images";
 import visit from "unist-util-visit";
 import unified from "unified";
 import remarkParse from "remark-parse";
@@ -84,8 +84,9 @@ export const getPostDataBySlug = async (
   if (!json) return null;
   const node = await getHtmlNodeFromMarkdown(json.content);
   const toc = await getTocHastFromMarkdown(json.content);
+  const coverImagePlaceholder = await getPlaceholder(json.cover.url);
 
-  return { node, postOrPage: json, toc };
+  return { node, postOrPage: json, toc, coverImagePlaceholder };
 };
 
 export const getPageDataBySlug = async (
@@ -95,6 +96,7 @@ export const getPageDataBySlug = async (
   if (!json) return null;
   const node = await getHtmlNodeFromMarkdown(json.content);
   const toc = await getTocHastFromMarkdown(json.content);
+
   return { node, postOrPage: json, toc };
 };
 
@@ -123,6 +125,10 @@ const optimizeImages = () => {
         (async () => {
           node.tagName = "Image";
           node.imageDimensions = await getDimensions(node.properties.src);
+          node.properties.placeholder = "blur";
+          node.properties.blurDataURL = await getPlaceholder(
+            node.properties.src
+          );
         })()
       );
     });

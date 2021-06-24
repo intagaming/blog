@@ -20,4 +20,5 @@ export interface PostOrPageData {
   postOrPage: PostOrPage;
   node: Node;
   toc: Element;
+  coverImagePlaceholder?: string;
 }

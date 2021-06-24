@@ -24,7 +24,7 @@ const PostOrPageContent = ({
   postOrPageData,
   tocMapping,
 }: Props): JSX.Element => {
-  const { node, postOrPage, toc } = postOrPageData;
+  const { node, postOrPage, toc, coverImagePlaceholder } = postOrPageData;
 
   // We need this state setting method in order to
   // update the intersect data in <TableOfContents/>.
@@ -71,6 +71,8 @@ const PostOrPageContent = ({
               src={postOrPage.cover.url}
               alt={postOrPage.cover.alternativeText}
               layout={"fill"}
+              placeholder="blur"
+              blurDataURL={coverImagePlaceholder}
             />
           </div>
         )}

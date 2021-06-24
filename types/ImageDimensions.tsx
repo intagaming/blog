@@ -1,4 +1,4 @@
-export interface ImageDimension {
+export interface ImageDimensions {
   width: number;
   height: number;
 }
