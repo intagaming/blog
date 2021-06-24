@@ -25,7 +25,7 @@ const Home = ({ posts, domainUrl }: Props): JSX.Element => {
           description: "I rant universities and document thought process.",
           images: [
             {
-              url: "https://res.cloudinary.com/an7/image/upload/v1624203392/banner_c88bc0724c.png",
+              url: "https://res.cloudinary.com/an7/image/upload/v1624529585/banner_c88bc0724c.png",
               width: 1920,
               height: 1080,
               alt: "An Hoang",

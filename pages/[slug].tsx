@@ -47,7 +47,7 @@ const PostAndPage = ({
             {
               url:
                 postOrPage.cover?.url ||
-                "https://res.cloudinary.com/an7/image/upload/v1624203392/banner_c88bc0724c.png",
+                "https://res.cloudinary.com/an7/image/upload/v1624529585/banner_c88bc0724c.png",
               width: postOrPage.cover?.width || 1920,
               height: postOrPage.cover?.height || 1080,
               alt: postOrPage.cover?.alternativeText || "An Hoang",
@@ -65,7 +65,7 @@ const PostAndPage = ({
         title={`${postOrPage.title} | An Hoang`}
         images={[
           postOrPage.cover?.url ||
-            "https://res.cloudinary.com/an7/image/upload/v1624203392/banner_c88bc0724c.png",
+            "https://res.cloudinary.com/an7/image/upload/v1624529585/banner_c88bc0724c.png",
         ]}
         datePublished={postOrPage.published_at}
         dateModified={postOrPage.updated_at}
