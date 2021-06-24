@@ -12,10 +12,12 @@ type Props = {
 const MyLink = ({ href, children }: Props): JSX.Element => {
   const isNextLink = href.toString().startsWith("/");
 
+  const classes = "!no-underline";
+
   if (isNextLink) {
     return (
       <Link href={href}>
-        <a>
+        <a className={classes}>
           <AnimatedLinkSpan>{children}</AnimatedLinkSpan>
         </a>
       </Link>
@@ -23,7 +25,7 @@ const MyLink = ({ href, children }: Props): JSX.Element => {
   }
 
   return (
-    <a href={href.toString()}>
+    <a href={href.toString()} className={classes}>
       <AnimatedLinkSpan>{children}</AnimatedLinkSpan>
     </a>
   );

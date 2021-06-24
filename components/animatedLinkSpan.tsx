@@ -26,7 +26,7 @@ const AnimatedLinkSpan = ({ children }: Props): JSX.Element => {
         ),
       }}
     >
-      <span className="text-indigo-600 underline">{children}</span>
+      <span className="text-indigo-600">{children}</span>
     </animated.span>
   );
 };

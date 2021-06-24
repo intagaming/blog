@@ -54,8 +54,7 @@ const PostOrPageContent = ({
     return React.createElement.apply(null, args);
   };
 
-  const proseClasses =
-    "prose prose-md lg:prose-lg xl:prose-xl prose-indigo w-full";
+  const proseClasses = "prose prose-md lg:prose-lg prose-indigo w-full";
   return (
     <article
       className={
