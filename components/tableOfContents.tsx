@@ -1,6 +1,6 @@
 import rehype from "rehype";
 import rehype2react from "rehype-react";
-import React from "react";
+import React, { useRef } from "react";
 import { Element } from "hast";
 import { useEffect } from "react";
 import TocLi from "./tocLi";
@@ -16,41 +16,32 @@ export type HeadingIntersectDataStore = {
   [key: string]: HeadingIntersectData;
 };
 
-export type SetHeadingIntersectDataStore = React.Dispatch<
-  React.SetStateAction<HeadingIntersectDataStore>
->;
+export type SetHeadingIntersectData = {
+  (headingId: string, headingIntersectData: HeadingIntersectData): void;
+};
 
 type Props = {
   toc: Element;
-  onMount(setHeadingIntersectDataStore: SetHeadingIntersectDataStore): void;
+  onMount(setHeadingIntersectData: SetHeadingIntersectData): void;
   tocMapping: TocMapping;
 };
 
 const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
   // This store contains intersect data of heading tags.
-  const [headingIntersectDataStore, setHeadingIntersectDataStore] =
-    useState<HeadingIntersectDataStore>({});
+  const headingIntersectDataStore = useRef({});
 
   // This board/panel is like a circuit breaker, full of flip flops.
   // In this case, it's an active state breaker for <li>s.
   const [headingActiveBoard, setHeadingActiveBoard] = useState({});
 
-  // To clear things up between the two stores, an active <li> tag
+  // To clear things up between the two, an active <li> tag
   // does not always mean the corresponding heading is showing on screen.
-
-  // Throw it outside to parent to access
-  useEffect(() => {
-    onMount(setHeadingIntersectDataStore);
-  }, [onMount]);
 
   // Clear the stores when updating tocMapping.
   // Triggered when we change page (which changes ToC, which changes tocMapping).
   useEffect(() => {
-    // These two state will actually be executed at once, without
-    // triggering any useEffect()
-
     // This will be hydrated at the page load, all to inView = false.
-    setHeadingIntersectDataStore({});
+    headingIntersectDataStore.current = {};
 
     // Will be hydrated when resetBoard() is called the first time,
     // which will be called when the first heading comes into screen.
@@ -59,13 +50,13 @@ const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
 
   // When rendering this component, populate the board with knobs.
   // In the same analogy, knob labels = id of <a> tags.
-  const defaultBoard = {}; // The default board with all = false.
+  const defaultBoard = useRef({}); // The default board with all = false.
   const createElementWrapper = (...args) => {
     if (args[0] === TocLi) {
       for (const liChild of args[2]) {
         if (liChild.type !== "a") return;
         const id = liChild.props.href.slice(1);
-        defaultBoard[id] = false;
+        defaultBoard.current[id] = false;
         args[1].active = headingActiveBoard[id]; // Attaching props to custom li.
         break;
       }
@@ -74,15 +65,35 @@ const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
   };
 
   const resetBoard = () => {
-    setHeadingActiveBoard(defaultBoard);
+    setHeadingActiveBoard(defaultBoard.current);
+  };
+
+  // Find all active headings.
+  type ActiveData = {
+    id: string;
+    headingIntersectData: HeadingIntersectData;
+  };
+  const getAllActiveData = (): ActiveData[] => {
+    const actives: ActiveData[] = [];
+    for (const id in headingActiveBoard) {
+      if (headingActiveBoard[id]) {
+        actives.push({
+          id,
+          headingIntersectData: headingIntersectDataStore.current[id],
+        });
+      }
+    }
+    return actives;
   };
 
   // Propagates the highlight like h4 -> h3 -> h2
   const highlight = (id: string) => {
     // Might be a good idea to store the final board first. (Too many re-render thingy.)
     setHeadingActiveBoard((board) => {
-      board[id] = true;
-      return board;
+      return {
+        ...board,
+        [id]: true,
+      };
     });
     const mapping = tocMapping[id];
     if (mapping.parent) {
@@ -90,17 +101,19 @@ const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
     }
   };
 
-  // Each time a heading appears on the screen, we reevaluate.
-  useEffect(() => {
-    if (toc.children.length === 0) {
-      return;
-    }
+  // Throw it outside to parent to access
+  // Each time a heading enters/leaves the screen, we reevaluate.
+  const setHeadingIntersectData: SetHeadingIntersectData = (
+    headingId,
+    headingIntersectData
+  ) => {
+    headingIntersectDataStore.current[headingId] = headingIntersectData; // Update to the store
 
-    // If we have a heading on screen, reset all active to false and activate on-screen headings.
+    // If we have a heading on screen, reset all active to false and activate currently on-screen headings.
     let reset = false; // We only reset if there's one heading in view. Otherwise keep old state.
     let somethingOnScreen = false;
-    for (const id in headingIntersectDataStore) {
-      if (headingIntersectDataStore[id].inView) {
+    for (const id in headingIntersectDataStore.current) {
+      if (headingIntersectDataStore.current[id].inView) {
         if (!reset) {
           resetBoard();
           reset = true;
@@ -115,20 +128,8 @@ const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
     // If it's above the screen, we're ok. Otherwise, back it off a notch.
     if (somethingOnScreen) return;
 
-    // Find all actives
-    type ActiveData = {
-      id: string;
-      headingIntersectData: HeadingIntersectData;
-    };
-    const actives: ActiveData[] = [];
-    for (const id in headingActiveBoard) {
-      if (headingActiveBoard[id]) {
-        actives.push({
-          id,
-          headingIntersectData: headingIntersectDataStore[id],
-        });
-      }
-    }
+    // Find all active headings.
+    const actives = getAllActiveData();
 
     // This safeguard requires there's at least an active (to back off of).
     // Triggered when first time loading the page (which at the time has
@@ -154,7 +155,8 @@ const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
     const last = tocMapping[child.id].last;
     if (!last) return; // Except we don't have anything to back off to.
     highlight(last);
-  }, [headingIntersectDataStore]);
+  };
+  onMount(setHeadingIntersectData);
 
   return (
     toc.children.length > 0 && (

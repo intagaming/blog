@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 import rehype2react from "rehype-react";
 import rehype from "rehype";
 import NextImage from "./nextImage";
@@ -8,7 +8,7 @@ import { PostOrPageData } from "../types/postOrPage";
 import "highlight.js/styles/github-dark.css";
 import MyLinkNodeWrapper from "./myLinkNodeWrapper";
 import TableOfContents, {
-  SetHeadingIntersectDataStore,
+  SetHeadingIntersectData,
 } from "../components/tableOfContents";
 import { TocMapping } from "../lib/tableOfContents";
 import PostOrPageHeading, {
@@ -26,24 +26,20 @@ const PostOrPageContent = ({
 }: Props): JSX.Element => {
   const { node, postOrPage, toc, coverImagePlaceholder } = postOrPageData;
 
-  // We need this state setting method in order to
-  // update the intersect data in <TableOfContents/>.
-  let setHeadingIntersectDataStore: SetHeadingIntersectDataStore;
-  const onTocMount = (f: SetHeadingIntersectDataStore) => {
-    setHeadingIntersectDataStore = f;
+  // We need this function in order to update the intersect data in <TableOfContents/>.
+  let setHeadingIntersectData: SetHeadingIntersectData;
+
+  // When <TableOfContents> renders, we will have the function to use.
+  const onTocMount = (f: SetHeadingIntersectData) => {
+    setHeadingIntersectData = f;
   };
 
   // On heading intersecting the view (called by PostOrPageHeading)
   const onIntersect: HeadingIntersectFunction = (headingId, inView, entry) => {
     // Seems like <InView/>'s onChange prop (which triggers this) is
-    // being called after <TableOfContents/> is mounted, which guarantees
+    // being called after <TableOfContents/> is rendered, which guarantees
     // this function to be available.
-    setHeadingIntersectDataStore((headingData) => {
-      return {
-        ...headingData,
-        [headingId]: { inView, entry },
-      };
-    });
+    setHeadingIntersectData(headingId, { inView, entry });
   };
 
   const createElementWrapper = (...args) => {
