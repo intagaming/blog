@@ -21,9 +21,7 @@ const AnimatedLinkSpan = ({ children }: Props): JSX.Element => {
       }}
       style={{
         cursor: "pointer",
-        backgroundColor: opacity.to(
-          (opacity) => `hsl(21, 27%, 45%, ${opacity})`
-        ),
+        backgroundColor: opacity.to((o) => `hsl(21, 27%, 45%, ${o})`),
       }}
     >
       <span className="text-indigo-600">{children}</span>

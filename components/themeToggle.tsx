@@ -1,7 +1,6 @@
 import { useTheme } from "next-themes";
 import { Switch } from "@headlessui/react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ThemeToggle(): JSX.Element {
   const { theme, setTheme } = useTheme();
@@ -23,7 +22,7 @@ export default function ThemeToggle(): JSX.Element {
     <Switch
       checked={enabled}
       onChange={toggle}
-      className={`focus:outline-none text-white flex items-center`}
+      className="focus:outline-none text-white flex items-center"
     >
       <span className="sr-only">Enable Dark mode</span>
       <span>

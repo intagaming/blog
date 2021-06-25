@@ -1,6 +1,6 @@
 import probe from "probe-image-size";
-import { ImageDimensions } from "../types/ImageDimensions";
 import { getPlaiceholder } from "plaiceholder";
+import { ImageDimensions } from "../types/ImageDimensions";
 
 export const getDimensions = async (url: string): Promise<ImageDimensions> => {
   const { width, height } = await probe(url);

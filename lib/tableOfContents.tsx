@@ -15,15 +15,14 @@ export const getTocMapping = (toc: Element): TocMapping => {
   const tocMapping = {};
 
   const getLiId = (li: Element): string | undefined => {
-    for (const child of li.children as Element[]) {
-      if (child.tagName === "a") {
-        return (child.properties.href as string).slice(1);
-      }
+    const child = li.children.find((c) => c.tagName === "a");
+    if (!child) {
+      return undefined;
     }
-    return undefined;
+    return (child.properties as { href: string }).href.slice(1);
   };
 
-  let lastLiId = undefined;
+  let lastLiId;
 
   visit(toc, (node: Element, _, parent) => {
     if (node.tagName === "ul") {
@@ -31,17 +30,18 @@ export const getTocMapping = (toc: Element): TocMapping => {
         parent?.tagName === "li" ? getLiId(parent as Element) : undefined;
       // We got the parent id. Find all children id and
       // map those to the parent id.
-      for (const li of node.children as Element[]) {
+      node.children.forEach((li: Element) => {
         const liId = getLiId(li);
         if (!liId) {
-          console.error("Cannot find liId. Skipping.");
-          continue;
+          throw new Error(
+            "Cannot find liId. Might be missing an <a/> tag in <li/> tag."
+          );
         }
         tocMapping[liId] = {
           parent: id,
           last: tocMapping[liId]?.last ?? undefined,
         };
-      }
+      });
       return;
     }
     if (node.tagName === "li") {

@@ -1,25 +1,24 @@
 import remark2rehype from "remark-rehype";
-import { getDimensions, getPlaceholder } from "../images";
-import visit from "unist-util-visit";
 import unified from "unified";
 import remarkParse from "remark-parse";
 import remarkUnwrapImages from "remark-unwrap-images";
-import { fetchAPI } from "./api";
 import { Node } from "unist";
-import { ImageElement } from "../../types/hast";
-import {
-  PostOrPage,
-  PostOrPageData as PostOrPageData,
-} from "../../types/postOrPage";
 import remarkGfm from "remark-gfm";
 import highlight from "rehype-highlight";
 import mdastUtilToc from "mdast-util-toc";
-import slug from "remark-slug";
+import remarkSlug from "remark-slug";
 import remark from "remark";
 import u from "unist-builder";
 import rehype from "rehype";
-import { hastRemoveLiParagraph, removeTextNewlineNode } from "../unified";
 import { Element } from "hast";
+import {
+  hastRemoveLiParagraph,
+  optimizeImages,
+  removeTextNewlineNode,
+} from "../unified";
+import { PostOrPage, PostOrPageData } from "../../types/postOrPage";
+import { fetchAPI } from "./api";
+import { getPlaceholder } from "../images";
 
 export const getPostBySlug = async (
   slug: string
@@ -44,7 +43,7 @@ export const getHtmlNodeFromMarkdown = async (
   // Process the node
   const htmlNode = await unified()
     .use(remarkUnwrapImages) // Unwrap the paragraph around the <img>
-    .use(slug)
+    .use(remarkSlug)
     .use(remark2rehype) // Converts to html processor
     .use(optimizeImages) // Prep the <img> to be "NextJS Image compatible"
     .use(highlight) // Highlight <pre> and <code> tags
@@ -86,7 +85,12 @@ export const getPostDataBySlug = async (
   const toc = await getTocHastFromMarkdown(json.content);
   const coverImagePlaceholder = await getPlaceholder(json.cover.url);
 
-  return { node, postOrPage: json, toc, coverImagePlaceholder };
+  return {
+    node,
+    postOrPage: json,
+    toc,
+    coverImagePlaceholder,
+  };
 };
 
 export const getPageDataBySlug = async (
@@ -100,41 +104,11 @@ export const getPageDataBySlug = async (
   return { node, postOrPage: json, toc };
 };
 
-export const getAllPosts = async (): Promise<PostOrPage[] | null> => {
-  return await fetchAPI("/posts");
-};
+export const getAllPosts = async (): Promise<PostOrPage[] | null> =>
+  fetchAPI("/posts");
 
-export const getLatestPosts = async (n = 10): Promise<PostOrPage[] | null> => {
-  return await fetchAPI(`/posts?_sort=published_at:DESC&_limit=${n}`);
-};
+export const getLatestPosts = async (n = 10): Promise<PostOrPage[] | null> =>
+  fetchAPI(`/posts?_sort=published_at:DESC&_limit=${n}`);
 
-export const getAllPages = async (): Promise<PostOrPage[] | null> => {
-  return await fetchAPI("/pages");
-};
-
-// Converts <img> to <Image> and assign width & height
-const optimizeImages = () => {
-  return async (tree: Node) => {
-    // We need a little trick to do this the async way,
-    // although we could change the signature as well.
-    // But then await multiple HTTP requests is faster.
-    const promises = [];
-
-    visit(tree, { tagName: "img" }, (node: ImageElement) => {
-      promises.push(
-        (async () => {
-          node.tagName = "Image";
-          node.imageDimensions = await getDimensions(node.properties.src);
-          node.properties.placeholder = "blur";
-          node.properties.blurDataURL = await getPlaceholder(
-            node.properties.src
-          );
-        })()
-      );
-    });
-
-    await Promise.allSettled(promises);
-
-    return tree;
-  };
-};
+export const getAllPages = async (): Promise<PostOrPage[] | null> =>
+  fetchAPI("/pages");

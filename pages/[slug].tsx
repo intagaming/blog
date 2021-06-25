@@ -1,5 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { NextSeo, BlogJsonLd } from "next-seo";
 import {
   getAllPages,
   getAllPosts,
@@ -9,9 +11,7 @@ import {
 import { PostOrPageData } from "../types/postOrPage";
 import Layout from "../components/layout";
 import PostOrPageContent from "../components/postOrPageContent";
-import { GetStaticPaths, GetStaticProps } from "next";
-import { NextSeo, BlogJsonLd } from "next-seo";
-import { getPostExcerpt } from "../lib/postOrPage";
+import getPostExcerpt from "../lib/postExcerpt";
 import { getTocMapping, TocMapping } from "../lib/tableOfContents";
 
 type Props = {
@@ -110,12 +110,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const domainUrl = process.env.DOMAIN_URL || "http://localhost:3000";
 
-  const slug = params.slug;
-  if (Array.isArray(slug)) return; // TypeScript sake
+  const { slug } = params;
 
-  let postOrPageData = await getPostDataBySlug(slug);
+  let postOrPageData = await getPostDataBySlug(slug as string);
   if (!postOrPageData) {
-    postOrPageData = await getPageDataBySlug(slug);
+    postOrPageData = await getPageDataBySlug(slug as string);
   }
 
   if (!postOrPageData) {

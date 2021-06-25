@@ -8,19 +8,33 @@ type Props = {
 const NextImage = ({ node }: Props): JSX.Element => {
   const isVertical = node.imageDimensions.height > node.imageDimensions.width;
 
+  const { src, alt, blurDataURL, placeholder } = node.properties;
+  const { width, height } = node.imageDimensions;
+
   if (isVertical) {
     return (
-      <div className={"vertical-image-div md:aspect-w-3 md:aspect-h-2"}>
-        <Image className="vertical-image" layout="fill" {...node.properties} />
+      <div className="vertical-image-div md:aspect-w-3 md:aspect-h-2">
+        <Image
+          src={src}
+          alt={alt}
+          className="vertical-image"
+          layout="fill"
+          placeholder={placeholder}
+          blurDataURL={blurDataURL}
+        />
       </div>
     );
   }
 
   return (
     <Image
-      {...node.properties}
-      {...node.imageDimensions}
-      layout={"responsive"}
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      layout="responsive"
+      placeholder={placeholder}
+      blurDataURL={blurDataURL}
     />
   );
 };

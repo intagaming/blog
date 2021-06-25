@@ -1,6 +1,7 @@
 import { Element } from "hast";
 import { ReactNode } from "react";
 import { InView } from "react-intersection-observer";
+import LinkWrapper from "./linkWrapper";
 
 export type HeadingIntersectFunction = {
   (headingId: string, inView: boolean, entry: IntersectionObserverEntry): void;
@@ -17,25 +18,18 @@ const PostOrPageHeading = ({
   children,
   onIntersect,
 }: Props): JSX.Element => {
+  const HeadingTag = node.tagName as keyof JSX.IntrinsicElements;
   return (
     <InView
       onChange={(inView, entry) => {
         onIntersect(node.properties.id as string, inView, entry);
       }}
     >
-      {({ ref }) => {
-        const HeadingTag = node.tagName as keyof JSX.IntrinsicElements;
-        const props = {
-          ref,
-          ...node.properties,
-          className: "heading",
-        };
-        return (
-          <a href={"#" + node.properties.id} className="!no-underline">
-            <HeadingTag {...props}>{children}</HeadingTag>
-          </a>
-        );
-      }}
+      <LinkWrapper href={`#${node.properties.id}`}>
+        <HeadingTag id={node.properties.id as string} className="heading">
+          {children}
+        </HeadingTag>
+      </LinkWrapper>
     </InView>
   );
 };

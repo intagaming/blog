@@ -1,11 +1,10 @@
 import rehype from "rehype";
 import rehype2react from "rehype-react";
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Element } from "hast";
-import { useEffect } from "react";
+
 import TocLi from "./tocLi";
 import { TocMapping } from "../lib/tableOfContents";
-import { useState } from "react";
 
 export type HeadingIntersectData = {
   inView: boolean;
@@ -53,13 +52,12 @@ const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
   const defaultBoard = useRef({}); // The default board with all = false.
   const createElementWrapper = (...args) => {
     if (args[0] === TocLi) {
-      for (const liChild of args[2]) {
+      args[2].forEach((liChild) => {
         if (liChild.type !== "a") return;
         const id = liChild.props.href.slice(1);
         defaultBoard.current[id] = false;
         args[1].active = headingActiveBoard[id]; // Attaching props to custom li.
-        break;
-      }
+      });
     }
     return React.createElement.apply(null, args);
   };
@@ -75,26 +73,24 @@ const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
   };
   const getAllActiveData = (): ActiveData[] => {
     const actives: ActiveData[] = [];
-    for (const id in headingActiveBoard) {
+    Object.keys(headingActiveBoard).forEach((id) => {
       if (headingActiveBoard[id]) {
         actives.push({
           id,
           headingIntersectData: headingIntersectDataStore.current[id],
         });
       }
-    }
+    });
     return actives;
   };
 
   // Propagates the highlight like h4 -> h3 -> h2
   const highlight = (id: string) => {
     // Might be a good idea to store the final board first. (Too many re-render thingy.)
-    setHeadingActiveBoard((board) => {
-      return {
-        ...board,
-        [id]: true,
-      };
-    });
+    setHeadingActiveBoard((board) => ({
+      ...board,
+      [id]: true,
+    }));
     const mapping = tocMapping[id];
     if (mapping.parent) {
       highlight(mapping.parent);
@@ -112,7 +108,7 @@ const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
     // If we have a heading on screen, reset all active to false and activate currently on-screen headings.
     let reset = false; // We only reset if there's one heading in view. Otherwise keep old state.
     let somethingOnScreen = false;
-    for (const id in headingIntersectDataStore.current) {
+    Object.keys(headingIntersectDataStore.current).forEach((id) => {
       if (headingIntersectDataStore.current[id].inView) {
         if (!reset) {
           resetBoard();
@@ -121,7 +117,7 @@ const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
         somethingOnScreen = true;
         highlight(id);
       }
-    }
+    });
 
     // If no heading is on screen, we need to reevaluate, because they might be scrolling backwards.
     // Check the position of the deepest level heading (because they're reading the deepest level heading's content).
@@ -137,12 +133,13 @@ const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
     if (actives.length === 0) return;
 
     let child: ActiveData = actives.pop();
-    let active: ActiveData;
-    while ((active = actives.pop()) !== undefined) {
+    let active: ActiveData = actives.pop();
+    while (active !== undefined) {
       if (tocMapping[active.id].parent === child.id) {
         // If current's parent is the children
         child = active; // Switch the position.
       }
+      active = actives.pop();
     }
 
     // We found the child. Now check if it's above the screen (which is ok, we ignore)
@@ -152,7 +149,7 @@ const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
 
     // It's below the screen. Back it off.
     resetBoard();
-    const last = tocMapping[child.id].last;
+    const { last } = tocMapping[child.id];
     if (!last) return; // Except we don't have anything to back off to.
     highlight(last);
   };

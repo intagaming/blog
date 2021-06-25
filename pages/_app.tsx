@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         storageKey="nightwind-mode"
         defaultTheme="system"
       >
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Component {...pageProps} />
       </ThemeProvider>
     </>

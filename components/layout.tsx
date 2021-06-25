@@ -1,19 +1,17 @@
+import { ReactNode } from "react";
 import TopNavigation from "./topnav";
 import Footer from "./footer";
-import { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
 };
 
-const Layout = ({ children }: Props): JSX.Element => {
-  return (
-    <>
-      <TopNavigation />
-      {children}
-      <Footer />
-    </>
-  );
-};
+const Layout = ({ children }: Props): JSX.Element => (
+  <>
+    <TopNavigation />
+    {children}
+    <Footer />
+  </>
+);
 
 export default Layout;

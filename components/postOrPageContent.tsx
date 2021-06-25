@@ -1,19 +1,17 @@
 import Image from "next/image";
-import React, { useRef } from "react";
+import React from "react";
 import rehype2react from "rehype-react";
 import rehype from "rehype";
 import NextImage from "./nextImage";
 import AuthorAndBrief from "./authorAndBrief";
 import { PostOrPageData } from "../types/postOrPage";
 import "highlight.js/styles/github-dark.css";
-import MyLinkNodeWrapper from "./myLinkNodeWrapper";
-import TableOfContents, {
-  SetHeadingIntersectData,
-} from "../components/tableOfContents";
+import TableOfContents, { SetHeadingIntersectData } from "./tableOfContents";
 import { TocMapping } from "../lib/tableOfContents";
 import PostOrPageHeading, {
   HeadingIntersectFunction,
 } from "./postOrPageHeading";
+import LinkSpan, { LinkSpanWithNode } from "./linkSpan";
 
 type Props = {
   postOrPageData: PostOrPageData;
@@ -52,11 +50,7 @@ const PostOrPageContent = ({
 
   const proseClasses = "prose prose-md lg:prose-lg prose-indigo w-full";
   return (
-    <article
-      className={
-        "md:pt-20 pt-10 pb-10 px-4 flex flex-col items-center bg-white dark:bg-[#121212] min-h-[65vh]"
-      }
-    >
+    <article className="md:pt-20 pt-10 pb-10 px-4 flex flex-col items-center bg-white dark:bg-[#121212] min-h-[65vh]">
       <div className={proseClasses}>
         <h1>{postOrPage.title}</h1>
         {postOrPage.author && <AuthorAndBrief post={postOrPage} />}
@@ -66,7 +60,7 @@ const PostOrPageContent = ({
               className="rounded-sm object-contain"
               src={postOrPage.cover.url}
               alt={postOrPage.cover.alternativeText}
-              layout={"fill"}
+              layout="fill"
               placeholder="blur"
               blurDataURL={coverImagePlaceholder}
             />
@@ -81,7 +75,7 @@ const PostOrPageContent = ({
           tocMapping={tocMapping}
         />
 
-        <div className={proseClasses + " mx-auto"}>
+        <div className={`${proseClasses} mx-auto`}>
           {rehype()
             .data("settings", {
               fragment: true,
@@ -91,7 +85,7 @@ const PostOrPageContent = ({
               Fragment: React.Fragment,
               components: {
                 Image: NextImage,
-                a: MyLinkNodeWrapper,
+                a: LinkSpan as LinkSpanWithNode,
                 h1: PostOrPageHeading,
                 h2: PostOrPageHeading,
                 h3: PostOrPageHeading,
