@@ -40,7 +40,7 @@
     "unified": "^9.2.1",
     "unist-builder": "2.0.3",
     "unist-util-find": "^1.0.2",
-    "unist-util-visit": "^3.1.0"
+    "unist-util-visit": "2.0.3"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.4.1",

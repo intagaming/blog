@@ -98,7 +98,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["unified", "npm:9.2.1"],
             ["unist-builder", "npm:2.0.3"],
             ["unist-util-find", "npm:1.0.2"],
-            ["unist-util-visit", "npm:3.1.0"]
+            ["unist-util-visit", "npm:2.0.3"]
           ],
           "linkType": "SOFT",
         }]
@@ -1657,7 +1657,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["unified", "npm:9.2.1"],
             ["unist-builder", "npm:2.0.3"],
             ["unist-util-find", "npm:1.0.2"],
-            ["unist-util-visit", "npm:3.1.0"]
+            ["unist-util-visit", "npm:2.0.3"]
           ],
           "linkType": "SOFT",
         }]
@@ -9229,13 +9229,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["unist-util-is", "npm:4.1.0"]
           ],
           "linkType": "HARD",
-        }],
-        ["npm:5.1.0", {
-          "packageLocation": "./.yarn/cache/unist-util-is-npm-5.1.0-8694b1153c-a1ccc9b3e3.zip/node_modules/unist-util-is/",
-          "packageDependencies": [
-            ["unist-util-is", "npm:5.1.0"]
-          ],
-          "linkType": "HARD",
         }]
       ]],
       ["unist-util-position", [
@@ -9275,16 +9268,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["unist-util-visit-parents", "npm:3.1.1"]
           ],
           "linkType": "HARD",
-        }],
-        ["npm:3.1.0", {
-          "packageLocation": "./.yarn/cache/unist-util-visit-npm-3.1.0-2f924a5a67-eb2815418f.zip/node_modules/unist-util-visit/",
-          "packageDependencies": [
-            ["unist-util-visit", "npm:3.1.0"],
-            ["@types/unist", "npm:2.0.3"],
-            ["unist-util-is", "npm:5.1.0"],
-            ["unist-util-visit-parents", "npm:4.1.1"]
-          ],
-          "linkType": "HARD",
         }]
       ]],
       ["unist-util-visit-parents", [
@@ -9302,15 +9285,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["unist-util-visit-parents", "npm:3.1.1"],
             ["@types/unist", "npm:2.0.3"],
             ["unist-util-is", "npm:4.1.0"]
-          ],
-          "linkType": "HARD",
-        }],
-        ["npm:4.1.1", {
-          "packageLocation": "./.yarn/cache/unist-util-visit-parents-npm-4.1.1-e51641aced-52f339bb9b.zip/node_modules/unist-util-visit-parents/",
-          "packageDependencies": [
-            ["unist-util-visit-parents", "npm:4.1.1"],
-            ["@types/unist", "npm:2.0.3"],
-            ["unist-util-is", "npm:5.1.0"]
           ],
           "linkType": "HARD",
         }]
