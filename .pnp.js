@@ -83,7 +83,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-spring", "npm:9.2.3"],
             ["rehype", "npm:11.0.0"],
             ["rehype-highlight", "npm:4.1.0"],
-            ["rehype-react", "npm:6.2.0"],
+            ["rehype-react", "npm:6.2.1"],
             ["remark", "npm:13.0.0"],
             ["remark-gfm", "npm:1.0.0"],
             ["remark-parse", "npm:9.0.0"],
@@ -98,7 +98,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["unified", "npm:9.2.1"],
             ["unist-builder", "npm:2.0.3"],
             ["unist-util-find", "npm:1.0.2"],
-            ["unist-util-visit", "npm:2.0.3"]
+            ["unist-util-visit", "npm:3.1.0"]
           ],
           "linkType": "SOFT",
         }]
@@ -333,10 +333,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@mapbox/hast-util-table-cell-style", [
-        ["npm:0.1.3", {
-          "packageLocation": "./.yarn/cache/@mapbox-hast-util-table-cell-style-npm-0.1.3-aa75f4530b-8e87ca336c.zip/node_modules/@mapbox/hast-util-table-cell-style/",
+        ["npm:0.2.0", {
+          "packageLocation": "./.yarn/cache/@mapbox-hast-util-table-cell-style-npm-0.2.0-92bf5dc7bf-7804f65ce8.zip/node_modules/@mapbox/hast-util-table-cell-style/",
           "packageDependencies": [
-            ["@mapbox/hast-util-table-cell-style", "npm:0.1.3"],
+            ["@mapbox/hast-util-table-cell-style", "npm:0.2.0"],
             ["unist-util-visit", "npm:1.4.1"]
           ],
           "linkType": "HARD",
@@ -1642,7 +1642,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-spring", "npm:9.2.3"],
             ["rehype", "npm:11.0.0"],
             ["rehype-highlight", "npm:4.1.0"],
-            ["rehype-react", "npm:6.2.0"],
+            ["rehype-react", "npm:6.2.1"],
             ["remark", "npm:13.0.0"],
             ["remark-gfm", "npm:1.0.0"],
             ["remark-parse", "npm:9.0.0"],
@@ -1657,7 +1657,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["unified", "npm:9.2.1"],
             ["unist-builder", "npm:2.0.3"],
             ["unist-util-find", "npm:1.0.2"],
-            ["unist-util-visit", "npm:2.0.3"]
+            ["unist-util-visit", "npm:3.1.0"]
           ],
           "linkType": "SOFT",
         }]
@@ -7745,11 +7745,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["rehype-react", [
-        ["npm:6.2.0", {
-          "packageLocation": "./.yarn/cache/rehype-react-npm-6.2.0-0dfcb9e949-503786c07d.zip/node_modules/rehype-react/",
+        ["npm:6.2.1", {
+          "packageLocation": "./.yarn/cache/rehype-react-npm-6.2.1-ad8cf4b651-9dc8b6a61b.zip/node_modules/rehype-react/",
           "packageDependencies": [
-            ["rehype-react", "npm:6.2.0"],
-            ["@mapbox/hast-util-table-cell-style", "npm:0.1.3"],
+            ["rehype-react", "npm:6.2.1"],
+            ["@mapbox/hast-util-table-cell-style", "npm:0.2.0"],
             ["hast-to-hyperscript", "npm:9.0.1"]
           ],
           "linkType": "HARD",
@@ -9229,6 +9229,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["unist-util-is", "npm:4.1.0"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:5.1.0", {
+          "packageLocation": "./.yarn/cache/unist-util-is-npm-5.1.0-8694b1153c-a1ccc9b3e3.zip/node_modules/unist-util-is/",
+          "packageDependencies": [
+            ["unist-util-is", "npm:5.1.0"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["unist-util-position", [
@@ -9268,6 +9275,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["unist-util-visit-parents", "npm:3.1.1"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:3.1.0", {
+          "packageLocation": "./.yarn/cache/unist-util-visit-npm-3.1.0-2f924a5a67-eb2815418f.zip/node_modules/unist-util-visit/",
+          "packageDependencies": [
+            ["unist-util-visit", "npm:3.1.0"],
+            ["@types/unist", "npm:2.0.3"],
+            ["unist-util-is", "npm:5.1.0"],
+            ["unist-util-visit-parents", "npm:4.1.1"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["unist-util-visit-parents", [
@@ -9285,6 +9302,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["unist-util-visit-parents", "npm:3.1.1"],
             ["@types/unist", "npm:2.0.3"],
             ["unist-util-is", "npm:4.1.0"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:4.1.1", {
+          "packageLocation": "./.yarn/cache/unist-util-visit-parents-npm-4.1.1-e51641aced-52f339bb9b.zip/node_modules/unist-util-visit-parents/",
+          "packageDependencies": [
+            ["unist-util-visit-parents", "npm:4.1.1"],
+            ["@types/unist", "npm:2.0.3"],
+            ["unist-util-is", "npm:5.1.0"]
           ],
           "linkType": "HARD",
         }]
