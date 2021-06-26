@@ -3,10 +3,6 @@ import React, { ReactNode } from "react";
 
 import LinkWrapper from "./linkWrapper";
 
-export type HeadingIntersectFunction = {
-  (headingId: string, inView: boolean, entry: IntersectionObserverEntry): void;
-};
-
 type Props = {
   node: Element;
   children: ReactNode;
