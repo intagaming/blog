@@ -129,7 +129,7 @@ const TableOfContents = ({ onMount, toc, tocMapping }: Props): JSX.Element => {
       }
     }
     setHeadingActiveBoard(newBoard);
-  }, [headingActiveBoard, headingRefs, tocMapping]);
+  }, [headingRefs, tocMapping]);
 
   useEffect(() => {
     const onScroll = () => {
