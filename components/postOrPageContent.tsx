@@ -1,16 +1,14 @@
 import Image from "next/image";
-import React from "react";
+import React, { createRef, useEffect } from "react";
 import rehype2react from "rehype-react";
 import rehype from "rehype";
 import NextImage from "./nextImage";
 import AuthorAndBrief from "./authorAndBrief";
 import { PostOrPageData } from "../types/postOrPage";
 import "highlight.js/styles/github-dark.css";
-import TableOfContents, { SetHeadingIntersectData } from "./tableOfContents";
+import TableOfContents from "./tableOfContents";
 import { TocMapping } from "../lib/tableOfContents";
-import PostOrPageHeading, {
-  HeadingIntersectFunction,
-} from "./postOrPageHeading";
+import PostOrPageHeading from "./postOrPageHeading";
 import LinkSpan, { LinkSpanWithNode } from "./linkSpan";
 
 type Props = {
@@ -24,29 +22,27 @@ const PostOrPageContent = ({
 }: Props): JSX.Element => {
   const { node, postOrPage, toc, coverImagePlaceholder } = postOrPageData;
 
-  // We need this function in order to update the intersect data in <TableOfContents/>.
-  let setHeadingIntersectData: SetHeadingIntersectData;
-
-  // When <TableOfContents> renders, we will have the function to use.
-  const onTocMount = (f: SetHeadingIntersectData) => {
-    setHeadingIntersectData = f;
-  };
-
-  // On heading intersecting the view (called by PostOrPageHeading)
-  const onIntersect: HeadingIntersectFunction = (headingId, inView, entry) => {
-    // Seems like <InView/>'s onChange prop (which triggers this) is
-    // being called after <TableOfContents/> is rendered, which guarantees
-    // this function to be available.
-    setHeadingIntersectData(headingId, { inView, entry });
-  };
+  // refs to the h tags inside PostOrPageHeading.
+  const headingRefs = {};
 
   const createElementWrapper = (...args) => {
-    // We need to pass onIntersect into PostOrPageHeading
     if (args[0] === PostOrPageHeading) {
-      args[1].onIntersect = onIntersect;
+      const ref = createRef<HTMLHeadingElement>();
+      args[1].ref = ref;
+      headingRefs[args[1].id] = ref; // Storing ref
     }
     return React.createElement.apply(null, args);
   };
+
+  let tocMount;
+  const onTocMount = (f) => {
+    tocMount = f;
+  };
+  // On rendering complete, we will send heading refs to ToC.
+  // It is a state, so the ToC will re-render.
+  useEffect(() => {
+    tocMount(headingRefs);
+  });
 
   const proseClasses = "prose prose-md lg:prose-lg prose-indigo w-full";
   return (
@@ -71,8 +67,8 @@ const PostOrPageContent = ({
       <div className="w-full mt-10 lg:relative lg:w-auto">
         <TableOfContents
           toc={toc}
-          onMount={onTocMount}
           tocMapping={tocMapping}
+          onMount={onTocMount}
         />
 
         <div className={`${proseClasses} mx-auto`}>
@@ -80,6 +76,7 @@ const PostOrPageContent = ({
             .data("settings", {
               fragment: true,
             })
+            // @ts-ignore Ignoring, forwardRef seems to work fine.
             .use(rehype2react, {
               createElement: createElementWrapper,
               Fragment: React.Fragment,
