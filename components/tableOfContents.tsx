@@ -75,7 +75,7 @@ const TableOfContents = ({ onMount, toc, tocMapping }: Props): JSX.Element => {
   }, [headingRefs]);
 
   const reevaluate = useCallback(() => {
-    let newBoard = headingActiveBoard;
+    let newBoard;
 
     // Propagates the highlight like h4 -> h3 -> h2
     const highlight = (id: string, nearMiss = false) => {
