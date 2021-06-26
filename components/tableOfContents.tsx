@@ -1,54 +1,45 @@
 import rehype from "rehype";
 import rehype2react from "rehype-react";
-import React, { useRef, useEffect, useState } from "react";
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  SetStateAction,
+  useCallback,
+} from "react";
 import { Element } from "hast";
 
 import TocLi from "./tocLi";
 import { TocMapping } from "../lib/tableOfContents";
 
-export type HeadingIntersectData = {
-  inView: boolean;
-  entry: IntersectionObserverEntry;
-};
-
-export type HeadingIntersectDataStore = {
-  [key: string]: HeadingIntersectData;
-};
-
-export type SetHeadingIntersectData = {
-  (headingId: string, headingIntersectData: HeadingIntersectData): void;
-};
-
 type Props = {
   toc: Element;
-  onMount(setHeadingIntersectData: SetHeadingIntersectData): void;
   tocMapping: TocMapping;
+  // headingRefs: { [headingId: string]: React.RefObject<HTMLHeadingElement> };
+  onMount(setHeadingRefs: React.Dispatch<SetStateAction<{}>>): void;
 };
 
-const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
-  // This store contains intersect data of heading tags.
-  const headingIntersectDataStore = useRef({});
-
+const TableOfContents = ({ onMount, toc, tocMapping }: Props): JSX.Element => {
   // This board/panel is like a circuit breaker, full of flip flops.
   // In this case, it's an active state breaker for <li>s.
   const [headingActiveBoard, setHeadingActiveBoard] = useState({});
 
-  // To clear things up between the two, an active <li> tag
-  // does not always mean the corresponding heading is showing on screen.
+  // refs to the h tags inside PostOrPageHeading.
+  const [headingRefs, setHeadingRefs] = useState(null);
 
-  // Clear the stores when updating tocMapping.
-  // Triggered when we change page (which changes ToC, which changes tocMapping).
+  // This boolean marks if this ToC reevaluated once.
+  const isInit = useRef(false);
+
+  // We'll send out the state set method.
+  // Once the state is updated, we can use those to
+  //   capture positions and highlight properly.
   useEffect(() => {
-    // This will be hydrated at the page load, all to inView = false.
-    headingIntersectDataStore.current = {};
+    onMount(setHeadingRefs);
+  }, [onMount]);
 
-    // Will be hydrated when resetBoard() is called the first time,
-    // which will be called when the first heading comes into screen.
-    setHeadingActiveBoard({});
-  }, [tocMapping]);
-
-  // When rendering this component, populate the board with knobs.
-  // In the same analogy, knob labels = id of <a> tags.
+  // When rendering this component, populate the board with toggles.
+  // In the same analogy, toggle labels = id of <a> tags.
+  // This is used to reset the board when highlighting.
   const defaultBoard = useRef({}); // The default board with all = false.
   const createElementWrapper = (...args) => {
     if (args[0] === TocLi) {
@@ -62,98 +53,108 @@ const TableOfContents = ({ toc, onMount, tocMapping }: Props): JSX.Element => {
     return React.createElement.apply(null, args);
   };
 
-  const resetBoard = () => {
-    setHeadingActiveBoard(defaultBoard.current);
-  };
+  // Reset when updating tocMapping.
+  // Triggered when we change page (which changes ToC, which changes tocMapping),
+  //   before headingRefs is sent into this ToC.
+  useEffect(() => {
+    // Hydrated when this component re-renders.
+    // It'll re-render after this reset.
+    defaultBoard.current = {};
 
-  // Find all active headings.
-  type ActiveData = {
-    id: string;
-    headingIntersectData: HeadingIntersectData;
-  };
-  const getAllActiveData = (): ActiveData[] => {
-    const actives: ActiveData[] = [];
-    Object.keys(headingActiveBoard).forEach((id) => {
-      if (headingActiveBoard[id]) {
-        actives.push({
-          id,
-          headingIntersectData: headingIntersectDataStore.current[id],
-        });
+    // Hydrated when the parent complete its render.
+    setHeadingRefs(null);
+
+    // Hydrated when reevaluate the first time.
+    setHeadingActiveBoard({});
+  }, [tocMapping]);
+
+  useEffect(() => {
+    // We can't depend on tocMapping because it is too soon.
+    // It would init right after it finishes resetting.
+    isInit.current = false;
+  }, [headingRefs]);
+
+  const reevaluate = useCallback(() => {
+    let newBoard = headingActiveBoard;
+
+    // Propagates the highlight like h4 -> h3 -> h2
+    const highlight = (id: string, nearMiss = false) => {
+      newBoard = {
+        ...newBoard,
+        [id]: nearMiss ? "nearMiss" : "active",
+      };
+      const lastId = tocMapping[id].last;
+      if (lastId) {
+        newBoard = {
+          ...newBoard,
+          [lastId]: !nearMiss ? false : "active",
+        };
       }
+
+      const mapping = tocMapping[id];
+      if (mapping.parent) {
+        highlight(mapping.parent);
+      }
+    };
+
+    const midpoint = window.innerHeight / 2; // Vertical center of the window
+    let nearMost = null; // The nearest id above the midpoint
+    let nearMiss = null; // The next id, below the midpoint
+    Object.keys(headingRefs ?? []).every((key) => {
+      // Find nearMost & nearMiss
+      const ref = headingRefs[key];
+      if (!ref.current) {
+        // Heading not available. We are in the page switching process.
+        // Stop and turn off all highlight.
+        return false;
+      }
+      const rect = ref.current.getBoundingClientRect();
+      if (rect.top <= midpoint) {
+        nearMost = key;
+        return true;
+      }
+      nearMiss = key;
+      return false;
     });
-    return actives;
-  };
 
-  // Propagates the highlight like h4 -> h3 -> h2
-  const highlight = (id: string) => {
-    // Might be a good idea to store the final board first. (Too many re-render thingy.)
-    setHeadingActiveBoard((board) => ({
-      ...board,
-      [id]: true,
-    }));
-    const mapping = tocMapping[id];
-    if (mapping.parent) {
-      highlight(mapping.parent);
-    }
-  };
-
-  // Throw it outside to parent to access
-  // Each time a heading enters/leaves the screen, we reevaluate.
-  const setHeadingIntersectData: SetHeadingIntersectData = (
-    headingId,
-    headingIntersectData
-  ) => {
-    headingIntersectDataStore.current[headingId] = headingIntersectData; // Update to the store
-
-    // If we have a heading on screen, reset all active to false and activate currently on-screen headings.
-    let reset = false; // We only reset if there's one heading in view. Otherwise keep old state.
-    let somethingOnScreen = false;
-    Object.keys(headingIntersectDataStore.current).forEach((id) => {
-      if (headingIntersectDataStore.current[id].inView) {
-        if (!reset) {
-          resetBoard();
-          reset = true;
-        }
-        somethingOnScreen = true;
-        highlight(id);
+    newBoard = defaultBoard; // Reset all to off
+    if (nearMost) {
+      highlight(nearMost);
+      if (
+        nearMiss &&
+        headingRefs[nearMiss].current.getBoundingClientRect().top <=
+          window.innerHeight
+      ) {
+        highlight(nearMiss, true);
       }
-    });
-
-    // If no heading is on screen, we need to reevaluate, because they might be scrolling backwards.
-    // Check the position of the deepest level heading (because they're reading the deepest level heading's content).
-    // If it's above the screen, we're ok. Otherwise, back it off a notch.
-    if (somethingOnScreen) return;
-
-    // Find all active headings.
-    const actives = getAllActiveData();
-
-    // This safeguard requires there's at least an active (to back off of).
-    // Triggered when first time loading the page (which at the time has
-    // no active but has intersect data - populated with inView = false)
-    if (actives.length === 0) return;
-
-    let child: ActiveData = actives.pop();
-    let active: ActiveData = actives.pop();
-    while (active !== undefined) {
-      if (tocMapping[active.id].parent === child.id) {
-        // If current's parent is the children
-        child = active; // Switch the position.
-      }
-      active = actives.pop();
     }
+    setHeadingActiveBoard(newBoard);
+  }, [headingActiveBoard, headingRefs, tocMapping]);
 
-    // We found the child. Now check if it's above the screen (which is ok, we ignore)
-    if (child.headingIntersectData.entry?.boundingClientRect.top <= 0) {
-      return;
+  useEffect(() => {
+    const onScroll = () => {
+      reevaluate(); // Reevaluate on scroll
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [reevaluate]);
+
+  // We must reevaluate once when the page is
+  //  completely loaded.
+  useEffect(() => {
+    // headingRefs must be available to init.
+    // And by this time, the defaultBoard is populated, because
+    //   headingRefs will only be updated once PostOrPageContent
+    //   finished its render, at which time this component already
+    //   rendered.
+    if (headingRefs && !isInit.current) {
+      reevaluate();
+      isInit.current = true;
     }
-
-    // It's below the screen. Back it off.
-    resetBoard();
-    const { last } = tocMapping[child.id];
-    if (!last) return; // Except we don't have anything to back off to.
-    highlight(last);
-  };
-  onMount(setHeadingIntersectData);
+  }, [reevaluate, headingRefs]);
 
   return (
     toc.children.length > 0 && (

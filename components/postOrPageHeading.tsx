@@ -1,6 +1,6 @@
 import { Element } from "hast";
-import { ReactNode } from "react";
-import { InView } from "react-intersection-observer";
+import React, { ReactNode } from "react";
+
 import LinkWrapper from "./linkWrapper";
 
 export type HeadingIntersectFunction = {
@@ -10,28 +10,27 @@ export type HeadingIntersectFunction = {
 type Props = {
   node: Element;
   children: ReactNode;
-  onIntersect: HeadingIntersectFunction;
 };
 
-const PostOrPageHeading = ({
-  node,
-  children,
-  onIntersect,
-}: Props): JSX.Element => {
-  const HeadingTag = node.tagName as keyof JSX.IntrinsicElements;
-  return (
-    <InView
-      onChange={(inView, entry) => {
-        onIntersect(node.properties.id as string, inView, entry);
-      }}
-    >
+const PostOrPageHeading = React.forwardRef(
+  ({ node, children }: Props, ref): JSX.Element => {
+    // I'm casting to bypass TypeScript complaining the ref type.
+    const HeadingTag = node.tagName as "h2";
+
+    return (
       <LinkWrapper href={`#${node.properties.id}`}>
-        <HeadingTag id={node.properties.id as string} className="heading">
+        <HeadingTag
+          ref={ref as React.ForwardedRef<HTMLHeadingElement>}
+          id={node.properties.id as string}
+          className="heading"
+        >
           {children}
         </HeadingTag>
       </LinkWrapper>
-    </InView>
-  );
-};
+    );
+  }
+);
+
+PostOrPageHeading.displayName = "PostOrPageHeading";
 
 export default PostOrPageHeading;

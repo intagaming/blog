@@ -49,10 +49,10 @@ body {
   li {
     &::before {
       content: "[x] ";
-      @apply text-indigo-600 dark:text-indigo-600 font-bold;
+      @apply text-indigo-600/50 dark:text-indigo-600/50 font-bold;
     }
     a {
-      @apply opacity-60 hover:opacity-100 transition-opacity;
+      @apply opacity-50 hover:opacity-100 transition-opacity;
     }
   }
 
@@ -63,6 +63,16 @@ body {
     }
     > a {
       @apply opacity-100;
+    }
+  }
+
+  .tocNearMiss {
+    &::before {
+      content: "[x] ";
+      @apply text-indigo-600/75 dark:text-indigo-600/75 font-bold;
+    }
+    > a {
+      @apply opacity-75;
     }
   }
 }
