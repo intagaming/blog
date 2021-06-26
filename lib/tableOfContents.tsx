@@ -10,7 +10,6 @@ export type TocMapping = {
 
 // Generate ToC mapping (maps id of <h?> tags to their
 // parent's id to highlight when they show on the screen)
-// TODO we need an ordered mapping to activate when we scroll backwards
 export const getTocMapping = (toc: Element): TocMapping => {
   const tocMapping = {};
 
