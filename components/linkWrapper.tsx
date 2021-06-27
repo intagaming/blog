@@ -12,7 +12,7 @@ const LinkWrapper = ({ href, children }: Props): JSX.Element => {
     return (
       <Link href={href}>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a>{children}</a>
+        <a className="!no-underline">{children}</a>
       </Link>
     );
   }
