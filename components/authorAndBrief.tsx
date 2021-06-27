@@ -33,7 +33,7 @@ const AuthorAndBrief = ({ post, size }: Props): JSX.Element => {
           {post.author && post.author.fullName}
         </span>
         <span className="text-gray-400 text-sm">
-          {date} •{minuteRead} min read
+          {date} • {minuteRead} min read
         </span>
       </div>
     </div>
