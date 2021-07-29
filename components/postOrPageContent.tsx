@@ -53,7 +53,7 @@ const PostOrPageContent = ({
         {postOrPage.cover && (
           <div className="mt-6 aspect-w-3 aspect-h-2">
             <Image
-              className="rounded-sm object-contain"
+              className="object-contain rounded-sm"
               src={postOrPage.cover.url}
               alt={postOrPage.cover.alternativeText}
               layout="fill"
@@ -93,6 +93,8 @@ const PostOrPageContent = ({
               passNode: true,
             })
             .stringify(node)}
+          {/* A little long text to make this div the full width */}
+          <span className="invisible">{"_ ".repeat(40)}</span>
         </div>
       </div>
     </article>
