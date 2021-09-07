@@ -653,11 +653,11 @@ __metadata:
   linkType: hard
 
 "@types/sharp@npm:^0":
-  version: 0.28.3
-  resolution: "@types/sharp@npm:0.28.3"
+  version: 0.28.6
+  resolution: "@types/sharp@npm:0.28.6"
   dependencies:
     "@types/node": "*"
-  checksum: e638ee8e34278a2457eafaad13ed8fdc3a3ca6126819bdd8897a1863ef00da5cf8d1c7479fa88eaaa23176a1caee560110814772008ef49505ab4da0713da21f
+  checksum: 0128e45b6605462bf7642bb6030662f8c7c128ee83ff5b13e6eeea4a7148e95a72687b543ed6608e0758f67cc63d59000c17de20268d73514ada664f2474e043
   languageName: node
   linkType: hard
 
@@ -1129,7 +1129,7 @@ __metadata:
     remark-slug: ^6.0.0
     remark-unwrap-images: ^2.1.0
     sass: ^1.35.1
-    sharp: ^0.28.3
+    sharp: ^0.29.1
     superjson: ^1.7.4
     tailwindcss: ^2.2.2
     typescript: ^4.3.4
@@ -1971,6 +1971,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"color-string@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "color-string@npm:1.6.0"
+  dependencies:
+    color-name: ^1.0.0
+    simple-swizzle: ^0.2.2
+  checksum: d48692037a6d38bd1deb91886a075d8af82e4e8269c5ab33eadf174d8aa5e82753a2f3edfe6749e24e48898ea2eb76df706b603c65a721e10ddc57c5d6a078cf
+  languageName: node
+  linkType: hard
+
 "color@npm:^3.1.3":
   version: 3.1.3
   resolution: "color@npm:3.1.3"
@@ -1978,6 +1988,16 @@ __metadata:
     color-convert: ^1.9.1
     color-string: ^1.5.4
   checksum: d0f4139e986806aaacaa748d170c9778faed93695fb776cd27d9c5825424263eb9354f69033804d0d2d350d9831a31d14dddff045da00713499f279da97e602f
+  languageName: node
+  linkType: hard
+
+"color@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "color@npm:4.0.1"
+  dependencies:
+    color-convert: ^2.0.1
+    color-string: ^1.6.0
+  checksum: 8f8820cdace4172760cfb0ff8907ce9991a218ddcdcb53c17efadea1b2097bb3266d96f0f662a9afda4c5f946b89c785cf0bd5e04299c53cebb5b72639cf8996
   languageName: node
   linkType: hard
 
@@ -5038,20 +5058,20 @@ __metadata:
   linkType: hard
 
 "node-abi@npm:^2.21.0":
-  version: 2.30.0
-  resolution: "node-abi@npm:2.30.0"
+  version: 2.30.1
+  resolution: "node-abi@npm:2.30.1"
   dependencies:
     semver: ^5.4.1
-  checksum: d048604a9f5694051a9d23650f4ce2e881d751385d913534c964895fea9849dceb6bffd2a0e0581aa03f5743bd2f3d6de37316bf1ed106f382e4492929806970
+  checksum: 815e2db6ef447718b525eaba963308d73f7a10866ce8076b10bf8283d20d128e6d7be98fed43db7d64aed343327f4b80fd7ca441226cb1895074f594ec541fe3
   languageName: node
   linkType: hard
 
-"node-addon-api@npm:^3.2.0":
-  version: 3.2.1
-  resolution: "node-addon-api@npm:3.2.1"
+"node-addon-api@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "node-addon-api@npm:4.1.0"
   dependencies:
     node-gyp: latest
-  checksum: b4c69283fc7baa813e7f38085ee8cd3bd9fd1463a11621eb7e9be12cd494bfabd83b1e7880dc7f7a8d664f8545238ce310d61301b3c4ae608e6e49f4862c41e5
+  checksum: b5f68f1047c843c84aea034915480e994ce2811b4629e92f27f442696382adb2d258228af07bd97fd207af13c7df62492029b92f852ac258c9661b85a9d40fa0
   languageName: node
   linkType: hard
 
@@ -5755,9 +5775,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prebuild-install@npm:^6.1.2":
-  version: 6.1.3
-  resolution: "prebuild-install@npm:6.1.3"
+"prebuild-install@npm:^6.1.4":
+  version: 6.1.4
+  resolution: "prebuild-install@npm:6.1.4"
   dependencies:
     detect-libc: ^1.0.3
     expand-template: ^2.0.3
@@ -5774,7 +5794,7 @@ __metadata:
     tunnel-agent: ^0.6.0
   bin:
     prebuild-install: bin.js
-  checksum: 4b9a6f4b9000648a3e38b96938b22bfa1fa4ced1f14fb290891d5ad182c621ccbfb14eb7e7d588448536c02a08c4727a19e42197d56308c3ff2ed1f18b4f1605
+  checksum: d11fc9f0df5db1f6926dec6739d9be82b976ed2838a7a97e70b5b290a42991f891838ea5a673f7e61987c307bf03c9ed6643c2bc9a4677997672608a4ef37eec
   languageName: node
   linkType: hard
 
@@ -6594,20 +6614,20 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sharp@npm:^0.28.3":
-  version: 0.28.3
-  resolution: "sharp@npm:0.28.3"
+"sharp@npm:^0.29.1":
+  version: 0.29.1
+  resolution: "sharp@npm:0.29.1"
   dependencies:
-    color: ^3.1.3
+    color: ^4.0.1
     detect-libc: ^1.0.3
-    node-addon-api: ^3.2.0
+    node-addon-api: ^4.1.0
     node-gyp: latest
-    prebuild-install: ^6.1.2
+    prebuild-install: ^6.1.4
     semver: ^7.3.5
     simple-get: ^3.1.0
     tar-fs: ^2.1.1
     tunnel-agent: ^0.6.0
-  checksum: 7490ab4afbb7a1987c011a5eb40be15873841d5dd92a66d47ec424f618daed616ed597533bb985dfabc2e186b5d8476a06003c84a618b749ae6f3de413cad736
+  checksum: 48ace872de75659ceab33bc9923ef057efbea5e997af71a37ffee91d7527a857e335e2c29c8be5b023d93db7a95d217386a7535cda5dbebc0baacaeda6870d9c
   languageName: node
   linkType: hard
 

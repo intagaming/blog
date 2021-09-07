@@ -48,7 +48,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/prop-types", "npm:15.7.3"],
             ["@types/react", "npm:17.0.11"],
             ["@types/sass", "npm:1.16.0"],
-            ["@types/sharp", "npm:0.28.3"],
+            ["@types/sharp", "npm:0.28.6"],
             ["@types/unist", "npm:2.0.3"],
             ["@typescript-eslint/eslint-plugin", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.27.0"],
             ["@typescript-eslint/parser", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.27.0"],
@@ -91,7 +91,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["remark-slug", "npm:6.0.0"],
             ["remark-unwrap-images", "npm:2.1.0"],
             ["sass", "npm:1.35.1"],
-            ["sharp", "npm:0.28.3"],
+            ["sharp", "npm:0.29.1"],
             ["superjson", "npm:1.7.4"],
             ["tailwindcss", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:2.2.2"],
             ["typescript", "patch:typescript@npm%3A4.3.4#builtin<compat/typescript>::version=4.3.4&hash=ddfc1b"],
@@ -487,9 +487,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@plaiceholder/next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:2.1.0"],
             ["@types/next", null],
-            ["@types/sharp", "npm:0.28.3"],
+            ["@types/sharp", "npm:0.28.6"],
             ["next", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:11.0.1"],
-            ["sharp", "npm:0.28.3"]
+            ["sharp", "npm:0.29.1"]
           ],
           "packagePeers": [
             "@types/next",
@@ -1052,10 +1052,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@types/sharp", [
-        ["npm:0.28.3", {
-          "packageLocation": "./.yarn/cache/@types-sharp-npm-0.28.3-584d227172-e638ee8e34.zip/node_modules/@types/sharp/",
+        ["npm:0.28.6", {
+          "packageLocation": "./.yarn/cache/@types-sharp-npm-0.28.6-b87f352c22-0128e45b66.zip/node_modules/@types/sharp/",
           "packageDependencies": [
-            ["@types/sharp", "npm:0.28.3"],
+            ["@types/sharp", "npm:0.28.6"],
             ["@types/node", "npm:15.12.2"]
           ],
           "linkType": "HARD",
@@ -1607,7 +1607,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/prop-types", "npm:15.7.3"],
             ["@types/react", "npm:17.0.11"],
             ["@types/sass", "npm:1.16.0"],
-            ["@types/sharp", "npm:0.28.3"],
+            ["@types/sharp", "npm:0.28.6"],
             ["@types/unist", "npm:2.0.3"],
             ["@typescript-eslint/eslint-plugin", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.27.0"],
             ["@typescript-eslint/parser", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:4.27.0"],
@@ -1650,7 +1650,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["remark-slug", "npm:6.0.0"],
             ["remark-unwrap-images", "npm:2.1.0"],
             ["sass", "npm:1.35.1"],
-            ["sharp", "npm:0.28.3"],
+            ["sharp", "npm:0.29.1"],
             ["superjson", "npm:1.7.4"],
             ["tailwindcss", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:2.2.2"],
             ["typescript", "patch:typescript@npm%3A4.3.4#builtin<compat/typescript>::version=4.3.4&hash=ddfc1b"],
@@ -2591,6 +2591,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["color-string", "npm:1.5.5"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:4.0.1", {
+          "packageLocation": "./.yarn/cache/color-npm-4.0.1-f655826e4e-8f8820cdac.zip/node_modules/color/",
+          "packageDependencies": [
+            ["color", "npm:4.0.1"],
+            ["color-convert", "npm:2.0.1"],
+            ["color-string", "npm:1.6.0"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["color-convert", [
@@ -2632,6 +2641,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/color-string-npm-1.5.5-dada7277d1-3d7799f70d.zip/node_modules/color-string/",
           "packageDependencies": [
             ["color-string", "npm:1.5.5"],
+            ["color-name", "npm:1.1.4"],
+            ["simple-swizzle", "npm:0.2.2"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:1.6.0", {
+          "packageLocation": "./.yarn/cache/color-string-npm-1.6.0-94ed25c258-d48692037a.zip/node_modules/color-string/",
+          "packageDependencies": [
+            ["color-string", "npm:1.6.0"],
             ["color-name", "npm:1.1.4"],
             ["simple-swizzle", "npm:0.2.2"]
           ],
@@ -6299,20 +6317,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["node-abi", [
-        ["npm:2.30.0", {
-          "packageLocation": "./.yarn/cache/node-abi-npm-2.30.0-d6aca91d32-d048604a9f.zip/node_modules/node-abi/",
+        ["npm:2.30.1", {
+          "packageLocation": "./.yarn/cache/node-abi-npm-2.30.1-36a2c4e28a-815e2db6ef.zip/node_modules/node-abi/",
           "packageDependencies": [
-            ["node-abi", "npm:2.30.0"],
+            ["node-abi", "npm:2.30.1"],
             ["semver", "npm:5.7.1"]
           ],
           "linkType": "HARD",
         }]
       ]],
       ["node-addon-api", [
-        ["npm:3.2.1", {
-          "packageLocation": "./.yarn/unplugged/node-addon-api-npm-3.2.1-a29528f81d/node_modules/node-addon-api/",
+        ["npm:4.1.0", {
+          "packageLocation": "./.yarn/unplugged/node-addon-api-npm-4.1.0-76373ac490/node_modules/node-addon-api/",
           "packageDependencies": [
-            ["node-addon-api", "npm:3.2.1"],
+            ["node-addon-api", "npm:4.1.0"],
             ["node-gyp", "npm:8.1.0"]
           ],
           "linkType": "HARD",
@@ -6975,12 +6993,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/$$virtual/plaiceholder-virtual-f3a9adc826/0/cache/plaiceholder-npm-2.0.1-b670e12633-930d073e0b.zip/node_modules/plaiceholder/",
           "packageDependencies": [
             ["plaiceholder", "virtual:ce3d4713ae2640536c22da951e5f7b8664f4bc990ccdcba516ecee032f7140e19791158ebb569fc79012bbd3239864f3999e14a1a165b0bda04dd9dee67f950b#npm:2.0.1"],
-            ["@types/sharp", "npm:0.28.3"],
+            ["@types/sharp", "npm:0.28.6"],
             ["blurhash", "npm:1.1.3"],
             ["image-size", "npm:1.0.0"],
             ["node-cache", "npm:5.1.2"],
             ["node-fetch", "npm:2.6.1"],
-            ["sharp", "npm:0.28.3"]
+            ["sharp", "npm:0.29.1"]
           ],
           "packagePeers": [
             "@types/sharp",
@@ -7140,17 +7158,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["prebuild-install", [
-        ["npm:6.1.3", {
-          "packageLocation": "./.yarn/cache/prebuild-install-npm-6.1.3-e1b7af2a78-4b9a6f4b90.zip/node_modules/prebuild-install/",
+        ["npm:6.1.4", {
+          "packageLocation": "./.yarn/cache/prebuild-install-npm-6.1.4-dba03730c6-d11fc9f0df.zip/node_modules/prebuild-install/",
           "packageDependencies": [
-            ["prebuild-install", "npm:6.1.3"],
+            ["prebuild-install", "npm:6.1.4"],
             ["detect-libc", "npm:1.0.3"],
             ["expand-template", "npm:2.0.3"],
             ["github-from-package", "npm:0.0.0"],
             ["minimist", "npm:1.2.5"],
             ["mkdirp-classic", "npm:0.5.3"],
             ["napi-build-utils", "npm:1.0.2"],
-            ["node-abi", "npm:2.30.0"],
+            ["node-abi", "npm:2.30.1"],
             ["npmlog", "npm:4.1.2"],
             ["pump", "npm:3.0.0"],
             ["rc", "npm:1.2.8"],
@@ -8090,15 +8108,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["sharp", [
-        ["npm:0.28.3", {
-          "packageLocation": "./.yarn/unplugged/sharp-npm-0.28.3-0b2c15610d/node_modules/sharp/",
+        ["npm:0.29.1", {
+          "packageLocation": "./.yarn/unplugged/sharp-npm-0.29.1-639a8c3365/node_modules/sharp/",
           "packageDependencies": [
-            ["sharp", "npm:0.28.3"],
-            ["color", "npm:3.1.3"],
+            ["sharp", "npm:0.29.1"],
+            ["color", "npm:4.0.1"],
             ["detect-libc", "npm:1.0.3"],
-            ["node-addon-api", "npm:3.2.1"],
+            ["node-addon-api", "npm:4.1.0"],
             ["node-gyp", "npm:8.1.0"],
-            ["prebuild-install", "npm:6.1.3"],
+            ["prebuild-install", "npm:6.1.4"],
             ["semver", "npm:7.3.5"],
             ["simple-get", "npm:3.1.0"],
             ["tar-fs", "npm:2.1.1"],

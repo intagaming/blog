@@ -6,13 +6,14 @@ import {
   getAllPages,
   getAllPosts,
   getPageDataBySlug,
-  getPostDataBySlug,
+  getPostDataBySlug
 } from "../lib/strapi/postAndPageApi";
 import { PostOrPageData } from "../types/postOrPage";
 import Layout from "../components/layout";
 import PostOrPageContent from "../components/postOrPageContent";
 import getPostExcerpt from "../lib/postExcerpt";
 import { getTocMapping, TocMapping } from "../lib/tableOfContents";
+import { escapeQuote } from "../lib/util";
 
 type Props = {
   postOrPageData: PostOrPageData;
@@ -23,14 +24,14 @@ type Props = {
 const PostAndPage = ({
   postOrPageData,
   domainUrl,
-  tocMapping,
+  tocMapping
 }: Props): JSX.Element => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
   const { postOrPage } = postOrPageData;
-  const excerpt = getPostExcerpt(postOrPage);
+  const excerpt = escapeQuote(getPostExcerpt(postOrPage));
 
   return (
     <>
@@ -50,14 +51,14 @@ const PostAndPage = ({
                 "https://res.cloudinary.com/an7/image/upload/v1624529585/banner_c88bc0724c.png",
               width: postOrPage.cover?.width || 1920,
               height: postOrPage.cover?.height || 1080,
-              alt: postOrPage.cover?.alternativeText || "An Hoang",
-            },
+              alt: postOrPage.cover?.alternativeText || "An Hoang"
+            }
           ],
           article: {
             publishedTime: postOrPage.published_at,
             modifiedTime: postOrPage.updated_at,
-            authors: ["https://hxann.com/about"],
-          },
+            authors: ["https://hxann.com/about"]
+          }
         }}
       />
       <BlogJsonLd
@@ -65,7 +66,7 @@ const PostAndPage = ({
         title={`${postOrPage.title} | An Hoang`}
         images={[
           postOrPage.cover?.url ||
-            "https://res.cloudinary.com/an7/image/upload/v1624529585/banner_c88bc0724c.png",
+          "https://res.cloudinary.com/an7/image/upload/v1624529585/banner_c88bc0724c.png"
         ]}
         datePublished={postOrPage.published_at}
         dateModified={postOrPage.updated_at}
@@ -91,19 +92,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = [
     ...posts.map((post) => ({
       params: {
-        slug: post.slug,
-      },
+        slug: post.slug
+      }
     })),
     ...pages.map((page) => ({
       params: {
-        slug: page.slug,
-      },
-    })),
+        slug: page.slug
+      }
+    }))
   ];
 
   return {
     paths,
-    fallback: true,
+    fallback: true
   };
 };
 
@@ -119,7 +120,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   if (!postOrPageData) {
     return {
-      notFound: true,
+      notFound: true
     };
   }
 
@@ -127,6 +128,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { postOrPageData, domainUrl, tocMapping },
-    revalidate: 30,
+    revalidate: 30
   };
 };
