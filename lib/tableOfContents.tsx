@@ -1,5 +1,6 @@
 import { Element } from "hast";
 import visit from "unist-util-visit";
+import { is } from "unist-util-is";
 
 export type TocMapping = {
   [key: string]: {
@@ -14,8 +15,9 @@ export const getTocMapping = (toc: Element): TocMapping => {
   const tocMapping = {};
 
   const getLiId = (li: Element): string | undefined => {
-    const child = li.children.find((c) => c.tagName === "a");
-    if (!child) {
+    const child = li.children.find(
+      (c) => c.type === "element" && c.tagName === "a");
+    if (!child || !is<Element>(child, "element")) {
       return undefined;
     }
     return (child.properties as { href: string }).href.slice(1);
@@ -26,7 +28,8 @@ export const getTocMapping = (toc: Element): TocMapping => {
   visit(toc, (node: Element, _, parent) => {
     if (node.tagName === "ul") {
       const id =
-        parent?.tagName === "li" ? getLiId(parent as Element) : undefined;
+        is<Element>(parent, "element") && parent?.tagName === "li" ? getLiId(
+          parent as Element) : undefined;
       // We got the parent id. Find all children id and
       // map those to the parent id.
       node.children.forEach((li: Element) => {
@@ -38,7 +41,7 @@ export const getTocMapping = (toc: Element): TocMapping => {
         }
         tocMapping[liId] = {
           parent: id,
-          last: tocMapping[liId]?.last ?? undefined,
+          last: tocMapping[liId]?.last ?? undefined
         };
       });
       return;
@@ -47,7 +50,7 @@ export const getTocMapping = (toc: Element): TocMapping => {
       const liId = getLiId(node);
       tocMapping[liId] = {
         parent: tocMapping[liId]?.parent ?? undefined,
-        last: lastLiId,
+        last: lastLiId
       };
       lastLiId = liId;
     }
