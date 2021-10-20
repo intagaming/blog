@@ -12,9 +12,10 @@ import u from "unist-builder";
 import rehype from "rehype";
 import { Element } from "hast";
 import {
+  imageCaptionParagraphToDiv,
   hastRemoveLiParagraph,
   optimizeImages,
-  removeTextNewlineNode,
+  removeTextNewlineNode
 } from "../unified";
 import { PostOrPage, PostOrPageData } from "../../types/postOrPage";
 import { fetchAPI } from "./api";
@@ -47,6 +48,7 @@ export const getHtmlNodeFromMarkdown = async (
     .use(remark2rehype) // Converts to html processor
     .use(optimizeImages) // Prep the <img> to be "NextJS Image compatible"
     .use(highlight) // Highlight <pre> and <code> tags
+    .use(imageCaptionParagraphToDiv) // Convert <p> to <div> if it has an <Image> inside
     .run(mdNode); // Mdast -> Hast
 
   return htmlNode;

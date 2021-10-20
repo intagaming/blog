@@ -50,3 +50,20 @@ export const optimizeImages: Plugin<[]> = () => async (tree) => {
 
   return tree;
 };
+
+/**
+ * This converts any <p> that has an <Image> inside to a <div>.
+ */
+export const imageCaptionParagraphToDiv: Plugin<[]> = () => async (tree) => {
+  visit<Element>(tree, { tagName: "p" }, (node) => {
+    const hasDiv = node.children.some(
+      (c) => c.type === "element" && c.tagName === "Image");
+
+    if (hasDiv) { // If <p> tag has a div
+      // Convert this <p> tag to a div
+      node.tagName = "div";
+    }
+  });
+
+  return tree;
+};
