@@ -16,7 +16,7 @@
     "eslint-config-prettier": "^8.3.0",
     "highlight.js": "^11.0.1",
     "mdast-util-toc": "5.1.0",
-    "next": "^11.0.1",
+    "next": "latest",
     "next-seo": "^4.26.0",
     "next-themes": "^0.0.14",
     "nightwind": "^1.1.11",
@@ -56,11 +56,11 @@
     "@types/sharp": "^0",
     "@types/unist": "^2.0.3",
     "@typescript-eslint/eslint-plugin": "latest",
-    "@typescript-eslint/parser": "latest",
+    "@typescript-eslint/parser": "^5.1.0",
     "@yarnpkg/pnpify": "^3.0.0-rc.6",
     "autoprefixer": "^10.0.4",
     "babel-plugin-superjson-next": "^0.3.0",
-    "eslint": "^8.0.1",
+    "eslint": "latest",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-config-next": "^11.1.2",
     "eslint-import-resolver-node": "^0.3.4",
@@ -74,6 +74,6 @@
     "prop-types": "^15.7.2",
     "superjson": "^1.7.4",
     "tailwindcss": "^2.2.2",
-    "typescript": "^4.3.4"
+    "typescript": "latest"
   }
 }
