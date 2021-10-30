@@ -1,8 +1,8 @@
 import { LinkProps } from "next/link";
 import { ReactNode } from "react";
 import { Node } from "unist";
-import AnimatedLinkSpan from "./animatedLinkSpan";
-import LinkWrapper from "./linkWrapper";
+import AnimatedLinkSpan from "./AnimatedLinkSpan";
+import LinkWrapper from "./LinkWrapper";
 
 type Props = {
   href: LinkProps["href"];

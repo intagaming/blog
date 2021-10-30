@@ -1,11 +1,14 @@
 import Image from "next/image";
-import { ImageElement } from "../types/hast";
+import { ImageElement } from "../../../types/hast";
 
 type Props = {
   node: ImageElement;
 };
 
-const NextImage = ({ node }: Props): JSX.Element => {
+/**
+ * A Next.js <Image> wrapper that fixes vertical images' styling.
+ */
+const NextDirectionalImage = ({ node }: Props): JSX.Element => {
   const isVertical = node.imageDimensions.height > node.imageDimensions.width;
 
   const { src, alt, blurDataURL, placeholder } = node.properties;
@@ -39,4 +42,4 @@ const NextImage = ({ node }: Props): JSX.Element => {
   );
 };
 
-export default NextImage;
+export default NextDirectionalImage;

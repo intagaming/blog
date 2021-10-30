@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FaFacebook, FaGithub } from "react-icons/fa";
-import Menu from "./menu";
-import ThemeToggle from "./themeToggle";
-import LinkWrapper from "./linkWrapper";
+import Menu from "./Menu";
+import ThemeToggle from "./ThemeToggle";
+import LinkWrapper from "../../common/LinkWrapper";
 
 const navLinks = [
   {

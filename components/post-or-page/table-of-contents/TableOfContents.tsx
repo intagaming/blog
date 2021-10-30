@@ -9,8 +9,8 @@ import React, {
 } from "react";
 import { Element } from "hast";
 
-import TocLi from "./tocLi";
-import { TocMapping } from "../lib/tableOfContents";
+import TocLi from "./TocLi";
+import { TocMapping } from "../../../lib/tableOfContents";
 
 type Props = {
   toc: Element;

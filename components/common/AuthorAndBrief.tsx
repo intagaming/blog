@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PostOrPage } from "../types/postOrPage";
+import { PostOrPage } from "../../types/postOrPage";
 
 type Props = {
   post: PostOrPage;

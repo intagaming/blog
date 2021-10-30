@@ -5,6 +5,9 @@ type Props = {
   active: "active" | "nearMiss" | false;
 };
 
+/**
+ * rehype2react component to render <li> tags in the Table of Contents.
+ */
 const TocLi = ({ children, active }: Props): JSX.Element => {
   let classes = "";
   switch (active) {

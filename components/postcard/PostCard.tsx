@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import AuthorAndBrief from "./authorAndBrief";
-import { PostOrPage } from "../types/postOrPage";
-import getPostExcerpt from "../lib/postExcerpt";
+import AuthorAndBrief from "../common/AuthorAndBrief";
+import { PostOrPage } from "../../types/postOrPage";
+import getPostExcerpt from "../../lib/postExcerpt";
 
 type Props = {
   post: PostOrPage;

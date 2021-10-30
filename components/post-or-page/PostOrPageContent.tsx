@@ -2,14 +2,14 @@ import Image from "next/image";
 import React, { createRef, useEffect } from "react";
 import rehype2react from "rehype-react";
 import rehype from "rehype";
-import NextImage from "./nextImage";
-import AuthorAndBrief from "./authorAndBrief";
-import { PostOrPageData } from "../types/postOrPage";
+import NextDirectionalImage from "./rehype-react-components/NextDirectionalImage";
+import AuthorAndBrief from "../common/AuthorAndBrief";
+import { PostOrPageData } from "../../types/postOrPage";
 import "highlight.js/styles/github-dark.css";
-import TableOfContents from "./tableOfContents";
-import { TocMapping } from "../lib/tableOfContents";
-import PostOrPageHeading from "./postOrPageHeading";
-import LinkSpan, { LinkSpanWithNode } from "./linkSpan";
+import TableOfContents from "./table-of-contents/TableOfContents";
+import { TocMapping } from "../../lib/tableOfContents";
+import PostOrPageHeading from "./rehype-react-components/PostOrPageHeading";
+import LinkSpan, { LinkSpanWithNode } from "../common/LinkSpan";
 
 type Props = {
   postOrPageData: PostOrPageData;
@@ -81,7 +81,7 @@ const PostOrPageContent = ({
               createElement: createElementWrapper,
               Fragment: React.Fragment,
               components: {
-                Image: NextImage,
+                Image: NextDirectionalImage,
                 a: LinkSpan as LinkSpanWithNode,
                 h1: PostOrPageHeading,
                 h2: PostOrPageHeading,

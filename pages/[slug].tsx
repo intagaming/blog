@@ -9,8 +9,8 @@ import {
   getPostDataBySlug
 } from "../lib/strapi/postAndPageApi";
 import { PostOrPageData } from "../types/postOrPage";
-import Layout from "../components/layout";
-import PostOrPageContent from "../components/postOrPageContent";
+import Layout from "../components/layout/Layout";
+import PostOrPageContent from "../components/post-or-page/PostOrPageContent";
 import getPostExcerpt from "../lib/postExcerpt";
 import { getTocMapping, TocMapping } from "../lib/tableOfContents";
 import { escapeQuote } from "../lib/util";
