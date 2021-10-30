@@ -109,7 +109,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const domainUrl = process.env.DOMAIN_URL || "http://localhost:3000";
+  const domainUrl = process.env.NEXT_PUBLIC_DOMAIN_URL || "http://localhost:3000";
 
   const { slug } = params;
 

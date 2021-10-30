@@ -2,6 +2,7 @@ import "../styles/styles.scss";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import { AppProps } from "next/app";
+import { UserContextProvider } from "../state/user-context";
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
@@ -12,8 +13,10 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         storageKey="nightwind-mode"
         defaultTheme="system"
       >
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-        <Component {...pageProps} />
+        <UserContextProvider>
+          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+          <Component {...pageProps} />
+        </UserContextProvider>
       </ThemeProvider>
     </>
   );

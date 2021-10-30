@@ -57,7 +57,7 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await getLatestPosts();
-  const domainUrl = process.env.DOMAIN_URL || "http://localhost:3000";
+  const domainUrl = process.env.NEXT_PUBLIC_DOMAIN_URL || "http://localhost:3000";
 
   if (!posts) {
     return {
