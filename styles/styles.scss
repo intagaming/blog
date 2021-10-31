@@ -83,3 +83,40 @@ body {
     @apply text-indigo-600;
   }
 }
+
+.form {
+  > label {
+    @apply block text-white;
+  }
+
+  > input {
+    @apply w-full text-black;
+  }
+
+  > textarea {
+    @apply w-full text-black;
+  }
+
+  > button {
+    @apply bg-indigo-700 text-white p-2;
+  }
+}
+
+#dialog-root {
+  position: relative;
+  z-index: 999;
+}
+
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.3);
+}

@@ -1,17 +1,15 @@
-import React from "react";
-import { useAuthUser } from "../../hooks/auth/useAuthUser";
-import { signOut } from "../../utils/supabase";
+import React, { ReactNode } from "react";
+import Sidebar from "./sidebar/Sidebar";
 
-const Dashboard = (): JSX.Element => {
-  const user = useAuthUser();
+interface Props {
+  children?: ReactNode;
+}
 
+const Dashboard = ({ children }: Props): JSX.Element => {
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Hi, {user.email}</p>
-      <button className="bg-indigo-300 p-1" onClick={() => signOut()}>
-        Sign out
-      </button>
+    <div className="flex flex-col nightwind-prevent-block">
+      <Sidebar />
+      {children}
     </div>
   );
 };

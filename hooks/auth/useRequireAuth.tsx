@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useUser } from "../../state/user-context";
 
-export const useRequireAuth = (redirectRoute: string) => {
+export const useRequireAuth = (redirectRoute: string = "/dashboard/auth") => {
   const { user } = useUser();
   const router = useRouter();
 

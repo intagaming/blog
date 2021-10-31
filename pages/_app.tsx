@@ -3,6 +3,10 @@ import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import { AppProps } from "next/app";
 import { UserContextProvider } from "../state/user-context";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Toaster } from "react-hot-toast";
+
+const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
@@ -13,10 +17,14 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         storageKey="nightwind-mode"
         defaultTheme="system"
       >
-        <UserContextProvider>
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          <Component {...pageProps} />
-        </UserContextProvider>
+        <QueryClientProvider client={queryClient}>
+          <UserContextProvider>
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+            <Component {...pageProps} />
+            <div id="dialog-root" />
+            <Toaster />
+          </UserContextProvider>
+        </QueryClientProvider>
       </ThemeProvider>
     </>
   );
