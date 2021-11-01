@@ -126,8 +126,9 @@ body {
 
 .posts-table {
   @apply w-full;
+
   th {
-    @apply text-left;
+    @apply text-left px-2;
   }
 
   tr {
