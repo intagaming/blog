@@ -12,6 +12,8 @@ import { useQueryClient } from "react-query";
 import { postsKey } from "../../../../hooks/supabase/usePostsQuery";
 import slugify from "slugify";
 import { RefreshIcon } from "@heroicons/react/solid";
+import useUploadObjectMutation from "../../../../hooks/supabase/useUploadObjectMutation";
+import { getObjectUrl } from "../../../../utils/supabase";
 
 interface IFormInputs {
   title: string;
@@ -66,9 +68,15 @@ const Composer = ({ post, onCommit }: Props): JSX.Element => {
     onCommit(composedPost);
   };
 
-  const handleUploadImage = async () => {
-    // TODO
-    return "https://placekitten.com/300/200";
+  const uploadObjectMutation = useUploadObjectMutation();
+  const handleUploadImage = async (fileToUpload: File) => {
+    const uploadPromise = uploadObjectMutation.mutateAsync(fileToUpload);
+    await toast.promise(uploadPromise, {
+      loading: "Uploading...",
+      success: "Upload complete.",
+      error: (e) => e.message,
+    });
+    return getObjectUrl(`${user.id}/${fileToUpload.name}`);
   };
 
   const published: boolean = !!post?.published_at;
