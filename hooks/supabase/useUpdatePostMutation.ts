@@ -5,7 +5,8 @@ import { useMutation } from "react-query";
 const updatePost = async (post: Partial<definitions["posts"]>) => {
   const { data, error } = await supabase
     .from<definitions["posts"]>("posts")
-    .update(post);
+    .update(post)
+    .match({ id: post.id });
 
   if (error) {
     throw new Error(error.message);
