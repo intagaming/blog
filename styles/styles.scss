@@ -51,6 +51,7 @@ body {
       content: "[x] ";
       @apply text-indigo-600/50 dark:text-indigo-600/50 font-bold;
     }
+
     a {
       @apply opacity-50 hover:opacity-100 transition-opacity;
     }
@@ -61,6 +62,7 @@ body {
       content: "[o] ";
       @apply text-green-600 dark:text-green-600 font-bold;
     }
+
     > a {
       @apply opacity-100;
     }
@@ -71,6 +73,7 @@ body {
       content: "[x] ";
       @apply text-indigo-600/75 dark:text-indigo-600/75 font-bold;
     }
+
     > a {
       @apply opacity-75;
     }
@@ -119,4 +122,15 @@ body {
   align-items: center;
 
   background: rgba(0, 0, 0, 0.3);
+}
+
+.posts-table {
+  @apply w-full;
+  th {
+    @apply text-left;
+  }
+
+  tr {
+    @apply cursor-pointer;
+  }
 }

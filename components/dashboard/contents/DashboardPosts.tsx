@@ -4,6 +4,9 @@ import usePostsQuery, {
   GetPostsEntry,
 } from "../../../hooks/supabase/usePostsQuery";
 import { Column, useSortBy, useTable } from "react-table";
+import { useRouter } from "next/router";
+import Image from "next/image";
+import { getCoverUrl } from "../../../utils/supabase";
 
 const columns: Column<GetPostsEntry>[] = [
   {
@@ -21,11 +24,17 @@ const columns: Column<GetPostsEntry>[] = [
   {
     Header: "cover",
     accessor: "cover",
+    Cell: ({ value }) => (
+      <div className="relative aspect-h-9 aspect-w-16 bg-white">
+        <Image src={getCoverUrl(value)} alt="" layout="fill" />
+      </div>
+    ),
   },
 ];
 
 const DashboardPosts = (): JSX.Element => {
-  const { data } = usePostsQuery();
+  const { data, isLoading } = usePostsQuery();
+  const router = useRouter();
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable<GetPostsEntry>(
@@ -36,11 +45,16 @@ const DashboardPosts = (): JSX.Element => {
       useSortBy
     );
 
+  const handleRowClick = (entry: GetPostsEntry) => {
+    router.push(`/dashboard/posts/edit/${entry.id}`);
+  };
+
   return (
     <div>
       <h2>Posts</h2>
 
-      <table {...getTableProps()}>
+      {isLoading && <p>Please wait...</p>}
+      <table className="posts-table" {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -54,7 +68,10 @@ const DashboardPosts = (): JSX.Element => {
           {rows.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <tr
+                {...row.getRowProps()}
+                onClick={() => handleRowClick(row.original)}
+              >
                 {row.cells.map((cell) => {
                   return (
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
