@@ -126,12 +126,9 @@ const Composer = ({ post, onCommit }: Props): JSX.Element => {
         )}
 
         <label htmlFor="slug">Slug</label>
-        <div className="relative w-full">
+        <div className="flex w-full bg-white">
           <input className="form-input" type="text" {...register("slug")} />
-          <button
-            onClick={handleGenerateSlug}
-            className="absolute right-0 top-0 bottom-0 w-10 p-2"
-          >
+          <button onClick={handleGenerateSlug} className="w-10 p-2">
             <RefreshIcon className="text-black" />
           </button>
         </div>
