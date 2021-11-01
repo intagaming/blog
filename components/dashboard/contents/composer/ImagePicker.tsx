@@ -33,8 +33,8 @@ const ImagePicker = ({ initialFile, onChange }: Props): JSX.Element => {
         success: "Upload complete.",
         error: (e) => e.message,
       })
-      .then((receivedData) => {
-        setFile(receivedData.Key);
+      .then(() => {
+        setFile(`${user.id}/${fileToUpload.name}`);
       });
   };
 
