@@ -1,10 +1,10 @@
 import React from "react";
 import { useRequireAuth } from "../../../hooks/auth/useRequireAuth";
 import { useAuthUser } from "../../../hooks/auth/useAuthUser";
-import PostComposer from "../../../components/dashboard/contents/composer/PostComposer";
+import PostComposer from "../../../components/dashboard/contents/post/PostComposer";
 import Dashboard from "../../../components/dashboard/Dashboard";
 import dynamic from "next/dynamic";
-import useInsertPostMutation from "../../../hooks/supabase/useInsertPostMutation";
+import useInsertPostMutation from "../../../hooks/supabase/post/useInsertPostMutation";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { definitions } from "../../../types/supabase";

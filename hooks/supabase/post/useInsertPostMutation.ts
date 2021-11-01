@@ -1,5 +1,5 @@
-import { supabase } from "../../utils/supabaseClient";
-import { definitions } from "../../types/supabase";
+import { supabase } from "../../../utils/supabaseClient";
+import { definitions } from "../../../types/supabase";
 import { useMutation } from "react-query";
 
 const insertPost = async (post: Partial<definitions["posts"]>) => {

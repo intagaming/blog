@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
-import { supabase } from "../../utils/supabaseClient";
-import { definitions } from "../../types/supabase";
+import { supabase } from "../../../utils/supabaseClient";
+import { definitions } from "../../../types/supabase";
 import { postsKey } from "./usePostsQuery";
 
 const getPost = async (postId: string): Promise<definitions["posts"]> => {

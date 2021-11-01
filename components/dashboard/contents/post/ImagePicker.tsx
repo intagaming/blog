@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import StorageBrowser from "../../../common/dialog/StorageBrowser";
 import { FileObject } from "@supabase/storage-js";
-import useUploadObjectMutation from "../../../../hooks/supabase/useUploadObjectMutation";
+import useUploadObjectMutation from "../../../../hooks/supabase/storage/useUploadObjectMutation";
 import Image from "next/image";
 import { getObjectUrl } from "../../../../utils/supabase";
 import { toast } from "react-hot-toast";

@@ -6,8 +6,8 @@ import dynamic from "next/dynamic";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { definitions } from "../../../types/supabase";
-import useInsertPageMutation from "../../../hooks/supabase/useInsertPageMutation";
-import PageComposer from "../../../components/dashboard/contents/composer/PageComposer";
+import useInsertPageMutation from "../../../hooks/supabase/page/useInsertPageMutation";
+import PageComposer from "../../../components/dashboard/contents/page/PageComposer";
 
 const WritePage = (): JSX.Element => {
   useRequireAuth();

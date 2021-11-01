@@ -1,13 +1,15 @@
 /* eslint-disable */
 import React from "react";
+import usePostsQuery, {
+  GetPostsEntry,
+} from "../../../../hooks/supabase/post/usePostsQuery";
 import { Column, useSortBy, useTable } from "react-table";
 import { useRouter } from "next/router";
-import usePagesQuery, {
-  GetPagesEntry,
-} from "../../../hooks/supabase/usePagesQuery";
+import Image from "next/image";
+import { getObjectUrl } from "../../../../utils/supabase";
 import Link from "next/link";
 
-const columns: Column<GetPagesEntry>[] = [
+const columns: Column<GetPostsEntry>[] = [
   {
     Header: "id",
     accessor: "id",
@@ -21,6 +23,15 @@ const columns: Column<GetPagesEntry>[] = [
     accessor: "slug",
   },
   {
+    Header: "cover",
+    accessor: "cover",
+    Cell: ({ value }) => (
+      <div className="relative aspect-h-9 aspect-w-16 bg-white">
+        <Image src={getObjectUrl(value)} alt="" layout="fill" />
+      </div>
+    ),
+  },
+  {
     Header: "published",
     accessor: "published_at",
     Cell: ({ value }) =>
@@ -28,12 +39,12 @@ const columns: Column<GetPagesEntry>[] = [
   },
 ];
 
-const DashboardPages = (): JSX.Element => {
-  const { data, isLoading } = usePagesQuery();
+const DashboardPosts = (): JSX.Element => {
+  const { data, isLoading } = usePostsQuery();
   const router = useRouter();
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable<GetPagesEntry>(
+    useTable<GetPostsEntry>(
       {
         columns,
         data: data ?? [],
@@ -41,16 +52,16 @@ const DashboardPages = (): JSX.Element => {
       useSortBy
     );
 
-  const handleRowClick = (entry: GetPagesEntry) => {
-    router.push(`/dashboard/pages/edit/${entry.id}`);
+  const handleRowClick = (entry: GetPostsEntry) => {
+    router.push(`/dashboard/posts/edit/${entry.id}`);
   };
 
   return (
     <div>
-      <h2>Pages</h2>
+      <h2>Posts</h2>
 
-      <Link href={"/dashboard/pages/write"}>
-        <button className="bg-green-700 p-2">New Page</button>
+      <Link href={"/dashboard/posts/write"}>
+        <button className="bg-green-700 p-2">New Post</button>
       </Link>
       {isLoading && <p>Please wait...</p>}
       <table className="list-table" {...getTableProps()}>
@@ -96,4 +107,4 @@ const DashboardPages = (): JSX.Element => {
   );
 };
 
-export default DashboardPages;
+export default DashboardPosts;

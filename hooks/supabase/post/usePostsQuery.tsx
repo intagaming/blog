@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
-import { supabase } from "../../utils/supabaseClient";
-import { definitions } from "../../types/supabase";
+import { supabase } from "../../../utils/supabaseClient";
+import { definitions } from "../../../types/supabase";
 
 export const postsKey = {
   all: ["posts"] as const,

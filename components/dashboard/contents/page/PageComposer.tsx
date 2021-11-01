@@ -5,43 +5,38 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { definitions } from "../../../../types/supabase";
 import { useAuthUser } from "../../../../hooks/auth/useAuthUser";
 import Editor from "rich-markdown-editor";
-import ImagePicker from "./ImagePicker";
-import useTogglePublishPostMutation from "../../../../hooks/supabase/useTogglePublishPostMutation";
 import { toast } from "react-hot-toast";
 import { useQueryClient } from "react-query";
-import { postsKey } from "../../../../hooks/supabase/usePostsQuery";
 import slugify from "slugify";
 import { RefreshIcon } from "@heroicons/react/solid";
-import useUploadObjectMutation from "../../../../hooks/supabase/useUploadObjectMutation";
+import useUploadObjectMutation from "../../../../hooks/supabase/storage/useUploadObjectMutation";
 import { getObjectUrl } from "../../../../utils/supabase";
-import useDeletePostMutation from "../../../../hooks/supabase/useDeletePostMutation";
 import { useRouter } from "next/router";
 import Modal from "../../../dialog/Modal";
+import useTogglePublishPageMutation from "../../../../hooks/supabase/page/useTogglePublishPageMutation";
+import { pagesKey } from "../../../../hooks/supabase/page/usePagesQuery";
+import useDeletePageMutation from "../../../../hooks/supabase/page/useDeletePageMutation";
 
 interface IFormInputs {
   title: string;
   slug: string;
-  excerpt: string;
-  cover: string;
   content: string;
 }
 
 const schema = yup.object({
   title: yup.string().required(),
   slug: yup.string().required(),
-  excerpt: yup.string().required(),
-  cover: yup.string().required(),
   content: yup.string().required(),
 });
 
-export type ComposedPost = Omit<definitions["posts"], "id"> & { id?: number };
+export type ComposedPage = Omit<definitions["pages"], "id"> & { id?: number };
 
 interface Props {
-  post?: definitions["posts"];
-  onCommit: (composedPost: ComposedPost) => void;
+  page?: definitions["pages"];
+  onCommit: (composedPage: ComposedPage) => void;
 }
 
-const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
+const PageComposer = ({ page, onCommit }: Props): JSX.Element => {
   const user = useAuthUser();
 
   const {
@@ -53,22 +48,20 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      title: post?.title,
-      slug: post?.slug,
-      excerpt: post?.excerpt,
-      cover: post?.cover,
-      content: post?.content,
+      title: page?.title,
+      slug: page?.slug,
+      content: page?.content,
     },
   });
 
   const editorRef = useRef<Editor>();
 
   const submit: SubmitHandler<IFormInputs> = (data) => {
-    const composedPost: ComposedPost = {
-      ...(post ?? { user_id: user.id }),
+    const composedPage: ComposedPage = {
+      ...(page ?? { user_id: user.id }),
       ...data,
     };
-    onCommit(composedPost);
+    onCommit(composedPage);
   };
 
   const uploadObjectMutation = useUploadObjectMutation();
@@ -82,26 +75,26 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
     return getObjectUrl(`${user.id}/${fileToUpload.name}`);
   };
 
-  const published: boolean = !!post?.published_at;
-  const togglePublishPostMutation = useTogglePublishPostMutation();
+  const published: boolean = !!page?.published_at;
+  const togglePublishPageMutation = useTogglePublishPageMutation();
   const queryClient = useQueryClient();
   const togglePublish = () => {
-    if (!post) return; // If composing new post
+    if (!page) return; // If composing new page
 
     toast
       .promise(
-        togglePublishPostMutation.mutateAsync({
-          postId: post.id,
+        togglePublishPageMutation.mutateAsync({
+          pageId: page.id,
           publish: !published,
         }),
         {
-          loading: published ? "Hiding post..." : "Publishing...",
-          success: published ? "Post has been taken down." : "Published.",
+          loading: published ? "Hiding page..." : "Publishing...",
+          success: published ? "Page has been taken down." : "Published.",
           error: (e: Error) => e.message,
         }
       )
       .then(() => {
-        queryClient.invalidateQueries(postsKey.all);
+        queryClient.invalidateQueries(pagesKey.all);
       });
   };
 
@@ -111,31 +104,31 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
   };
 
   const [showDeleteModal, setShowDeleteModel] = useState<boolean>(false);
-  const handleDeletePostClick = () => {
+  const handleDeletePageClick = () => {
     setShowDeleteModel(true);
   };
   const handleDeleteModalCancel = () => {
     setShowDeleteModel(false);
   };
 
-  const deletePostMutation = useDeletePostMutation();
+  const deletePageMutation = useDeletePageMutation();
   const router = useRouter();
-  const handleDeletePost = () => {
-    if (!post) return;
+  const handleDeletePage = () => {
+    if (!page) return;
     toast
-      .promise(deletePostMutation.mutateAsync(post.id), {
-        loading: "Deleting post...",
-        success: "Post deleted.",
+      .promise(deletePageMutation.mutateAsync(page.id), {
+        loading: "Deleting page...",
+        success: "Page deleted.",
         error: (e: Error) => e.message,
       })
       .then(() => {
-        queryClient.invalidateQueries(postsKey.all);
-        router.push("/dashboard/posts");
+        queryClient.invalidateQueries(pagesKey.all);
+        router.push("/dashboard/pages");
       });
   };
   const handleDeleteModalOk = () => {
     setShowDeleteModel(false);
-    handleDeletePost();
+    handleDeletePage();
   };
 
   return (
@@ -143,15 +136,15 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
       <h2 className="text-xl">Composer</h2>
 
       <div className="form">
-        {post && (
-          <button className="bg-red-700 p-2" onClick={handleDeletePostClick}>
-            Delete post
+        {page && (
+          <button className="bg-red-700 p-2" onClick={handleDeletePageClick}>
+            Delete page
           </button>
         )}
-        {showDeleteModal && post && (
+        {showDeleteModal && page && (
           <Modal
-            title="Delete post"
-            content={`Do you really want to delete "${post.title}"?`}
+            title="Delete page"
+            content={`Do you really want to delete "${page.title}"?`}
             okString="Delete"
             onCancel={handleDeleteModalCancel}
             onOk={handleDeleteModalOk}
@@ -165,11 +158,11 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
           <p>{errors.title?.message}</p>
         </div>
 
-        {post && (
+        {page && (
           <>
-            <p>This post is {published ? "published" : "not published"}.</p>
+            <p>This page is {published ? "published" : "not published"}.</p>
             <button className="bg-indigo-700 p-2" onClick={togglePublish}>
-              {published ? "Hide post" : "Publish"}
+              {published ? "Hide page" : "Publish"}
             </button>
           </>
         )}
@@ -190,21 +183,6 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
         </div>
 
         <div className="field">
-          <label htmlFor="excerpt">Excerpt</label>
-          <textarea rows={4} cols={50} {...register("excerpt")} />
-          <p>{errors.excerpt?.message}</p>
-        </div>
-
-        <div className="field">
-          <label>Cover</label>
-          <ImagePicker
-            initialFile={post?.cover}
-            onChange={(fileName) => setValue("cover", fileName)}
-          />
-          <p>{errors.cover?.message}</p>
-        </div>
-
-        <div className="field">
           <label htmlFor="content">Content</label>
           <div
             className="h-[80vh] bg-white overflow-auto"
@@ -216,7 +194,7 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
           >
             <Editor
               ref={editorRef}
-              defaultValue={post?.content}
+              defaultValue={page?.content}
               uploadImage={handleUploadImage}
               onChange={(getFn) => setValue("content", getFn())}
             />
@@ -232,4 +210,4 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
   );
 };
 
-export default PostComposer;
+export default PageComposer;

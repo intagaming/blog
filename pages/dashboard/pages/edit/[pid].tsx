@@ -6,9 +6,9 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { definitions } from "../../../../types/supabase";
 import { toast } from "react-hot-toast";
-import usePageQuery from "../../../../hooks/supabase/usePageQuery";
-import useUpdatePageMutation from "../../../../hooks/supabase/useUpdatePageMutation";
-import PageComposer from "../../../../components/dashboard/contents/composer/PageComposer";
+import usePageQuery from "../../../../hooks/supabase/page/usePageQuery";
+import useUpdatePageMutation from "../../../../hooks/supabase/page/useUpdatePageMutation";
+import PageComposer from "../../../../components/dashboard/contents/page/PageComposer";
 
 /**
  * We need to wrap with a component in order to ensure the [pid] is available.

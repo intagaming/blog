@@ -1,5 +1,5 @@
-import { supabase } from "../../utils/supabaseClient";
-import { useAuthUser } from "../auth/useAuthUser";
+import { supabase } from "../../../utils/supabaseClient";
+import { useAuthUser } from "../../auth/useAuthUser";
 import { AuthUser } from "@supabase/supabase-js";
 import { useMutation } from "react-query";
 

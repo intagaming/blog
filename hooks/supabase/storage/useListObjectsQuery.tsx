@@ -1,7 +1,7 @@
-import { supabase } from "../../utils/supabaseClient";
+import { supabase } from "../../../utils/supabaseClient";
 import { useQuery } from "react-query";
 import { AuthUser } from "@supabase/supabase-js";
-import { useAuthUser } from "../auth/useAuthUser";
+import { useAuthUser } from "../../auth/useAuthUser";
 
 export const objectsKey = {
   me: ["objects"] as const,

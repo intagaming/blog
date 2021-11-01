@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useRequireAuth } from "../../../hooks/auth/useRequireAuth";
 import { useAuthUser } from "../../../hooks/auth/useAuthUser";
 import Dashboard from "../../../components/dashboard/Dashboard";
-import DashboardPosts from "../../../components/dashboard/contents/DashboardPosts";
+import DashboardPosts from "../../../components/dashboard/contents/post/DashboardPosts";
 
 const DashboardPostsPage = (): JSX.Element => {
   useRequireAuth();

@@ -1,6 +1,6 @@
 import React from "react";
 import FullScreenDialog from "../../dialog/FullScreenDialog";
-import useListObjectsQuery from "../../../hooks/supabase/useListObjectsQuery";
+import useListObjectsQuery from "../../../hooks/supabase/storage/useListObjectsQuery";
 import Image from "next/image";
 import { getObjectUrl } from "../../../utils/supabase";
 import { FileObject } from "@supabase/storage-js";

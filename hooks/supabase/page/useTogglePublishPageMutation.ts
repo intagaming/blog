@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
-import { supabase } from "../../utils/supabaseClient";
-import { definitions } from "../../types/supabase";
+import { supabase } from "../../../utils/supabaseClient";
+import { definitions } from "../../../types/supabase";
 
 const togglePublish = async (pageId: number, publish: boolean) => {
   const { error } = await supabase
