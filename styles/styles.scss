@@ -92,7 +92,7 @@ body {
     @apply block text-white;
   }
 
-  > input {
+  > input, .form-input {
     @apply w-full text-black;
   }
 

@@ -25,13 +25,11 @@ const EditPageWithPid = ({ pid }: Props): JSX.Element => {
   const updatePostMutation = useUpdatePostMutation();
 
   const handleCommit = (composedPost: Partial<definitions["posts"]>): void => {
-    toast
-      .promise(updatePostMutation.mutateAsync(composedPost), {
-        loading: "Updating",
-        success: "Updated.",
-        error: "An error occurred.",
-      })
-      .then();
+    toast.promise(updatePostMutation.mutateAsync(composedPost), {
+      loading: "Updating",
+      success: "Updated.",
+      error: (e: Error) => e.message,
+    });
   };
 
   return (

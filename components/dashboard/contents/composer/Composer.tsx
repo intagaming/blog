@@ -10,6 +10,8 @@ import useTogglePublishPostMutation from "../../../../hooks/supabase/useTogglePu
 import { toast } from "react-hot-toast";
 import { useQueryClient } from "react-query";
 import { postsKey } from "../../../../hooks/supabase/usePostsQuery";
+import slugify from "slugify";
+import { RefreshIcon } from "@heroicons/react/solid";
 
 interface IFormInputs {
   title: string;
@@ -42,6 +44,7 @@ const Composer = ({ post, onCommit }: Props): JSX.Element => {
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -83,12 +86,17 @@ const Composer = ({ post, onCommit }: Props): JSX.Element => {
         {
           loading: published ? "Hiding post..." : "Publishing...",
           success: published ? "Post has been taken down." : "Published.",
-          error: (e) => e,
+          error: (e: Error) => e.message,
         }
       )
       .then(() => {
         queryClient.invalidateQueries(postsKey.all);
       });
+  };
+
+  const title = watch("title");
+  const handleGenerateSlug = () => {
+    setValue("slug", slugify(title, { lower: true }));
   };
 
   return (
@@ -110,7 +118,15 @@ const Composer = ({ post, onCommit }: Props): JSX.Element => {
         )}
 
         <label htmlFor="slug">Slug</label>
-        <input type="text" {...register("slug")} />
+        <div className="relative w-full">
+          <input className="form-input" type="text" {...register("slug")} />
+          <button
+            onClick={handleGenerateSlug}
+            className="absolute right-0 top-0 bottom-0 w-10 p-2"
+          >
+            <RefreshIcon className="text-black" />
+          </button>
+        </div>
         <p>{errors.slug?.message}</p>
 
         <label htmlFor="excerpt">Excerpt</label>

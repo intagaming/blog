@@ -20,11 +20,14 @@ const WritePage = (): JSX.Element => {
       .promise(insertPostMutation.mutateAsync(composedPost), {
         loading: "Creating a post...",
         success: "Success",
-        error: "An error occurred.",
+        error: (e: Error) => e.message,
       })
-      .then((post) => {
-        router.push(`/dashboard/posts/edit/${post.id}`).then();
-      });
+      .then(
+        (post) => {
+          router.push(`/dashboard/posts/edit/${post.id}`).then();
+        },
+        () => {}
+      );
   };
 
   return (
