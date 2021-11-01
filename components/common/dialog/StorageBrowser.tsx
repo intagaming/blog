@@ -1,6 +1,6 @@
 import React from "react";
 import FullScreenDialog from "../../dialog/FullScreenDialog";
-import useListCoversQuery from "../../../hooks/supabase/useListCoversQuery";
+import useListObjectsQuery from "../../../hooks/supabase/useListObjectsQuery";
 import Image from "next/image";
 import { getCoverUrl } from "../../../utils/supabase";
 import { FileObject } from "@supabase/storage-js";
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const StorageBrowser = ({ onClose, onChosen }: Props): JSX.Element => {
-  const { data, isLoading, error } = useListCoversQuery();
+  const { data, isLoading, error } = useListObjectsQuery();
   const user = useAuthUser();
 
   const handleChooseImage = (file: FileObject) => {

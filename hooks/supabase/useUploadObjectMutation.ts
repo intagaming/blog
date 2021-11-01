@@ -5,7 +5,7 @@ import { useMutation } from "react-query";
 
 const uploadObject = async (user: AuthUser, file: File) => {
   const { data, error } = await supabase.storage
-    .from("covers")
+    .from("assets")
     .upload(`${user.id}/${file.name}`, file);
 
   if (error) {
