@@ -13,12 +13,17 @@ export type GetPostsEntry = Pick<
 >;
 
 const getPosts = async (): Promise<GetPostsEntry[]> => {
-  const { data, error } = await supabase.from<GetPostsEntry>("posts").select(`
+  const { data, error } = await supabase
+    .from<GetPostsEntry>("posts")
+    .select(
+      `
     id,
     title,
     slug,
     cover
-    `);
+    `
+    )
+    .order("id", { ascending: false });
 
   if (error) {
     throw new Error(error.message);
