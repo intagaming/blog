@@ -7,6 +7,7 @@ import { Column, useSortBy, useTable } from "react-table";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { getObjectUrl } from "../../../utils/supabase";
+import Link from "next/link";
 
 const columns: Column<GetPostsEntry>[] = [
   {
@@ -59,6 +60,9 @@ const DashboardPosts = (): JSX.Element => {
     <div>
       <h2>Posts</h2>
 
+      <Link href={"/dashboard/posts/write"}>
+        <button className="bg-green-700 p-2">New Post</button>
+      </Link>
       {isLoading && <p>Please wait...</p>}
       <table className="list-table" {...getTableProps()}>
         <thead>
