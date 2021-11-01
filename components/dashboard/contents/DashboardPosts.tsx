@@ -65,7 +65,18 @@ const DashboardPosts = (): JSX.Element => {
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  <div className="flex">
+                    <span>
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? "🔽 "
+                          : "🔼 "
+                        : ""}
+                    </span>
+                    {column.render("Header")}
+                  </div>
+                </th>
               ))}
             </tr>
           ))}
