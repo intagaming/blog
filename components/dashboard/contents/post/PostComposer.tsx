@@ -138,6 +138,18 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
     handleDeletePost();
   };
 
+  const [showUnpublishModal, setShowUnpublishModel] = useState<boolean>(false);
+  const handleUnpublishClick = () => {
+    setShowUnpublishModel(true);
+  };
+  const handleUnpublishCancel = () => {
+    setShowUnpublishModel(false);
+  };
+  const handleUnpublishOk = () => {
+    setShowUnpublishModel(false);
+    togglePublish();
+  };
+
   return (
     <div className="flex flex-col gap-2">
       <h2 className="text-xl">Composer</h2>
@@ -168,9 +180,22 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
         {post && (
           <>
             <p>This post is {published ? "published" : "not published"}.</p>
-            <button className="bg-indigo-700 p-2" onClick={togglePublish}>
+            <button
+              className="bg-indigo-700 p-2"
+              onClick={published ? handleUnpublishClick : togglePublish}
+            >
               {published ? "Hide post" : "Publish"}
             </button>
+            {showUnpublishModal && post && (
+              <Modal
+                title="Unpublish"
+                content={`Do you really want to unpublish "${post.title}"?`}
+                okString="Unpublish"
+                onCancel={handleUnpublishCancel}
+                onOk={handleUnpublishOk}
+                okClassNames="bg-red-300"
+              />
+            )}
           </>
         )}
 
