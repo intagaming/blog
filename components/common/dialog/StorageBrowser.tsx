@@ -2,7 +2,7 @@ import React from "react";
 import FullScreenDialog from "../../dialog/FullScreenDialog";
 import useListObjectsQuery from "../../../hooks/supabase/useListObjectsQuery";
 import Image from "next/image";
-import { getCoverUrl } from "../../../utils/supabase";
+import { getObjectUrl } from "../../../utils/supabase";
 import { FileObject } from "@supabase/storage-js";
 import { useAuthUser } from "../../../hooks/auth/useAuthUser";
 
@@ -38,7 +38,7 @@ const StorageBrowser = ({ onClose, onChosen }: Props): JSX.Element => {
                 onClick={() => handleChooseImage(file)}
               >
                 <Image
-                  src={getCoverUrl(`${user.id}/${file.name}`)}
+                  src={getObjectUrl(`${user.id}/${file.name}`)}
                   alt=""
                   layout="fill"
                 />

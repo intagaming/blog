@@ -6,7 +6,7 @@ import usePostsQuery, {
 import { Column, useSortBy, useTable } from "react-table";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { getCoverUrl } from "../../../utils/supabase";
+import { getObjectUrl } from "../../../utils/supabase";
 
 const columns: Column<GetPostsEntry>[] = [
   {
@@ -26,7 +26,7 @@ const columns: Column<GetPostsEntry>[] = [
     accessor: "cover",
     Cell: ({ value }) => (
       <div className="relative aspect-h-9 aspect-w-16 bg-white">
-        <Image src={getCoverUrl(value)} alt="" layout="fill" />
+        <Image src={getObjectUrl(value)} alt="" layout="fill" />
       </div>
     ),
   },

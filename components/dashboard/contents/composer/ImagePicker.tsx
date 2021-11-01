@@ -3,7 +3,7 @@ import StorageBrowser from "../../../common/dialog/StorageBrowser";
 import { FileObject } from "@supabase/storage-js";
 import useUploadObjectMutation from "../../../../hooks/supabase/useUploadObjectMutation";
 import Image from "next/image";
-import { getCoverUrl } from "../../../../utils/supabase";
+import { getObjectUrl } from "../../../../utils/supabase";
 import { toast } from "react-hot-toast";
 import { useAuthUser } from "../../../../hooks/auth/useAuthUser";
 
@@ -67,7 +67,7 @@ const ImagePicker = ({ initialFile, onChange }: Props): JSX.Element => {
       <div className={`relative aspect-h-9 aspect-w-16`}>
         {file && (
           <Image
-            src={getCoverUrl(file)}
+            src={getObjectUrl(file)}
             alt="Cover image"
             className="bg-white"
             layout="fill"
