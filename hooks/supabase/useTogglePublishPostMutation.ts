@@ -3,10 +3,12 @@ import { supabase } from "../../utils/supabaseClient";
 import { definitions } from "../../types/supabase";
 
 const togglePublish = async (postId: number, publish: boolean) => {
-  const { error } = await supabase.from<definitions["posts"]>("posts").update({
-    id: postId,
-    published_at: publish ? new Date().toISOString() : null,
-  });
+  const { error } = await supabase
+    .from<definitions["posts"]>("posts")
+    .update({
+      published_at: publish ? new Date().toISOString() : null,
+    })
+    .match({ id: postId });
   if (error) {
     throw new Error(error.message);
   }
