@@ -12,27 +12,36 @@ import u from "unist-builder";
 import rehype from "rehype";
 import { Element } from "hast";
 import {
-  imageCaptionParagraphToDiv,
   hastRemoveLiParagraph,
+  imageCaptionParagraphToDiv,
   optimizeImages,
-  removeTextNewlineNode
-} from "../unified";
-import { PostOrPage, PostOrPageData } from "../../types/postOrPage";
-import { fetchAPI } from "./api";
-import { getPlaceholder } from "../images";
+  removeTextNewlineNode,
+} from "./unified";
+import { PostOrPageData } from "../types/postOrPage";
+import { getPlaceholder } from "./images";
+import { supabase } from "../utils/supabaseClient";
+import { getObjectUrl } from "../utils/supabase";
+import { definitions } from "../types/supabase";
+import { getAuthor } from "../hooks/supabase/author/useAuthorQuery";
 
 export const getPostBySlug = async (
   slug: string
-): Promise<PostOrPage | null> => {
-  const postsJson = await fetchAPI(`/posts?slug=${slug}`);
-  return postsJson[0] ?? null;
+): Promise<definitions["posts"] | null> => {
+  const { data } = await supabase
+    .from<definitions["posts"]>("posts")
+    .select()
+    .eq("slug", slug);
+  return data[0] ?? null;
 };
 
 export const getPageBySlug = async (
   slug: string
-): Promise<PostOrPage | null> => {
-  const pagesJson = await fetchAPI(`/pages?slug=${slug}`);
-  return pagesJson[0] ?? null;
+): Promise<definitions["pages"] | null> => {
+  const { data } = await supabase
+    .from<definitions["pages"]>("pages")
+    .select()
+    .eq("slug", slug);
+  return data[0] ?? null;
 };
 
 export const getHtmlNodeFromMarkdown = async (
@@ -85,13 +94,15 @@ export const getPostDataBySlug = async (
   if (!json) return null;
   const node = await getHtmlNodeFromMarkdown(json.content);
   const toc = await getTocHastFromMarkdown(json.content);
-  const coverImagePlaceholder = await getPlaceholder(json.cover.url);
+  const coverImagePlaceholder = await getPlaceholder(getObjectUrl(json.cover));
+  const author = await getAuthor(json.user_id);
 
   return {
     node,
     postOrPage: json,
     toc,
     coverImagePlaceholder,
+    author,
   };
 };
 
@@ -102,15 +113,7 @@ export const getPageDataBySlug = async (
   if (!json) return null;
   const node = await getHtmlNodeFromMarkdown(json.content);
   const toc = await getTocHastFromMarkdown(json.content);
+  const author = await getAuthor(json.user_id);
 
-  return { node, postOrPage: json, toc };
+  return { node, postOrPage: json, toc, author };
 };
-
-export const getAllPosts = async (): Promise<PostOrPage[] | null> =>
-  fetchAPI("/posts");
-
-export const getLatestPosts = async (n = 10): Promise<PostOrPage[] | null> =>
-  fetchAPI(`/posts?_sort=published_at:DESC&_limit=${n}`);
-
-export const getAllPages = async (): Promise<PostOrPage[] | null> =>
-  fetchAPI("/pages");

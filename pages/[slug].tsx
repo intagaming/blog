@@ -1,37 +1,41 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { NextSeo, BlogJsonLd } from "next-seo";
-import {
-  getAllPages,
-  getAllPosts,
-  getPageDataBySlug,
-  getPostDataBySlug
-} from "../lib/strapi/postAndPageApi";
+import { BlogJsonLd, NextSeo } from "next-seo";
+import { getPageDataBySlug, getPostDataBySlug } from "../lib/postAndPageApi";
 import { PostOrPageData } from "../types/postOrPage";
 import Layout from "../components/layout/Layout";
 import PostOrPageContent from "../components/post-or-page/PostOrPageContent";
-import getPostExcerpt from "../lib/postExcerpt";
 import { getTocMapping, TocMapping } from "../lib/tableOfContents";
-import { escapeQuote } from "../lib/util";
+import { supabase } from "../utils/supabaseClient";
+import { definitions } from "../types/supabase";
+import { getObjectUrl } from "../utils/supabase";
+import { getDimensions } from "../lib/images";
+import { escapeQuote } from "../utils/general";
 
 type Props = {
   postOrPageData: PostOrPageData;
   domainUrl: string;
   tocMapping: TocMapping;
+  cover?: { src: string; width: number; height: number };
 };
 
 const PostAndPage = ({
   postOrPageData,
   domainUrl,
-  tocMapping
+  tocMapping,
+  cover,
 }: Props): JSX.Element => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
   const { postOrPage } = postOrPageData;
-  const excerpt = escapeQuote(getPostExcerpt(postOrPage));
+  const excerpt = "excerpt" in postOrPage && escapeQuote(postOrPage.excerpt);
+
+  const coverUrl =
+    (cover ? cover.src : null) ||
+    "https://res.cloudinary.com/an7/image/upload/v1624529585/banner_c88bc0724c.png";
 
   return (
     <>
@@ -46,31 +50,26 @@ const PostAndPage = ({
           description: excerpt || "A blog by An Hoang.",
           images: [
             {
-              url:
-                postOrPage.cover?.url ||
-                "https://res.cloudinary.com/an7/image/upload/v1624529585/banner_c88bc0724c.png",
-              width: postOrPage.cover?.width || 1920,
-              height: postOrPage.cover?.height || 1080,
-              alt: postOrPage.cover?.alternativeText || "An Hoang"
-            }
+              url: coverUrl,
+              width: cover?.width || 1920,
+              height: cover?.height || 1080,
+              alt: "",
+            },
           ],
           article: {
             publishedTime: postOrPage.published_at,
-            modifiedTime: postOrPage.updated_at,
-            authors: ["https://hxann.com/about"]
-          }
+            modifiedTime: postOrPage.published_at, // TODO: update with modified_at in the future
+            authors: ["https://hxann.com/about"],
+          },
         }}
       />
       <BlogJsonLd
         url={`${domainUrl}/${postOrPage.slug}`}
         title={`${postOrPage.title} | An Hoang`}
-        images={[
-          postOrPage.cover?.url ||
-          "https://res.cloudinary.com/an7/image/upload/v1624529585/banner_c88bc0724c.png"
-        ]}
+        images={[coverUrl]}
         datePublished={postOrPage.published_at}
-        dateModified={postOrPage.updated_at}
-        authorName={postOrPage.author?.fullName || "An Hoang"}
+        dateModified={postOrPage.published_at}
+        authorName={postOrPageData.author?.fullName || "An Hoang"}
         description={excerpt || "A blog by An Hoang."}
       />
       <Layout>
@@ -86,30 +85,35 @@ const PostAndPage = ({
 export default PostAndPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getAllPosts();
-  const pages = await getAllPages();
+  const { data: posts } = await supabase
+    .from<definitions["posts"]>("posts")
+    .select();
+  const { data: pages } = await supabase
+    .from<definitions["pages"]>("pages")
+    .select();
 
   const paths = [
     ...posts.map((post) => ({
       params: {
-        slug: post.slug
-      }
+        slug: post.slug,
+      },
     })),
     ...pages.map((page) => ({
       params: {
-        slug: page.slug
-      }
-    }))
+        slug: page.slug,
+      },
+    })),
   ];
 
   return {
     paths,
-    fallback: true
+    fallback: true,
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const domainUrl = process.env.NEXT_PUBLIC_DOMAIN_URL || "http://localhost:3000";
+  const domainUrl =
+    process.env.NEXT_PUBLIC_DOMAIN_URL || "http://localhost:3000";
 
   const { slug } = params;
 
@@ -120,14 +124,25 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   if (!postOrPageData) {
     return {
-      notFound: true
+      notFound: true,
+    };
+  }
+
+  let cover = null;
+  if ("cover" in postOrPageData.postOrPage) {
+    const src = getObjectUrl(postOrPageData.postOrPage.cover);
+    const size = await getDimensions(src);
+    cover = {
+      src,
+      width: size.width,
+      height: size.height,
     };
   }
 
   const tocMapping = getTocMapping(postOrPageData.toc);
 
   return {
-    props: { postOrPageData, domainUrl, tocMapping },
-    revalidate: 30
+    props: { postOrPageData, domainUrl, tocMapping, cover },
+    revalidate: 30,
   };
 };

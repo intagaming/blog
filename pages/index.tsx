@@ -1,13 +1,13 @@
 import { GetStaticProps } from "next";
 import { NextSeo } from "next-seo";
-import { getLatestPosts } from "../lib/strapi/postAndPageApi";
-import { PostOrPage } from "../types/postOrPage";
 import Layout from "../components/layout/Layout";
 import PostCard from "../components/postcard/PostCard";
 import LinkSpan from "../components/common/LinkSpan";
+import { supabase } from "../utils/supabaseClient";
+import { definitions } from "../types/supabase";
 
 type Props = {
-  posts: PostOrPage[];
+  posts: definitions["posts"][];
   domainUrl: string;
 };
 
@@ -34,9 +34,7 @@ const Home = ({ posts, domainUrl }: Props): JSX.Element => (
     />
     <Layout>
       <div className="nightwind-prevent nightwind-prevent-block bg-black px-[6vw] py-20 flex flex-col gap-6 md:items-center">
-        <h1 className="text-3xl text-white font-bold text-center">
-          Hello!
-        </h1>
+        <h1 className="text-3xl text-white font-bold text-center">Hello!</h1>
         <p className="text-gray-300 ">
           My blog rants about universities and document thought process.
           <br />
@@ -56,10 +54,19 @@ const Home = ({ posts, domainUrl }: Props): JSX.Element => (
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getLatestPosts();
-  const domainUrl = process.env.NEXT_PUBLIC_DOMAIN_URL || "http://localhost:3000";
+  const { data, error } = await supabase
+    .from<definitions["posts"]>("posts")
+    .select()
+    .order("published_at", { ascending: false });
 
-  if (!posts) {
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  const domainUrl =
+    process.env.NEXT_PUBLIC_DOMAIN_URL || "http://localhost:3000";
+
+  if (data.length === 0) {
     return {
       // FIXME
       //  This notFound here does not make sense. If there's
@@ -70,7 +77,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 
   return {
-    props: { posts, domainUrl },
+    props: { posts: data, domainUrl },
     revalidate: 60,
   };
 };
