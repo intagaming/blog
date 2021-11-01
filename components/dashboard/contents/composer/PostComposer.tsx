@@ -41,7 +41,7 @@ interface Props {
   onCommit: (composedPost: ComposedPost) => void;
 }
 
-const Composer = ({ post, onCommit }: Props): JSX.Element => {
+const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
   const user = useAuthUser();
 
   const {
@@ -232,4 +232,4 @@ const Composer = ({ post, onCommit }: Props): JSX.Element => {
   );
 };
 
-export default Composer;
+export default PostComposer;

@@ -1,14 +1,13 @@
 /* eslint-disable */
 import React from "react";
-import usePostsQuery, {
-  GetPostsEntry,
-} from "../../../hooks/supabase/usePostsQuery";
 import { Column, useSortBy, useTable } from "react-table";
 import { useRouter } from "next/router";
-import Image from "next/image";
-import { getObjectUrl } from "../../../utils/supabase";
+import usePagesQuery, {
+  GetPagesEntry,
+} from "../../../hooks/supabase/usePagesQuery";
+import Link from "next/link";
 
-const columns: Column<GetPostsEntry>[] = [
+const columns: Column<GetPagesEntry>[] = [
   {
     Header: "id",
     accessor: "id",
@@ -22,15 +21,6 @@ const columns: Column<GetPostsEntry>[] = [
     accessor: "slug",
   },
   {
-    Header: "cover",
-    accessor: "cover",
-    Cell: ({ value }) => (
-      <div className="relative aspect-h-9 aspect-w-16 bg-white">
-        <Image src={getObjectUrl(value)} alt="" layout="fill" />
-      </div>
-    ),
-  },
-  {
     Header: "published",
     accessor: "published_at",
     Cell: ({ value }) =>
@@ -38,12 +28,12 @@ const columns: Column<GetPostsEntry>[] = [
   },
 ];
 
-const DashboardPosts = (): JSX.Element => {
-  const { data, isLoading } = usePostsQuery();
+const DashboardPages = (): JSX.Element => {
+  const { data, isLoading } = usePagesQuery();
   const router = useRouter();
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable<GetPostsEntry>(
+    useTable<GetPagesEntry>(
       {
         columns,
         data: data ?? [],
@@ -51,14 +41,17 @@ const DashboardPosts = (): JSX.Element => {
       useSortBy
     );
 
-  const handleRowClick = (entry: GetPostsEntry) => {
-    router.push(`/dashboard/posts/edit/${entry.id}`);
+  const handleRowClick = (entry: GetPagesEntry) => {
+    router.push(`/dashboard/pages/edit/${entry.id}`);
   };
 
   return (
     <div>
-      <h2>Posts</h2>
+      <h2>Pages</h2>
 
+      <Link href={"/dashboard/pages/write"}>
+        <button className="bg-green-700 p-2">New Page</button>
+      </Link>
       {isLoading && <p>Please wait...</p>}
       <table className="list-table" {...getTableProps()}>
         <thead>
@@ -103,4 +96,4 @@ const DashboardPosts = (): JSX.Element => {
   );
 };
 
-export default DashboardPosts;
+export default DashboardPages;

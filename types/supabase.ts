@@ -237,6 +237,7 @@ export interface definitions {
     id: number;
     user_id: string;
     title: string;
+    slug: string;
     content: string;
     created_at?: string;
     published_at?: string;

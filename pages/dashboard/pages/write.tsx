@@ -1,30 +1,30 @@
 import React from "react";
 import { useRequireAuth } from "../../../hooks/auth/useRequireAuth";
 import { useAuthUser } from "../../../hooks/auth/useAuthUser";
-import PostComposer from "../../../components/dashboard/contents/composer/PostComposer";
 import Dashboard from "../../../components/dashboard/Dashboard";
 import dynamic from "next/dynamic";
-import useInsertPostMutation from "../../../hooks/supabase/useInsertPostMutation";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { definitions } from "../../../types/supabase";
+import useInsertPageMutation from "../../../hooks/supabase/useInsertPageMutation";
+import PageComposer from "../../../components/dashboard/contents/composer/PageComposer";
 
 const WritePage = (): JSX.Element => {
   useRequireAuth();
   const user = useAuthUser();
-  const insertPostMutation = useInsertPostMutation();
+  const insertPageMutation = useInsertPageMutation();
   const router = useRouter();
 
-  const handleCommit = (composedPost: Partial<definitions["posts"]>): void => {
+  const handleCommit = (composedPage: Partial<definitions["pages"]>): void => {
     toast
-      .promise(insertPostMutation.mutateAsync(composedPost), {
-        loading: "Creating a post...",
+      .promise(insertPageMutation.mutateAsync(composedPage), {
+        loading: "Creating a page...",
         success: "Success",
         error: (e: Error) => e.message,
       })
       .then(
-        (post) => {
-          router.push(`/dashboard/posts/edit/${post.id}`).then();
+        (page) => {
+          router.push(`/dashboard/pages/edit/${page.id}`).then();
         },
         () => {}
       );
@@ -34,7 +34,7 @@ const WritePage = (): JSX.Element => {
     <>
       {user && (
         <Dashboard>
-          <PostComposer onCommit={handleCommit} />
+          <PageComposer onCommit={handleCommit} />
         </Dashboard>
       )}
     </>

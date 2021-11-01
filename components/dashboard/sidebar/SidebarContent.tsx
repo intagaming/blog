@@ -19,6 +19,10 @@ const SidebarContent = (): JSX.Element => {
       </div>
 
       <div className="flex flex-col gap-3 mx-2">
+        <SidebarLink href="/dashboard/pages">Pages</SidebarLink>
+      </div>
+
+      <div className="flex flex-col gap-3 mx-2">
         <SidebarLink href="/dashboard/posts/write">Write</SidebarLink>
       </div>
 

@@ -1,14 +1,14 @@
 import React from "react";
 import { useRequireAuth } from "../../../../hooks/auth/useRequireAuth";
 import { useAuthUser } from "../../../../hooks/auth/useAuthUser";
-import PostComposer from "../../../../components/dashboard/contents/composer/PostComposer";
 import Dashboard from "../../../../components/dashboard/Dashboard";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import usePostQuery from "../../../../hooks/supabase/usePostQuery";
-import useUpdatePostMutation from "../../../../hooks/supabase/useUpdatePostMutation";
 import { definitions } from "../../../../types/supabase";
 import { toast } from "react-hot-toast";
+import usePageQuery from "../../../../hooks/supabase/usePageQuery";
+import useUpdatePageMutation from "../../../../hooks/supabase/useUpdatePageMutation";
+import PageComposer from "../../../../components/dashboard/contents/composer/PageComposer";
 
 /**
  * We need to wrap with a component in order to ensure the [pid] is available.
@@ -20,12 +20,12 @@ interface Props {
 
 const EditPageWithPid = ({ pid }: Props): JSX.Element => {
   const user = useAuthUser();
-  const { data: postData, isLoading } = usePostQuery(pid as string);
+  const { data: pageData, isLoading } = usePageQuery(pid as string);
 
-  const updatePostMutation = useUpdatePostMutation();
+  const updatePageMutation = useUpdatePageMutation();
 
-  const handleCommit = (composedPost: Partial<definitions["posts"]>): void => {
-    toast.promise(updatePostMutation.mutateAsync(composedPost), {
+  const handleCommit = (composedPage: Partial<definitions["pages"]>): void => {
+    toast.promise(updatePageMutation.mutateAsync(composedPage), {
       loading: "Updating",
       success: "Updated.",
       error: (e: Error) => e.message,
@@ -38,12 +38,12 @@ const EditPageWithPid = ({ pid }: Props): JSX.Element => {
         <Dashboard>
           {isLoading && <p>Please wait...</p>}
 
-          {!isLoading && !postData && (
+          {!isLoading && !pageData && (
             <p>An error occurred. Please try again.</p>
           )}
 
-          {!isLoading && postData && (
-            <PostComposer post={postData} onCommit={handleCommit} />
+          {!isLoading && pageData && (
+            <PageComposer page={pageData} onCommit={handleCommit} />
           )}
         </Dashboard>
       )}
