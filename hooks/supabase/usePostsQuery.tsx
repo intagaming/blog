@@ -9,7 +9,7 @@ export const postsKey = {
 
 export type GetPostsEntry = Pick<
   definitions["posts"],
-  "id" | "title" | "slug" | "cover"
+  "id" | "title" | "slug" | "cover" | "published_at"
 >;
 
 const getPosts = async (): Promise<GetPostsEntry[]> => {
@@ -20,7 +20,8 @@ const getPosts = async (): Promise<GetPostsEntry[]> => {
     id,
     title,
     slug,
-    cover
+    cover,
+    published_at
     `
     )
     .order("id", { ascending: false });

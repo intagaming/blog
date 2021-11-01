@@ -30,6 +30,12 @@ const columns: Column<GetPostsEntry>[] = [
       </div>
     ),
   },
+  {
+    Header: "published",
+    accessor: "published_at",
+    Cell: ({ value }) =>
+      value ? new Date(value).toLocaleDateString() : "Unpublished",
+  },
 ];
 
 const DashboardPosts = (): JSX.Element => {
