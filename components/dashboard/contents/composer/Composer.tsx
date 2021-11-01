@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,6 +14,9 @@ import slugify from "slugify";
 import { RefreshIcon } from "@heroicons/react/solid";
 import useUploadObjectMutation from "../../../../hooks/supabase/useUploadObjectMutation";
 import { getObjectUrl } from "../../../../utils/supabase";
+import useDeletePostMutation from "../../../../hooks/supabase/useDeletePostMutation";
+import { useRouter } from "next/router";
+import Modal from "../../../dialog/Modal";
 
 interface IFormInputs {
   title: string;
@@ -107,63 +110,123 @@ const Composer = ({ post, onCommit }: Props): JSX.Element => {
     setValue("slug", slugify(title, { lower: true }));
   };
 
+  const [showDeleteModal, setShowDeleteModel] = useState<boolean>(false);
+  const handleDeletePostClick = () => {
+    setShowDeleteModel(true);
+  };
+  const handleDeleteModalCancel = () => {
+    setShowDeleteModel(false);
+  };
+
+  const deletePostMutation = useDeletePostMutation();
+  const router = useRouter();
+  const handleDeletePost = () => {
+    if (!post) return;
+    toast
+      .promise(deletePostMutation.mutateAsync(post.id), {
+        loading: "Deleting post...",
+        success: "Post deleted.",
+        error: (e: Error) => e.message,
+      })
+      .then(() => {
+        queryClient.invalidateQueries(postsKey.all);
+        router.push("/dashboard/posts");
+      });
+  };
+  const handleDeleteModalOk = () => {
+    setShowDeleteModel(false);
+    handleDeletePost();
+  };
+
   return (
     <div className="flex flex-col gap-2">
       <h2 className="text-xl">Composer</h2>
 
       <div className="form">
-        <label htmlFor="title">Title</label>
-        <input type="text" {...register("title")} />
-        <p>{errors.title?.message}</p>
+        {post && (
+          <button className="bg-red-700 p-2" onClick={handleDeletePostClick}>
+            Delete post
+          </button>
+        )}
+        {showDeleteModal && post && (
+          <Modal
+            title="Delete post"
+            content={`Do you really want to delete "${post.title}"?`}
+            okString="Delete"
+            onCancel={handleDeleteModalCancel}
+            onOk={handleDeleteModalOk}
+            okClassNames="bg-red-300"
+          />
+        )}
+
+        <div className="field">
+          <label htmlFor="title">Title</label>
+          <input type="text" {...register("title")} />
+          <p>{errors.title?.message}</p>
+        </div>
 
         {post && (
           <>
             <p>This post is {published ? "published" : "not published"}.</p>
-            <button onClick={togglePublish}>
+            <button className="bg-indigo-700 p-2" onClick={togglePublish}>
               {published ? "Hide post" : "Publish"}
             </button>
           </>
         )}
 
-        <label htmlFor="slug">Slug</label>
-        <div className="flex w-full bg-white">
-          <input className="form-input" type="text" {...register("slug")} />
-          <button onClick={handleGenerateSlug} className="w-10 p-2">
-            <RefreshIcon className="text-black" />
-          </button>
+        <div className="field">
+          <label htmlFor="slug">Slug</label>
+          <div className="flex w-full bg-white">
+            <input
+              className="w-full text-black"
+              type="text"
+              {...register("slug")}
+            />
+            <button onClick={handleGenerateSlug} className="w-10 p-2">
+              <RefreshIcon className="text-black" />
+            </button>
+          </div>
+          <p>{errors.slug?.message}</p>
         </div>
-        <p>{errors.slug?.message}</p>
 
-        <label htmlFor="excerpt">Excerpt</label>
-        <textarea rows={4} cols={50} {...register("excerpt")} />
-        <p>{errors.excerpt?.message}</p>
+        <div className="field">
+          <label htmlFor="excerpt">Excerpt</label>
+          <textarea rows={4} cols={50} {...register("excerpt")} />
+          <p>{errors.excerpt?.message}</p>
+        </div>
 
-        <label htmlFor="cover">Cover</label>
-        <ImagePicker
-          initialFile={post?.cover}
-          onChange={(fileName) => setValue("cover", fileName)}
-        />
-        <p>{errors.cover?.message}</p>
-
-        <label htmlFor="content">Content</label>
-        <div
-          className="h-[80vh] bg-white overflow-auto"
-          onClick={(e) => {
-            if (e.target !== e.currentTarget) return;
-            // When clicking the background of this div, focus editor at the end.
-            editorRef.current.focusAtEnd();
-          }}
-        >
-          <Editor
-            ref={editorRef}
-            defaultValue={post?.content}
-            uploadImage={handleUploadImage}
-            onChange={(getFn) => setValue("content", getFn())}
+        <div className="field">
+          <label>Cover</label>
+          <ImagePicker
+            initialFile={post?.cover}
+            onChange={(fileName) => setValue("cover", fileName)}
           />
+          <p>{errors.cover?.message}</p>
         </div>
-        <p>{errors.content?.message}</p>
 
-        <button onClick={handleSubmit(submit)}> Submit</button>
+        <div className="field">
+          <label htmlFor="content">Content</label>
+          <div
+            className="h-[80vh] bg-white overflow-auto"
+            onClick={(e) => {
+              if (e.target !== e.currentTarget) return;
+              // When clicking the background of this div, focus editor at the end.
+              editorRef.current.focusAtEnd();
+            }}
+          >
+            <Editor
+              ref={editorRef}
+              defaultValue={post?.content}
+              uploadImage={handleUploadImage}
+              onChange={(getFn) => setValue("content", getFn())}
+            />
+          </div>
+          <p>{errors.content?.message}</p>
+        </div>
+
+        <button className="bg-indigo-700 p-2" onClick={handleSubmit(submit)}>
+          Submit
+        </button>
       </div>
     </div>
   );

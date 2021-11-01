@@ -88,20 +88,18 @@ body {
 }
 
 .form {
-  > label {
+  @apply flex flex-col gap-3;
+
+  .field > label {
     @apply block text-white;
   }
 
-  > input, .form-input {
+  .field > input {
     @apply w-full text-black;
   }
 
-  > textarea {
+  .field > textarea {
     @apply w-full text-black;
-  }
-
-  > button {
-    @apply bg-indigo-700 text-white p-2;
   }
 }
 
