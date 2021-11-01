@@ -6,6 +6,10 @@ import { definitions } from "../../../../types/supabase";
 import { useAuthUser } from "../../../../hooks/auth/useAuthUser";
 import Editor from "rich-markdown-editor";
 import ImagePicker from "./ImagePicker";
+import useTogglePublishPostMutation from "../../../../hooks/supabase/useTogglePublishPostMutation";
+import { toast } from "react-hot-toast";
+import { useQueryClient } from "react-query";
+import { postsKey } from "../../../../hooks/supabase/usePostsQuery";
 
 interface IFormInputs {
   title: string;
@@ -64,6 +68,29 @@ const Composer = ({ post, onCommit }: Props): JSX.Element => {
     return "https://placekitten.com/300/200";
   };
 
+  const published: boolean = !!post?.published_at;
+  const togglePublishPostMutation = useTogglePublishPostMutation();
+  const queryClient = useQueryClient();
+  const togglePublish = () => {
+    if (!post) return; // If composing new post
+
+    toast
+      .promise(
+        togglePublishPostMutation.mutateAsync({
+          postId: post.id,
+          publish: !published,
+        }),
+        {
+          loading: published ? "Hiding post..." : "Publishing...",
+          success: published ? "Post has been taken down." : "Published.",
+          error: (e) => e,
+        }
+      )
+      .then(() => {
+        queryClient.invalidateQueries(postsKey.all);
+      });
+  };
+
   return (
     <div className="flex flex-col gap-2">
       <h2 className="text-xl">Composer</h2>
@@ -72,6 +99,15 @@ const Composer = ({ post, onCommit }: Props): JSX.Element => {
         <label htmlFor="title">Title</label>
         <input type="text" {...register("title")} />
         <p>{errors.title?.message}</p>
+
+        {post && (
+          <>
+            <p>This post is {published ? "published" : "not published"}.</p>
+            <button onClick={togglePublish}>
+              {published ? "Hide post" : "Publish"}
+            </button>
+          </>
+        )}
 
         <label htmlFor="slug">Slug</label>
         <input type="text" {...register("slug")} />
