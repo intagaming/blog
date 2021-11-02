@@ -1,17 +1,20 @@
 import { GetStaticProps } from "next";
 import { NextSeo } from "next-seo";
-import { getLatestPosts } from "../lib/strapi/postAndPageApi";
-import { PostOrPage } from "../types/postOrPage";
 import Layout from "../components/layout/Layout";
 import PostCard from "../components/postcard/PostCard";
 import LinkSpan from "../components/common/LinkSpan";
+import { supabase } from "../utils/supabaseClient";
+import { definitions } from "../types/supabase";
+import { getPlaceholder } from "../lib/images";
+import { getObjectUrl } from "../utils/supabase";
 
 type Props = {
-  posts: PostOrPage[];
+  posts: definitions["posts"][];
   domainUrl: string;
+  coverPlaceholders: { [slug: string]: string };
 };
 
-const Home = ({ posts, domainUrl }: Props): JSX.Element => (
+const Home = ({ posts, domainUrl, coverPlaceholders }: Props): JSX.Element => (
   <>
     <NextSeo
       title="Blog"
@@ -34,9 +37,7 @@ const Home = ({ posts, domainUrl }: Props): JSX.Element => (
     />
     <Layout>
       <div className="nightwind-prevent nightwind-prevent-block bg-black px-[6vw] py-20 flex flex-col gap-6 md:items-center">
-        <h1 className="text-3xl text-white font-bold text-center">
-          Hello!
-        </h1>
+        <h1 className="text-3xl text-white font-bold text-center">Hello!</h1>
         <p className="text-gray-300 ">
           My blog rants about universities and document thought process.
           <br />
@@ -46,7 +47,11 @@ const Home = ({ posts, domainUrl }: Props): JSX.Element => (
 
       <div className="bg-white dark:bg-[#121212] px-[4vw] py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map((post) => (
-          <PostCard key={post.slug} post={post} />
+          <PostCard
+            key={post.slug}
+            post={post}
+            coverPlaceholder={coverPlaceholders[post.slug]}
+          />
         ))}
       </div>
     </Layout>
@@ -56,10 +61,12 @@ const Home = ({ posts, domainUrl }: Props): JSX.Element => (
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getLatestPosts();
-  const domainUrl = process.env.DOMAIN_URL || "http://localhost:3000";
+  const { data } = await supabase
+    .from<definitions["posts"]>("posts")
+    .select()
+    .order("published_at", { ascending: false });
 
-  if (!posts) {
+  if (data.length === 0) {
     return {
       // FIXME
       //  This notFound here does not make sense. If there's
@@ -69,8 +76,24 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   }
 
+  const domainUrl =
+    process.env.NEXT_PUBLIC_DOMAIN_URL || "http://localhost:3000";
+
+  const coverPlaceholders = {};
+  const placeholderPromises: Promise<void>[] = [];
+  data.forEach((post) => {
+    placeholderPromises.push(
+      (async () => {
+        coverPlaceholders[post.slug] = await getPlaceholder(
+          getObjectUrl(post.cover)
+        );
+      })()
+    );
+  });
+  await Promise.all(placeholderPromises);
+
   return {
-    props: { posts, domainUrl },
+    props: { posts: data, domainUrl, coverPlaceholders },
     revalidate: 60,
   };
 };

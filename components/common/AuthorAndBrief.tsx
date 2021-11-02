@@ -1,36 +1,46 @@
 import Image from "next/image";
 import { PostOrPage } from "../../types/postOrPage";
+import useAuthorQuery from "../../hooks/supabase/author/useAuthorQuery";
+import { getObjectUrl } from "../../utils/supabase";
+import { base64ImagePlaceholder } from "../../utils/general";
+import Skeleton from "react-loading-skeleton";
 
 type Props = {
-  post: PostOrPage;
+  postOrPage: PostOrPage;
   size?: "sm" | "md";
 };
 
-const AuthorAndBrief = ({ post, size }: Props): JSX.Element => {
-  const date = new Date(post.published_at).toLocaleDateString("en-US", {
+const AuthorAndBrief = ({ postOrPage, size }: Props): JSX.Element => {
+  const { data: author, isLoading } = useAuthorQuery(postOrPage.user_id);
+
+  const date = new Date(postOrPage.published_at).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
   });
-  const minuteRead = Math.ceil(post.content.split(/\s+/).length / 145);
+  const minuteRead = Math.ceil(postOrPage.content.split(/\s+/).length / 145);
 
   return (
     <div className="mt-6 flex gap-4">
-      <div className={size === "sm" ? "w-12 h-12" : "w-14 h-14"}>
-        {post.author && (
+      <div className={`relative ${size === "sm" ? "w-12 h-12" : "w-14 h-14"}`}>
+        {!author && isLoading && <Skeleton className="rounded-full" />}
+        {author && (
           <Image
             className="rounded-full"
-            src={post.author.avatar.url}
-            alt={post.author.avatar.alternativeText}
-            width={post.author.avatar.width}
-            height={post.author.avatar.height}
-            layout="responsive"
+            src={
+              author.avatar
+                ? getObjectUrl(author.avatar)
+                : base64ImagePlaceholder
+            }
+            alt=""
+            layout="fill"
           />
         )}
       </div>
       <div className="flex flex-col justify-center">
         <span className="font-semibold">
-          {post.author && post.author.fullName}
+          {!author && isLoading && <Skeleton />}
+          {author && (author.fullName ?? "Mysterious Author")}
         </span>
         <span className="text-gray-400 text-sm">
           {date} • {minuteRead} min read

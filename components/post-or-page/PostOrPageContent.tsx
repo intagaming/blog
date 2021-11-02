@@ -10,6 +10,7 @@ import TableOfContents from "./table-of-contents/TableOfContents";
 import { TocMapping } from "../../lib/tableOfContents";
 import PostOrPageHeading from "./rehype-react-components/PostOrPageHeading";
 import LinkSpan, { LinkSpanWithNode } from "../common/LinkSpan";
+import { getObjectUrl } from "../../utils/supabase";
 
 type Props = {
   postOrPageData: PostOrPageData;
@@ -49,13 +50,14 @@ const PostOrPageContent = ({
     <article className="md:pt-20 pt-10 pb-10 px-4 flex flex-col items-center bg-white dark:bg-[#121212] min-h-[65vh]">
       <div className={proseClasses}>
         <h1>{postOrPage.title}</h1>
-        {postOrPage.author && <AuthorAndBrief post={postOrPage} />}
-        {postOrPage.cover && (
-          <div className="mt-6 aspect-w-3 aspect-h-2">
+        <AuthorAndBrief postOrPage={postOrPage} />
+        {"excerpt" in postOrPage && <p>{postOrPage.excerpt}</p>}
+        {"cover" in postOrPage && (
+          <div className="mt-6 aspect-w-16 aspect-h-9">
             <Image
               className="object-contain rounded-sm"
-              src={postOrPage.cover.url}
-              alt={postOrPage.cover.alternativeText}
+              src={getObjectUrl(postOrPage.cover)}
+              alt=""
               layout="fill"
               placeholder="blur"
               blurDataURL={coverImagePlaceholder}

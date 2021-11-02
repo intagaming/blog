@@ -14,31 +14,32 @@ const NextDirectionalImage = ({ node }: Props): JSX.Element => {
   const { src, alt, blurDataURL, placeholder } = node.properties;
   const { width, height } = node.imageDimensions;
 
-  if (isVertical) {
-    return (
-      <div className="vertical-image-div md:aspect-w-3 md:aspect-h-2">
+  return (
+    <>
+      {isVertical && (
+        <div className="vertical-image-div hidden md:aspect-w-3 md:aspect-h-2 md:block">
+          <Image
+            src={src}
+            alt={alt}
+            className="vertical-image"
+            layout="fill"
+            placeholder={placeholder}
+            blurDataURL={blurDataURL}
+          />
+        </div>
+      )}
+      <div className={`relative md:static ${isVertical ? "md:hidden" : ""}`}>
         <Image
           src={src}
           alt={alt}
-          className="vertical-image"
-          layout="fill"
+          width={width}
+          height={height}
+          layout="responsive"
           placeholder={placeholder}
           blurDataURL={blurDataURL}
         />
       </div>
-    );
-  }
-
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      layout="responsive"
-      placeholder={placeholder}
-      blurDataURL={blurDataURL}
-    />
+    </>
   );
 };
 

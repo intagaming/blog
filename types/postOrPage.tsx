@@ -1,24 +1,13 @@
 import { Element } from "hast";
 import { Node } from "unist";
-import { StrapiImage } from "./strapiTypes";
+import { definitions } from "./supabase";
 
-export interface PostOrPage {
-  title: string;
-  slug: string;
-  content: string;
-  published_at: string;
-  created_at: string;
-  updated_at: string;
-  cover?: StrapiImage;
-  author?: {
-    avatar: StrapiImage;
-    fullName: string;
-  };
-}
+export type PostOrPage = definitions["posts"] | definitions["pages"];
 
 export interface PostOrPageData {
   postOrPage: PostOrPage;
   node: Node;
   toc: Element;
   coverImagePlaceholder?: string;
+  author?: definitions["authors"];
 }
