@@ -17,6 +17,7 @@ import { getObjectUrl } from "../../../../utils/supabase";
 import useDeletePostMutation from "../../../../hooks/supabase/post/useDeletePostMutation";
 import { useRouter } from "next/router";
 import Modal from "../../../dialog/Modal";
+import { removeTrailingBackslash } from "../../../../utils/general";
 
 interface IFormInputs {
   title: string;
@@ -243,7 +244,10 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
               ref={editorRef}
               defaultValue={post?.content}
               uploadImage={handleUploadImage}
-              onChange={(getFn) => setValue("content", getFn())}
+              onChange={(getFn) => {
+                console.log(getFn(), removeTrailingBackslash(getFn()));
+                setValue("content", removeTrailingBackslash(getFn()));
+              }}
             />
           </div>
           <p>{errors.content?.message}</p>
