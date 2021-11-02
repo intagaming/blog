@@ -1,5 +1,5 @@
 # Personal Blog
 
-This is my NextJS + Tailwind CSS + Strapi Blog project, with the objective of being my first 100% complete website. See [https://hxann.com/about](https://hxann.com/about)
+This is my NextJS + Tailwind CSS + Supabase Blog project, with the objective of being my first 100% complete website. See [https://hxann.com/about](https://hxann.com/about)
 
-Checkout the Strapi project at [https://github.com/intagaming/strapi-blog](https://github.com/intagaming/strapi-blog)
+The Supabase schema will be available some time in the future.
