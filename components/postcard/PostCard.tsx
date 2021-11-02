@@ -6,9 +6,10 @@ import { definitions } from "../../types/supabase";
 
 type Props = {
   post: definitions["posts"];
+  coverPlaceholder: string;
 };
 
-const PostCard = ({ post }: Props): JSX.Element => (
+const PostCard = ({ post, coverPlaceholder }: Props): JSX.Element => (
   <article>
     <Link href={`/${post.slug}`}>
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
@@ -19,6 +20,8 @@ const PostCard = ({ post }: Props): JSX.Element => (
             src={getObjectUrl(post.cover)}
             alt=""
             layout="fill"
+            placeholder="blur"
+            blurDataURL={coverPlaceholder}
           />
         </div>
         <h2 className="mt-6 text-xl font-bold">{post.title}</h2>

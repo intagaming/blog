@@ -5,13 +5,16 @@ import PostCard from "../components/postcard/PostCard";
 import LinkSpan from "../components/common/LinkSpan";
 import { supabase } from "../utils/supabaseClient";
 import { definitions } from "../types/supabase";
+import { getPlaceholder } from "../lib/images";
+import { getObjectUrl } from "../utils/supabase";
 
 type Props = {
   posts: definitions["posts"][];
   domainUrl: string;
+  coverPlaceholders: { [slug: string]: string };
 };
 
-const Home = ({ posts, domainUrl }: Props): JSX.Element => (
+const Home = ({ posts, domainUrl, coverPlaceholders }: Props): JSX.Element => (
   <>
     <NextSeo
       title="Blog"
@@ -44,7 +47,11 @@ const Home = ({ posts, domainUrl }: Props): JSX.Element => (
 
       <div className="bg-white dark:bg-[#121212] px-[4vw] py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map((post) => (
-          <PostCard key={post.slug} post={post} />
+          <PostCard
+            key={post.slug}
+            post={post}
+            coverPlaceholder={coverPlaceholders[post.slug]}
+          />
         ))}
       </div>
     </Layout>
@@ -54,17 +61,10 @@ const Home = ({ posts, domainUrl }: Props): JSX.Element => (
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from<definitions["posts"]>("posts")
     .select()
     .order("published_at", { ascending: false });
-
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  const domainUrl =
-    process.env.NEXT_PUBLIC_DOMAIN_URL || "http://localhost:3000";
 
   if (data.length === 0) {
     return {
@@ -76,8 +76,24 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   }
 
+  const domainUrl =
+    process.env.NEXT_PUBLIC_DOMAIN_URL || "http://localhost:3000";
+
+  const coverPlaceholders = {};
+  const placeholderPromises: Promise<void>[] = [];
+  data.forEach((post) => {
+    placeholderPromises.push(
+      (async () => {
+        coverPlaceholders[post.slug] = await getPlaceholder(
+          getObjectUrl(post.cover)
+        );
+      })()
+    );
+  });
+  await Promise.all(placeholderPromises);
+
   return {
-    props: { posts: data, domainUrl },
+    props: { posts: data, domainUrl, coverPlaceholders },
     revalidate: 60,
   };
 };
