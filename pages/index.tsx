@@ -2,6 +2,7 @@ import { definitions } from "../types/supabase";
 import { GetStaticProps } from "next";
 import { supabase } from "../utils/supabaseClient";
 import Home from "../components/pages/Home";
+import { hackAuthorAvatarUrl, hackPostCoverUrl } from "../utils/supabase";
 
 interface Props {
   posts: definitions["posts"][];
@@ -15,16 +16,20 @@ const HomePage = ({ posts, authors }: Props) => (
 export default HomePage;
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const { data: posts } = await supabase
+  const { data: postsData } = await supabase
     .from<definitions["posts"]>("posts")
     .select()
     .range(0, 9);
+  // TODO: remove the cover url hack
+  const posts = postsData.map((postData) => hackPostCoverUrl(postData));
+
   const { data: authorsData } = await supabase
     .from<definitions["authors"]>("authors")
     .select();
   const authors = {};
   authorsData.forEach((authorData) => {
-    authors[authorData.user_id] = authorData;
+    // TODO: remove the avatar url hack
+    authors[authorData.user_id] = hackAuthorAvatarUrl(authorData);
   });
 
   return {
