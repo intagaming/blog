@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import _ from "lodash";
-import Home from "../pages";
-import { definitions } from "../types/supabase";
+import { definitions } from "../../types/supabase";
 import { screen } from "@testing-library/react";
+import Home from "./Home";
 
 describe("Home page", function () {
   let idCounter = 0;
