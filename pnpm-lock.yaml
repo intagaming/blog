@@ -80,7 +80,7 @@ specifiers:
   sharp: ^0.29.1
   slugify: ^1.6.1
   styled-components: ^5.3.3
-  tailwindcss: ^2.2.2
+  tailwindcss: ^2.2.19
   ts-jest: ^27.0.7
   typescript: latest
   unified: ^9.2.1
@@ -98,15 +98,15 @@ dependencies:
   '@supabase/storage-js': 1.4.1
   '@supabase/supabase-js': 1.25.2
   '@supabase/ui': 0.35.0_react-dom@17.0.2+react@17.0.2
-  '@tailwindcss/aspect-ratio': 0.2.2_tailwindcss@2.2.17
-  '@tailwindcss/forms': 0.3.4_tailwindcss@2.2.17
+  '@tailwindcss/aspect-ratio': 0.2.2_tailwindcss@2.2.19
+  '@tailwindcss/forms': 0.3.4_tailwindcss@2.2.19
   eslint-config-prettier: 8.3.0_eslint@7.32.0
   highlight.js: 11.3.1
   mdast-util-toc: 5.1.0
   next: 12.0.1_0f2fd6b33f6a1fbafc35fb025cab224e
   next-seo: 4.28.1_0372076d1358852c896b8498e97a3374
   next-themes: 0.0.14_0372076d1358852c896b8498e97a3374
-  nightwind: 1.1.12_tailwindcss@2.2.17
+  nightwind: 1.1.12_tailwindcss@2.2.19
   plaiceholder: 2.0.1_sharp@0.29.1
   probe-image-size: 7.2.1
   react: 17.0.2
@@ -141,7 +141,7 @@ dependencies:
   yup: 0.32.11
 
 devDependencies:
-  '@tailwindcss/typography': 0.4.1_tailwindcss@2.2.17
+  '@tailwindcss/typography': 0.4.1_tailwindcss@2.2.19
   '@testing-library/jest-dom': 5.15.0
   '@testing-library/react': 12.1.2_react-dom@17.0.2+react@17.0.2
   '@types/eslint': 7.28.1
@@ -178,7 +178,7 @@ devDependencies:
   prettier: 2.4.1
   prop-types: 15.7.2
   react-test-renderer: 17.0.2_react@17.0.2
-  tailwindcss: 2.2.17_96f83969316717847b3edf58a3f353f3
+  tailwindcss: 2.2.19_96f83969316717847b3edf58a3f353f3
   ts-jest: 27.0.7_b048f5d0aa39c0974937f316379faa99
   typescript: 4.4.4
 
@@ -1397,24 +1397,24 @@ packages:
       defer-to-connect: 2.0.1
     dev: true
 
-  /@tailwindcss/aspect-ratio/0.2.2_tailwindcss@2.2.17:
+  /@tailwindcss/aspect-ratio/0.2.2_tailwindcss@2.2.19:
     resolution: {integrity: sha512-yjvYH1qKQapYUVz0rCRAQ29KlKuiDsWJF/0d24lpTPWtTKBimcKWHiAMjZOILbnRd25PogILsbOyFFVOjFd6Ow==}
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.17_96f83969316717847b3edf58a3f353f3
+      tailwindcss: 2.2.19_96f83969316717847b3edf58a3f353f3
     dev: false
 
-  /@tailwindcss/forms/0.3.4_tailwindcss@2.2.17:
+  /@tailwindcss/forms/0.3.4_tailwindcss@2.2.19:
     resolution: {integrity: sha512-vlAoBifNJUkagB+PAdW4aHMe4pKmSLroH398UPgIogBFc91D2VlHUxe4pjxQhiJl0Nfw53sHSJSQBSTQBZP3vA==}
     peerDependencies:
       tailwindcss: '>=2.0.0'
     dependencies:
       mini-svg-data-uri: 1.4.3
-      tailwindcss: 2.2.17_96f83969316717847b3edf58a3f353f3
+      tailwindcss: 2.2.19_96f83969316717847b3edf58a3f353f3
     dev: false
 
-  /@tailwindcss/typography/0.4.1_tailwindcss@2.2.17:
+  /@tailwindcss/typography/0.4.1_tailwindcss@2.2.19:
     resolution: {integrity: sha512-ovPPLUhs7zAIJfr0y1dbGlyCuPhpuv/jpBoFgqAc658DWGGrOBWBMpAWLw2KlzbNeVk4YBJMzue1ekvIbdw6XA==}
     peerDependencies:
       tailwindcss: '>=2.0.0'
@@ -1423,7 +1423,7 @@ packages:
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
-      tailwindcss: 2.2.17_96f83969316717847b3edf58a3f353f3
+      tailwindcss: 2.2.19_96f83969316717847b3edf58a3f353f3
     dev: true
 
   /@testing-library/dom/8.11.0:
@@ -6551,12 +6551,12 @@ packages:
       - webpack
     dev: false
 
-  /nightwind/1.1.12_tailwindcss@2.2.17:
+  /nightwind/1.1.12_tailwindcss@2.2.19:
     resolution: {integrity: sha512-iJGJxeglk3vrRyFDH7shinvKuN/EcIbBtNVkko0Zni/XGVSHrBH0rsvqgp2HhkIf5B7iZU+2+kGhS2oItBnASQ==}
     peerDependencies:
       tailwindcss: ^2.0.0
     dependencies:
-      tailwindcss: 2.2.17_96f83969316717847b3edf58a3f353f3
+      tailwindcss: 2.2.19_96f83969316717847b3edf58a3f353f3
     dev: false
 
   /node-abi/2.30.1:
@@ -8474,8 +8474,8 @@ packages:
       strip-ansi: 6.0.1
     dev: true
 
-  /tailwindcss/2.2.17_96f83969316717847b3edf58a3f353f3:
-    resolution: {integrity: sha512-WgRpn+Pxn7eWqlruxnxEbL9ByVRWi3iC10z4b6dW0zSdnkPVC4hPMSWLQkkW8GCyBIv/vbJ0bxIi9dVrl4CfoA==}
+  /tailwindcss/2.2.19_96f83969316717847b3edf58a3f353f3:
+    resolution: {integrity: sha512-6Ui7JSVtXadtTUo2NtkBBacobzWiQYVjYW0ZnKaP9S1ZCKQ0w7KVNz+YSDI/j7O7KCMHbOkz94ZMQhbT9pOqjw==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     peerDependencies:
