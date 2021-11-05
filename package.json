@@ -23,6 +23,7 @@
     "@tailwindcss/forms": "^0.3.4",
     "eslint-config-prettier": "^8.3.0",
     "highlight.js": "^11.0.1",
+    "lodash": "^4.17.21",
     "mdast-util-toc": "5.1.0",
     "next": "^12.0.1",
     "next-seo": "^4.26.0",
@@ -62,12 +63,14 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.16.0",
     "@tailwindcss/typography": "^0.4.1",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
     "@types/eslint": "^7",
     "@types/hast": "^2.3.1",
     "@types/jest": "^27.0.2",
+    "@types/lodash": "^4.14.176",
     "@types/node": "^15.12.4",
     "@types/probe-image-size": "^7",
     "@types/prop-types": "^15",

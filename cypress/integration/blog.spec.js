@@ -1,6 +1,8 @@
 describe("blog", () => {
-  it("has a greeting", () => {
+  it("shows initial blogs", () => {
     cy.visit("/");
-    cy.get("h1").should("not.be.empty");
+
+    cy.get("article h2").should("exist");
+    cy.get("article p").should("exist");
   });
 });
