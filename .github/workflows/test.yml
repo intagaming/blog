@@ -28,6 +28,8 @@ jobs:
           node-version: '14'
           cache: 'pnpm'
       - run: pnpm install
+        env:
+          CYPRESS_INSTALL_BINARY: 0
       - name: Run tests
         run: pnpm test
 
