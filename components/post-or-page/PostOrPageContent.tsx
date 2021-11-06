@@ -55,7 +55,10 @@ const PostOrPageContent = ({
         />
         {"excerpt" in postOrPage && <p>{postOrPage.excerpt}</p>}
         {"cover" in postOrPage && (
-          <div className="mt-6 aspect-w-16 aspect-h-9">
+          <div
+            className="mt-6 aspect-w-16 aspect-h-9"
+            data-testid="cover-image"
+          >
             <Image
               className="object-contain rounded-sm"
               src={postOrPage.cover}

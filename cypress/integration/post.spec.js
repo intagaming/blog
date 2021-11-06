@@ -23,6 +23,10 @@ describe("Post", function () {
       .contains("min read");
   });
 
+  it("has the cover image", () => {
+    cy.get(`[data-testid="cover-image"] img`).should("exist");
+  });
+
   it("headers are linked and tagged correctly", () => {
     cy.get(`[data-testid="blog-content"] h2`).first().as("firstH2");
 
