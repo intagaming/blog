@@ -6,20 +6,32 @@ import { definitions } from "../../types/supabase";
 type Props = {
   post: definitions["posts"];
   author: definitions["authors"];
+  blurDataURL?: string;
 };
 
-const PostCard = ({ post, author }: Props): JSX.Element => (
+const PostCard = ({ post, author, blurDataURL }: Props): JSX.Element => (
   <article>
     <Link href={`/${post.slug}`}>
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a>
         <div className="aspect-w-16 aspect-h-9">
-          <Image
-            className="rounded-sm object-cover"
-            src={post.cover}
-            alt=""
-            layout="fill"
-          />
+          {blurDataURL ? (
+            <Image
+              className="rounded-sm object-cover"
+              src={post.cover}
+              alt=""
+              layout="fill"
+              placeholder="blur"
+              blurDataURL={blurDataURL}
+            />
+          ) : (
+            <Image
+              className="rounded-sm object-cover"
+              src={post.cover}
+              alt=""
+              layout="fill"
+            />
+          )}
         </div>
         <h2 className="mt-6 text-xl font-bold">{post.title}</h2>
         <p className="mt-2 text-gray-500">{post.excerpt}</p>
