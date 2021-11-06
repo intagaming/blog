@@ -26,9 +26,16 @@ describe("home page", () => {
 
     it("can visit a blog post", () => {
       cy.get("article").first().as("theArticle");
-      cy.get("@theArticle").get("h2").as("articleTitle");
-      cy.get("@theArticle").click();
-      cy.get("@articleTitle", { timeout: 10000 }).should("exist");
+      cy.get("@theArticle").then((article) => {
+        const title = article.find("h2").text();
+        cy.get("@theArticle").click();
+
+        cy.url({ timeout: 10000 }).should("match", /https?:\/\/.*\/.+/);
+
+        cy.get("h1").then(function (el) {
+          expect(el.text()).to.eq(title);
+        });
+      });
     });
 
     it("can visit the about and contact page", () => {
