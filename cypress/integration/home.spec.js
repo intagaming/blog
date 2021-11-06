@@ -30,5 +30,15 @@ describe("home page", () => {
       cy.get("@theArticle").click();
       cy.get("@articleTitle", { timeout: 10000 }).should("exist");
     });
+
+    it("can visit the about and contact page", () => {
+      cy.contains(/^about/i).click();
+      cy.url({ timeout: 10000 }).should("match", /about/i);
+      cy.get("h1").contains(/about/i);
+
+      cy.contains(/^contact/i).click();
+      cy.url({ timeout: 10000 }).should("match", /contact/i);
+      cy.get("h1").contains(/contact/i);
+    });
   });
 });

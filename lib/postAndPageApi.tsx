@@ -117,7 +117,7 @@ export const getPageDataBySlug = async (
   if (!json) return null;
   const node = await getHtmlNodeFromMarkdown(json.content);
   const toc = await getTocHastFromMarkdown(json.content);
-  const author = await getAuthor(json.user_id);
+  const author = hackAuthorAvatarUrl(await getAuthor(json.user_id)); // TODO: remove hack
 
   return { node, postOrPage: json, toc, author };
 };
