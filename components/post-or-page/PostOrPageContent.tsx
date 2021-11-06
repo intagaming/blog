@@ -75,7 +75,7 @@ const PostOrPageContent = ({
           onMount={onTocMount}
         />
 
-        <div className={`${proseClasses} mx-auto`}>
+        <div className={`${proseClasses} mx-auto`} data-testid="blog-content">
           {rehype()
             .data("settings", {
               fragment: true,
