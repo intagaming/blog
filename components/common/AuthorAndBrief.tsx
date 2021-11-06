@@ -18,7 +18,7 @@ const AuthorAndBrief = ({ postOrPage, size, author }: Props): JSX.Element => {
   const minuteRead = Math.ceil(postOrPage.content.split(/\s+/).length / 145);
 
   return (
-    <div className="mt-6 flex gap-4">
+    <div className="mt-6 flex gap-4" data-testid="author-and-brief">
       <div className={`relative ${size === "sm" ? "w-12 h-12" : "w-14 h-14"}`}>
         <Image
           className="rounded-full"
