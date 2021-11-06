@@ -28,12 +28,12 @@ const TopNavigation = (): JSX.Element => {
     const onRouteStart = () => {
       setExtend(false);
     };
-    router.events.on("routeChangeStart", onRouteStart);
+    router?.events.on("routeChangeStart", onRouteStart);
 
     return () => {
-      router.events.off("routeChangeStart", onRouteStart);
+      router?.events.off("routeChangeStart", onRouteStart);
     };
-  }, [router.events]);
+  }, [router?.events]);
 
   return (
     <>
