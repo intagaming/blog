@@ -1,9 +1,9 @@
 describe("home page", () => {
-  before(() => {
-    cy.visit("/");
-  });
-
   describe("assure parts are available", () => {
+    before(() => {
+      cy.visit("/");
+    });
+
     it("shows initial blogs", () => {
       cy.get("article h2").should("exist");
       cy.get("article p").should("exist");
