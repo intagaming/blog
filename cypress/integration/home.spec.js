@@ -27,8 +27,8 @@ describe("home page", () => {
     it("can visit a blog post", () => {
       cy.get("article").first().as("theArticle");
       cy.get("@theArticle").get("h2").as("articleTitle");
-      cy.get("@theArticle").click({ timeout: 20000 });
-      cy.contains("@articleTitle");
+      cy.get("@theArticle").click();
+      cy.get("@articleTitle", { timeout: 10000 }).should("exist");
     });
   });
 });

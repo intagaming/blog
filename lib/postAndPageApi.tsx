@@ -20,7 +20,7 @@ import {
 import { PostOrPageData } from "../types/postOrPage";
 import { getPlaceholder } from "./images";
 import { supabase } from "../utils/supabaseClient";
-import { getObjectUrl } from "../utils/supabase";
+import { hackAuthorAvatarUrl, hackPostCoverUrl } from "../utils/supabase";
 import { definitions } from "../types/supabase";
 import { getAuthor } from "../hooks/supabase/author/useAuthorQuery";
 
@@ -31,7 +31,11 @@ export const getPostBySlug = async (
     .from<definitions["posts"]>("posts")
     .select()
     .eq("slug", slug);
-  return data[0] ?? null;
+  // TODO: remove the hack
+  if (data[0]) {
+    return hackPostCoverUrl(data[0]);
+  }
+  return null;
 };
 
 export const getPageBySlug = async (
@@ -94,8 +98,8 @@ export const getPostDataBySlug = async (
   if (!json) return null;
   const node = await getHtmlNodeFromMarkdown(json.content);
   const toc = await getTocHastFromMarkdown(json.content);
-  const coverImagePlaceholder = await getPlaceholder(getObjectUrl(json.cover));
-  const author = await getAuthor(json.user_id);
+  const coverImagePlaceholder = await getPlaceholder(json.cover);
+  const author = hackAuthorAvatarUrl(await getAuthor(json.user_id)); // TODO: remove hack
 
   return {
     node,

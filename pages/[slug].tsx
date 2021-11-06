@@ -9,7 +9,6 @@ import PostOrPageContent from "../components/post-or-page/PostOrPageContent";
 import { getTocMapping, TocMapping } from "../lib/tableOfContents";
 import { supabase } from "../utils/supabaseClient";
 import { definitions } from "../types/supabase";
-import { getObjectUrl } from "../utils/supabase";
 import { getDimensions } from "../lib/images";
 import { escapeQuote } from "../utils/general";
 
@@ -130,7 +129,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   let cover = null;
   if ("cover" in postOrPageData.postOrPage) {
-    const src = getObjectUrl(postOrPageData.postOrPage.cover);
+    const src = postOrPageData.postOrPage.cover;
     const size = await getDimensions(src);
     cover = {
       src,
