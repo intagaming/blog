@@ -12,4 +12,8 @@ describe("blog", () => {
     cy.contains(/^about/i).should("have.attr", "href");
     cy.contains(/^contact/i).should("have.attr", "href");
   });
+
+  it("linked to social pages", () => {
+    cy.get("a[href*=facebook], a[href*=github]").should("exist");
+  });
 });
