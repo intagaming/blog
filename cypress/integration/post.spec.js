@@ -23,15 +23,23 @@ describe("Post", function () {
       .contains("min read");
   });
 
-  it("headers are linked correctly", () => {
+  it("headers are linked and tagged correctly", () => {
     cy.get(`[data-testid="blog-content"] h2`).first().as("firstH2");
 
-    // Expect to be a linked <a>
     cy.get("@firstH2")
       .parent()
       .then((el) => {
+        // Expect to be a linked <a>
         expect(el.prop("tagName")).to.be.match(/a/i);
-        expect(el.prop("href")).to.match(/https?:\/\/.*\/[^#]+#.+/);
+        const href = el.prop("href");
+        const regex = /https?:\/\/.*\/[^#]+#(.+)/;
+        expect(href).to.match(regex);
+
+        const match = href.match(regex);
+        const id = match[1];
+
+        // Expect to have an exact match
+        cy.get("@firstH2").should("have.id", id);
       });
   });
 });
