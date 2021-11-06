@@ -1,7 +1,7 @@
 import { FaHeart, FaFacebook, FaGithub } from "react-icons/fa";
 
 const Footer = (): JSX.Element => (
-  <footer className="nightwind-prevent-block nightwind-prevent bg-black text-white py-20 px-10 flex flex-col items-center text-center">
+  <footer className="bg-black text-white py-20 px-10 flex flex-col items-center text-center">
     <p>
       Made by
       <span className="text-indigo-600 font-bold"> &lt;</span>

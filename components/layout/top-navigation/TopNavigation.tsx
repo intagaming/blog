@@ -38,7 +38,7 @@ const TopNavigation = (): JSX.Element => {
   return (
     <>
       <div
-        className={`nightwind-prevent-block fixed text-white w-screen flex flex-col md:flex-row z-50 ${
+        className={`fixed text-white w-screen flex flex-col md:flex-row z-50 ${
           extend ? "h-full md:h-auto" : ""
         }`}
       >
