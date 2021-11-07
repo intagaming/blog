@@ -19,7 +19,7 @@ type Props = {
   cover?: { src: string; width: number; height: number };
 };
 
-const PostAndPage = ({
+const PostOrPage = ({
   postOrPageData,
   domainUrl,
   tocMapping,
@@ -81,7 +81,7 @@ const PostAndPage = ({
   );
 };
 
-export default PostAndPage;
+export default PostOrPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data: posts } = await supabase
