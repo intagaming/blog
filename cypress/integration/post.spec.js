@@ -43,4 +43,44 @@ describe("Post", function () {
         cy.get("@firstH2").should("have.id", id);
       });
   });
+
+  describe("table of contents", () => {
+    context("desktop viewport", () => {
+      before(() => {
+        cy.viewport("macbook-13");
+        cy.scrollTo("top");
+      });
+
+      it("navigates to the correct section", () => {
+        cy.get(".toc a").last().as("lastLink").click({ force: true });
+        cy.get("@lastLink").then((el) => {
+          const href = el.prop("href");
+          const regex = /https?:\/\/.*\/[^#]+#(.+)/;
+          const match = href.match(regex);
+          const id = match[1];
+
+          cy.get(`[id="${id}"]`).should("be.visible");
+        });
+      });
+    });
+
+    context("mobile viewport", () => {
+      before(() => {
+        cy.viewport("iphone-x");
+        cy.scrollTo("top");
+      });
+
+      it("navigates to the correct section", () => {
+        cy.get(".toc a").last().as("lastLink").click({ force: true });
+        cy.get("@lastLink").then((el) => {
+          const href = el.prop("href");
+          const regex = /https?:\/\/.*\/[^#]+#(.+)/;
+          const match = href.match(regex);
+          const id = match[1];
+
+          cy.get(`[id="${id}"]`).should("be.visible");
+        });
+      });
+    });
+  });
 });
