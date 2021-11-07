@@ -42,40 +42,50 @@ body {
 
 // Styling ToC's generated elements
 .toc {
-  ul ul {
-    padding-left: 2ch;
-  }
+  @apply mx-auto w-[65ch] max-w-full lg:absolute lg:left-full lg:h-full lg:ml-4 lg:w-[calc((100vw-65ch)/2-5rem)] xl:w-[calc((100vw-65ch)/2-8rem)];
 
-  li {
-    &::before {
-      content: "[x] ";
-      @apply text-indigo-600/50 dark:text-indigo-600/50 font-bold;
+  aside {
+    @apply text-gray-900 bg-gray-50 p-4 rounded-md mb-5 text-sm overflow-hidden max-h-[75vh] overflow-y-auto lg:my-0 lg:sticky lg:top-20;
+
+    h2 {
+      @apply pb-4;
     }
 
-    a {
-      @apply opacity-50 hover:opacity-100 transition-opacity;
-    }
-  }
-
-  .tocActive {
-    &::before {
-      content: "[o] ";
-      @apply text-green-600 dark:text-green-600 font-bold;
+    ul ul {
+      padding-left: 2ch;
     }
 
-    > a {
-      @apply opacity-100;
-    }
-  }
+    li {
+      &::before {
+        content: "[x] ";
+        @apply text-indigo-600/30 font-bold;
+      }
 
-  .tocNearMiss {
-    &::before {
-      content: "[x] ";
-      @apply text-indigo-600/75 dark:text-indigo-600/75 font-bold;
+      a {
+        @apply opacity-30 hover:opacity-100 transition-opacity;
+      }
     }
 
-    > a {
-      @apply opacity-75;
+    .tocActive {
+      &::before {
+        content: "[o] ";
+        @apply text-green-600 font-bold;
+      }
+
+      > a {
+        @apply opacity-100;
+      }
+    }
+
+    .tocNearMiss {
+      &::before {
+        content: "[x] ";
+        @apply text-indigo-600/60 font-bold;
+      }
+
+      > a {
+        @apply opacity-60;
+      }
     }
   }
 }
