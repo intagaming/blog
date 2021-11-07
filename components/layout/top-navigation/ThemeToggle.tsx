@@ -24,7 +24,7 @@ export default function ThemeToggle(): JSX.Element {
         <Switch
           checked={theme === "dark"}
           onChange={toggle}
-          className="flex items-center text-white focus:outline-none"
+          className="flex items-center text-black dark:text-white focus:outline-none"
         >
           <span className="sr-only">Enable Dark mode</span>
           <span>

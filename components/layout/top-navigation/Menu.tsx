@@ -8,7 +8,7 @@ type Props = {
 const Menu = ({ checked, onClick }: Props): JSX.Element => (
   <Switch
     checked={checked}
-    className="text-white focus:outline-none flex items-center"
+    className="text-black dark:text-white focus:outline-none flex items-center"
     onChange={onClick}
   >
     <span className="sr-only">Menu toggle</span>

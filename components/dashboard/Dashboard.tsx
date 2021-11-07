@@ -7,9 +7,9 @@ interface Props {
 
 const Dashboard = ({ children }: Props): JSX.Element => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col md:flex-row md:w-full md:h-screen">
       <Sidebar />
-      {children}
+      <div className="md:overflow-y-auto flex-1">{children}</div>
     </div>
   );
 };

@@ -132,14 +132,25 @@ const PageComposer = ({ page, onCommit }: Props): JSX.Element => {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 md:px-20 md:py-4">
       <h2 className="text-xl">Composer</h2>
 
       <div className="form">
         {page && (
-          <button className="bg-red-700 p-2" onClick={handleDeletePageClick}>
-            Delete page
-          </button>
+          <div className="flex gap-3">
+            <button
+              className="bg-red-700 text-dark-white p-2"
+              onClick={handleDeletePageClick}
+            >
+              Delete page
+            </button>
+            <button
+              className="bg-indigo-700 text-dark-white p-2"
+              onClick={togglePublish}
+            >
+              {published ? "Hide page" : "Publish"}
+            </button>
+          </div>
         )}
         {showDeleteModal && page && (
           <Modal
@@ -152,40 +163,36 @@ const PageComposer = ({ page, onCommit }: Props): JSX.Element => {
           />
         )}
 
-        <div className="field">
-          <label htmlFor="title">Title</label>
-          <input type="text" {...register("title")} />
-          <p>{errors.title?.message}</p>
-        </div>
-
-        {page && (
-          <>
-            <p>This page is {published ? "published" : "not published"}.</p>
-            <button className="bg-indigo-700 p-2" onClick={togglePublish}>
-              {published ? "Hide page" : "Publish"}
-            </button>
-          </>
-        )}
-
-        <div className="field">
-          <label htmlFor="slug">Slug</label>
-          <div className="flex w-full bg-white">
-            <input
-              className="w-full text-black"
-              type="text"
-              {...register("slug")}
-            />
-            <button onClick={handleGenerateSlug} className="w-10 p-2">
-              <RefreshIcon className="text-black" />
-            </button>
+        <div className="flex flex-col md:flex-row justify-between gap-3">
+          <div className="field flex-1">
+            <label htmlFor="title">Title</label>
+            <input type="text" {...register("title")} />
+            <p>{errors.title?.message}</p>
           </div>
-          <p>{errors.slug?.message}</p>
+
+          <div className="field flex-1">
+            <label htmlFor="slug">Slug</label>
+            <div className="flex w-full bg-white">
+              <input
+                className="w-full text-black"
+                type="text"
+                {...register("slug")}
+              />
+              <button
+                onClick={handleGenerateSlug}
+                className="w-10 p-2 border-2"
+              >
+                <RefreshIcon className="text-black" />
+              </button>
+            </div>
+            <p>{errors.slug?.message}</p>
+          </div>
         </div>
 
         <div className="field">
           <label htmlFor="content">Content</label>
           <div
-            className="h-[80vh] bg-white overflow-auto"
+            className="h-[80vh] bg-white overflow-auto border"
             onClick={(e) => {
               if (e.target !== e.currentTarget) return;
               // When clicking the background of this div, focus editor at the end.
@@ -202,7 +209,10 @@ const PageComposer = ({ page, onCommit }: Props): JSX.Element => {
           <p>{errors.content?.message}</p>
         </div>
 
-        <button className="bg-indigo-700 p-2" onClick={handleSubmit(submit)}>
+        <button
+          className="bg-indigo-700 text-dark-white p-2"
+          onClick={handleSubmit(submit)}
+        >
           Submit
         </button>
       </div>

@@ -77,14 +77,14 @@ const ImagePicker = ({ initialFile, onChange }: Props): JSX.Element => {
 
         <div className="absolute flex h-full divide-x-2">
           <button
-            className="flex-1 flex justify-center items-center bg-opacity-20 bg-black hover:bg-opacity-50"
+            className="flex-1 flex justify-center items-center bg-opacity-20 bg-black hover:bg-opacity-50 text-dark-white"
             onClick={handleUploadClick}
           >
             Upload new image
           </button>
 
           <button
-            className="flex-1 flex justify-center items-center bg-opacity-20 bg-black hover:bg-opacity-50"
+            className="flex-1 flex justify-center items-center bg-opacity-20 bg-black hover:bg-opacity-50 text-dark-white"
             onClick={handleOpenStorageBrowser}
           >
             Choose from Storage

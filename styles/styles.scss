@@ -101,7 +101,7 @@ body {
   @apply flex flex-col gap-3;
 
   .field > label {
-    @apply block text-white;
+    @apply block text-black dark:text-dark-white;
   }
 
   .field > input {

@@ -152,14 +152,25 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 md:px-20 md:py-4">
       <h2 className="text-xl">Composer</h2>
 
       <div className="form">
         {post && (
-          <button className="bg-red-700 p-2" onClick={handleDeletePostClick}>
-            Delete post
-          </button>
+          <div className="flex gap-3">
+            <button
+              className="bg-red-700 text-dark-white p-2"
+              onClick={handleDeletePostClick}
+            >
+              Delete post
+            </button>
+            <button
+              className="bg-indigo-700 text-dark-white p-2"
+              onClick={published ? handleUnpublishClick : togglePublish}
+            >
+              {published ? "Hide post" : "Publish"}
+            </button>
+          </div>
         )}
         {showDeleteModal && post && (
           <Modal
@@ -171,69 +182,64 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
             okClassNames="bg-red-300"
           />
         )}
-
-        <div className="field">
-          <label htmlFor="title">Title</label>
-          <input type="text" {...register("title")} />
-          <p>{errors.title?.message}</p>
-        </div>
-
-        {post && (
-          <>
-            <p>This post is {published ? "published" : "not published"}.</p>
-            <button
-              className="bg-indigo-700 p-2"
-              onClick={published ? handleUnpublishClick : togglePublish}
-            >
-              {published ? "Hide post" : "Publish"}
-            </button>
-            {showUnpublishModal && post && (
-              <Modal
-                title="Unpublish"
-                content={`Do you really want to unpublish "${post.title}"?`}
-                okString="Unpublish"
-                onCancel={handleUnpublishCancel}
-                onOk={handleUnpublishOk}
-                okClassNames="bg-red-300"
-              />
-            )}
-          </>
+        {showUnpublishModal && post && (
+          <Modal
+            title="Unpublish"
+            content={`Do you really want to unpublish "${post.title}"?`}
+            okString="Unpublish"
+            onCancel={handleUnpublishCancel}
+            onOk={handleUnpublishOk}
+            okClassNames="bg-red-300"
+          />
         )}
 
-        <div className="field">
-          <label htmlFor="slug">Slug</label>
-          <div className="flex w-full bg-white">
-            <input
-              className="w-full text-black"
-              type="text"
-              {...register("slug")}
-            />
-            <button onClick={handleGenerateSlug} className="w-10 p-2">
-              <RefreshIcon className="text-black" />
-            </button>
+        <div className="flex flex-col md:flex-row justify-between gap-3">
+          <div className="field flex-1">
+            <label htmlFor="title">Title</label>
+            <input type="text" {...register("title")} />
+            <p>{errors.title?.message}</p>
           </div>
-          <p>{errors.slug?.message}</p>
+
+          <div className="field flex-1">
+            <label htmlFor="slug">Slug</label>
+            <div className="flex w-full bg-white">
+              <input
+                className="w-full text-black"
+                type="text"
+                {...register("slug")}
+              />
+              <button
+                onClick={handleGenerateSlug}
+                className="w-10 p-2 border-2"
+              >
+                <RefreshIcon className="text-black" />
+              </button>
+            </div>
+            <p>{errors.slug?.message}</p>
+          </div>
         </div>
 
-        <div className="field">
-          <label htmlFor="excerpt">Excerpt</label>
-          <textarea rows={4} cols={50} {...register("excerpt")} />
-          <p>{errors.excerpt?.message}</p>
-        </div>
+        <div className="flex flex-col md:flex-row gap-3">
+          <div className="field flex-1">
+            <label>Cover</label>
+            <ImagePicker
+              initialFile={post?.cover}
+              onChange={(fileName) => setValue("cover", fileName)}
+            />
+            <p>{errors.cover?.message}</p>
+          </div>
 
-        <div className="field">
-          <label>Cover</label>
-          <ImagePicker
-            initialFile={post?.cover}
-            onChange={(fileName) => setValue("cover", fileName)}
-          />
-          <p>{errors.cover?.message}</p>
+          <div className="field flex-1">
+            <label htmlFor="excerpt">Excerpt</label>
+            <textarea rows={4} cols={50} {...register("excerpt")} />
+            <p>{errors.excerpt?.message}</p>
+          </div>
         </div>
 
         <div className="field">
           <label htmlFor="content">Content</label>
           <div
-            className="h-[80vh] bg-white overflow-auto"
+            className="h-[80vh] bg-white overflow-auto border"
             onClick={(e) => {
               if (e.target !== e.currentTarget) return;
               // When clicking the background of this div, focus editor at the end.
@@ -253,7 +259,10 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
           <p>{errors.content?.message}</p>
         </div>
 
-        <button className="bg-indigo-700 p-2" onClick={handleSubmit(submit)}>
+        <button
+          className="bg-indigo-700 text-dark-white p-2"
+          onClick={handleSubmit(submit)}
+        >
           Submit
         </button>
       </div>
