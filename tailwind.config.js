@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         "surface-gray": "#121212",
         primary: colors.indigo["600"],
+        "dark-white": "hsla(0, 0%, 100%, 0.87)",
       },
     },
   },

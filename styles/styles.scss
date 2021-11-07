@@ -149,9 +149,9 @@ body {
 }
 
 .prose {
-  @apply text-black dark:text-white/[0.87] dark:font-light;
+  @apply text-black dark:text-dark-white dark:font-light;
 
   h1, h2, h3, h4, h5, h6, p, code, div, strong, li {
-    @apply text-black dark:text-white/[0.87];
+    @apply text-black dark:text-dark-white;
   }
 }

@@ -10,12 +10,14 @@ interface Props {
 
 const FullScreenDialog = ({ title, onClose, children }: Props): JSX.Element => (
   <Dialog>
-    <div className="w-full h-full overflow-hidden bg-white shadow-md">
+    <div className="flex flex-col w-full h-full overflow-hidden bg-white shadow-md text-black dark:bg-surface-gray dark:text-dark-white">
       <TitleBar title={title} onClose={onClose} />
       <hr />
 
       {/* Take all the spaces, but no more than that, so it can be scrolled. */}
-      <div className="flex-auto overflow-hidden p-4">{children}</div>
+      <div className="flex-auto overflow-auto p-4 overscroll-contain">
+        {children}
+      </div>
     </div>
   </Dialog>
 );
