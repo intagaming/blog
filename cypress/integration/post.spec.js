@@ -1,8 +1,6 @@
 describe("Post", function () {
   before(() => {
-    cy.visit("/");
-    cy.get("article").first().click();
-    cy.url({ timeout: 10000 }).should("match", /https?:\/\/.*\/.+/);
+    cy.visit("/test");
   });
 
   it("has the title", () => {
@@ -16,11 +14,10 @@ describe("Post", function () {
 
     // Author avatar
     cy.get("@authorAndBrief").get("img").should("exist");
-    cy.get("@authorAndBrief")
-      // At least contains a year
-      .contains(/[12][0-9]{3}/)
-      // Read time brief
-      .contains("min read");
+    // At least contains a year
+    cy.get("@authorAndBrief").contains(/[12][0-9]{3}/);
+    // Read time brief
+    cy.get("@authorAndBrief").contains("min read");
   });
 
   it("has the cover image", () => {
