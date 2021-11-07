@@ -22,7 +22,7 @@ export type LinkSpanWithNode = {
 
 const LinkSpan = ({ href, children }: Props): JSX.Element => (
   <LinkWrapper href={href}>
-    <span className="hover:underline">{children}</span>
+    <span className="hover:underline text-primary">{children}</span>
   </LinkWrapper>
 );
 
