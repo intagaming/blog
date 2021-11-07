@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  font-family: "JetBrains Mono", monospace;
+  @apply font-sans;
 }
 
 /*
@@ -42,10 +42,10 @@ body {
 
 // Styling ToC's generated elements
 .toc {
-  @apply mx-auto w-[65ch] max-w-full lg:absolute lg:left-full lg:h-full lg:ml-4 lg:w-[calc((100vw-65ch)/2-5rem)] xl:w-[calc((100vw-65ch)/2-8rem)];
+  @apply font-mono mx-auto w-[65ch] max-w-full lg:absolute lg:left-full lg:h-full lg:ml-4 lg:w-[calc((100vw-65ch)/2-5rem)] xl:w-[calc((100vw-65ch)/2-8rem)];
 
   aside {
-    @apply text-gray-900 bg-gray-50 p-4 rounded-md mb-5 text-sm overflow-hidden max-h-[75vh] overflow-y-auto lg:my-0 lg:sticky lg:top-20;
+    @apply text-black dark:text-white bg-white dark:bg-black shadow-md p-4 rounded-md mb-5 text-sm overflow-hidden max-h-[75vh] overflow-y-auto lg:my-0 lg:sticky lg:top-20;
 
     h2 {
       @apply pb-4;
@@ -145,5 +145,13 @@ body {
     td {
       @apply p-2;
     }
+  }
+}
+
+.prose {
+  @apply text-black dark:text-white/[0.87] dark:font-light;
+
+  h1, h2, h3, h4, h5, h6, p, code, div, strong, li {
+    @apply text-black dark:text-white/[0.87];
   }
 }

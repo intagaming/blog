@@ -42,6 +42,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   const { data: postsData } = await supabase
     .from<definitions["posts"]>("posts")
     .select()
+    .order("published_at", { ascending: false })
     .range(0, 9);
   // TODO: remove the cover url hack
   const posts = postsData.map((postData) => hackPostCoverUrl(postData));

@@ -46,7 +46,7 @@ const PostOrPageContent = ({
 
   const proseClasses = "prose prose-md lg:prose-lg prose-indigo w-full";
   return (
-    <article className="md:pt-20 pt-10 pb-10 px-4 flex flex-col items-center bg-white dark:bg-[#121212] min-h-[65vh]">
+    <article className="md:pt-20 pt-10 pb-10 px-4 flex flex-col items-center bg-white dark:bg-surface-gray min-h-[65vh]">
       <div className={proseClasses}>
         <h1>{postOrPage.title}</h1>
         <AuthorAndBrief

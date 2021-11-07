@@ -18,7 +18,10 @@ const AuthorAndBrief = ({ postOrPage, size, author }: Props): JSX.Element => {
   const minuteRead = Math.ceil(postOrPage.content.split(/\s+/).length / 145);
 
   return (
-    <div className="mt-6 flex gap-4" data-testid="author-and-brief">
+    <div
+      className="mt-6 flex items-center gap-4"
+      data-testid="author-and-brief"
+    >
       <div className={`relative ${size === "sm" ? "w-12 h-12" : "w-14 h-14"}`}>
         <Image
           className="rounded-full"
@@ -28,10 +31,10 @@ const AuthorAndBrief = ({ postOrPage, size, author }: Props): JSX.Element => {
         />
       </div>
       <div className="flex flex-col justify-center">
-        <span className="font-semibold">
+        <span className="text-black dark:text-white font-semibold">
           {author.fullName ?? "Mysterious Author"}
         </span>
-        <span className="text-gray-400 text-sm">
+        <span className="text-gray-500 dark:text-gray-400 text-sm">
           {date} • {minuteRead} min read
         </span>
       </div>

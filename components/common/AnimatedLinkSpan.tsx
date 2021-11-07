@@ -24,7 +24,7 @@ const AnimatedLinkSpan = ({ children }: Props): JSX.Element => {
         backgroundColor: opacity.to((o) => `hsl(21, 27%, 45%, ${o})`),
       }}
     >
-      <span className="text-indigo-600">{children}</span>
+      <span className="text-primary">{children}</span>
     </animated.span>
   );
 };

@@ -20,7 +20,7 @@ const Home = ({ posts, authors }: Props): JSX.Element => {
           <LinkSpan href="/about">Read more about me.</LinkSpan>
         </p>
       </div>
-      <div className="bg-white px-[4vw] py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="bg-white dark:bg-surface-gray px-[4vw] py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map((post) => (
           <PostCard key={post.id} post={post} author={authors[post.user_id]} />
         ))}

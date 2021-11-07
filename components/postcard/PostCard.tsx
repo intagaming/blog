@@ -33,8 +33,10 @@ const PostCard = ({ post, author, blurDataURL }: Props): JSX.Element => (
             />
           )}
         </div>
-        <h2 className="mt-6 text-xl font-bold">{post.title}</h2>
-        <p className="mt-2 text-gray-500">{post.excerpt}</p>
+        <h2 className="mt-6 text-xl font-bold text-black dark:text-white">
+          {post.title}
+        </h2>
+        <p className="mt-2 text-gray-500 dark:text-gray-400">{post.excerpt}</p>
       </a>
     </Link>
     <AuthorAndBrief postOrPage={post} size="sm" author={author} />

@@ -7,7 +7,7 @@ interface Props {
 
 const Dashboard = ({ children }: Props): JSX.Element => {
   return (
-    <div className="flex flex-col nightwind-prevent-block">
+    <div className="flex flex-col">
       <Sidebar />
       {children}
     </div>

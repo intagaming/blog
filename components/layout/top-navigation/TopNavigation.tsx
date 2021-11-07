@@ -44,10 +44,10 @@ const TopNavigation = (): JSX.Element => {
       >
         <div className="bg-black flex justify-between items-center px-4 h-10 md:h-14">
           <LinkWrapper href="/">
-            <span className="md:text-lg md:font-bold px-2 text-white">
-              <span className="text-indigo-600 font-extrabold">&lt;</span>
+            <span className="md:text-lg md:font-bold px-2 text-white font-mono">
+              <span className="text-primary font-extrabold">&lt;</span>
               An Hoang
-              <span className="text-indigo-600 font-extrabold">/&gt;</span>
+              <span className="text-primary font-extrabold">/&gt;</span>
             </span>
           </LinkWrapper>
           <div className="flex gap-6 md:hidden">
