@@ -12,6 +12,8 @@ import { definitions } from "../types/supabase";
 import { getDimensions } from "../lib/images";
 import { escapeQuote } from "../utils/general";
 
+export const TEST_SLUG = process.env.NEXT_TEST_SLUG;
+
 type Props = {
   postOrPageData: PostOrPageData;
   domainUrl: string;
@@ -104,6 +106,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
     })),
   ];
 
+  if (TEST_SLUG) {
+    paths.push({
+      params: {
+        slug: TEST_SLUG,
+      },
+    });
+  }
+
   return {
     paths,
     fallback: true,
@@ -116,7 +126,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const { slug } = params;
 
-  let postOrPageData = await getPostDataBySlug(slug as string);
+  let postOrPageData = await getPostDataBySlug(
+    slug as string,
+    slug === TEST_SLUG
+  );
   if (!postOrPageData) {
     postOrPageData = await getPageDataBySlug(slug as string);
   }
