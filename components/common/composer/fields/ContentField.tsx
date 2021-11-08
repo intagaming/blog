@@ -35,7 +35,7 @@ const ContentField = ({
         <div
           className={`${
             contentFullScreenHandle.active ? "h-screen" : "h-[80vh]"
-          } bg-white overflow-auto border`}
+          } bg-white dark:bg-surface-gray overflow-auto border`}
           onClick={(e) => {
             if (e.target !== e.currentTarget) return;
             // When clicking the background of this div, focus editor at the end.
