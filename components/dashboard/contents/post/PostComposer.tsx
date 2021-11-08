@@ -18,6 +18,8 @@ import useDeletePostMutation from "../../../../hooks/supabase/post/useDeletePost
 import { useRouter } from "next/router";
 import Modal from "../../../dialog/Modal";
 import { removeTrailingBackslash } from "../../../../utils/general";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import { AiOutlineFullscreen } from "react-icons/ai";
 
 interface IFormInputs {
   title: string;
@@ -151,6 +153,8 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
     togglePublish();
   };
 
+  const contentFullScreenHandle = useFullScreenHandle();
+
   return (
     <div className="flex flex-col gap-2 md:px-20 md:py-4">
       <h2 className="text-xl">Composer</h2>
@@ -238,24 +242,33 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
 
         <div className="field">
           <label htmlFor="content">Content</label>
-          <div
-            className="h-[80vh] bg-white overflow-auto border"
-            onClick={(e) => {
-              if (e.target !== e.currentTarget) return;
-              // When clicking the background of this div, focus editor at the end.
-              editorRef.current.focusAtEnd();
-            }}
+          <button
+            onClick={contentFullScreenHandle.enter}
+            className="p-2 border"
           >
-            <Editor
-              ref={editorRef}
-              defaultValue={post?.content}
-              uploadImage={handleUploadImage}
-              onChange={(getFn) => {
-                console.log(getFn(), removeTrailingBackslash(getFn()));
-                setValue("content", removeTrailingBackslash(getFn()));
+            <AiOutlineFullscreen />
+          </button>
+          <FullScreen handle={contentFullScreenHandle}>
+            <div
+              className={`${
+                contentFullScreenHandle.active ? "h-screen" : "h-[80vh]"
+              } bg-white overflow-auto border`}
+              onClick={(e) => {
+                if (e.target !== e.currentTarget) return;
+                // When clicking the background of this div, focus editor at the end.
+                editorRef.current.focusAtEnd();
               }}
-            />
-          </div>
+            >
+              <Editor
+                ref={editorRef}
+                defaultValue={post?.content}
+                uploadImage={handleUploadImage}
+                onChange={(getFn) =>
+                  setValue("content", removeTrailingBackslash(getFn()))
+                }
+              />
+            </div>
+          </FullScreen>
           <p>{errors.content?.message}</p>
         </div>
 
