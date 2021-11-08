@@ -60,7 +60,7 @@ const PostOrPageContent = ({
             data-testid="cover-image"
           >
             <Image
-              className="object-contain rounded-sm"
+              className="object-cover rounded-sm"
               src={postOrPage.cover}
               alt=""
               layout="fill"
