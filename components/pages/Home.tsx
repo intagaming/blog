@@ -7,7 +7,7 @@ import Layout from "../layout/Layout";
 interface Props {
   posts: definitions["posts"][];
   authors: { [authorId: string]: definitions["authors"] };
-  blurDataURLs: { [postId: number]: string };
+  blurDataURLs?: { [postId: number]: string };
 }
 
 const Home = ({ posts, authors, blurDataURLs }: Props): JSX.Element => {
@@ -28,7 +28,7 @@ const Home = ({ posts, authors, blurDataURLs }: Props): JSX.Element => {
             post={post}
             author={authors[post.user_id]}
             isLatestBlog={index === 0}
-            blurDataURL={blurDataURLs[post.id] ?? undefined}
+            blurDataURL={blurDataURLs?.[post.id] ?? undefined}
           />
         ))}
       </div>
