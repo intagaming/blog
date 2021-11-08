@@ -18,12 +18,15 @@ const SlugField = ({
       <label htmlFor="slug">Slug</label>
       <div className="flex w-full bg-white">
         <input
-          className="w-full text-black"
+          className="w-full text-black field-input"
           type="text"
           {...register("slug")}
         />
-        <button onClick={handleGenerateSlug} className="w-10 p-2 border-2">
-          <RefreshIcon className="text-black" />
+        <button
+          onClick={handleGenerateSlug}
+          className="w-10 p-2 border dark:bg-surface-gray dark:text-dark-white"
+        >
+          <RefreshIcon />
         </button>
       </div>
       <p>{errors.slug?.message}</p>

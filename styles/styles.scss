@@ -104,12 +104,12 @@ body {
     @apply block text-black dark:text-dark-white;
   }
 
-  .field > input {
-    @apply w-full text-black;
+  .field > input, .field-input {
+    @apply w-full text-black dark:bg-surface-gray dark:text-dark-white;
   }
 
   .field > textarea {
-    @apply w-full text-black;
+    @apply w-full text-black dark:bg-surface-gray dark:text-dark-white;
   }
 }
 
