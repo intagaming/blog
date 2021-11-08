@@ -137,6 +137,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!postOrPageData) {
     return {
       notFound: true,
+      revalidate: 5,
     };
   }
 
