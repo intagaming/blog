@@ -155,6 +155,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { postOrPageData, domainUrl, tocMapping, cover },
-    revalidate: 30,
+    revalidate: 5,
   };
 };
