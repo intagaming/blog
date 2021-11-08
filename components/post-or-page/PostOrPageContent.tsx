@@ -10,7 +10,6 @@ import TableOfContents from "./table-of-contents/TableOfContents";
 import { TocMapping } from "../../lib/tableOfContents";
 import PostOrPageHeading from "./rehype-react-components/PostOrPageHeading";
 import LinkSpan, { LinkSpanWithNode } from "../common/LinkSpan";
-import { getObjectUrl } from "../../utils/supabase";
 
 type Props = {
   postOrPageData: PostOrPageData;
@@ -47,16 +46,22 @@ const PostOrPageContent = ({
 
   const proseClasses = "prose prose-md lg:prose-lg prose-indigo w-full";
   return (
-    <article className="md:pt-20 pt-10 pb-10 px-4 flex flex-col items-center bg-white dark:bg-[#121212] min-h-[65vh]">
+    <article className="md:pt-20 pt-10 pb-10 px-4 flex flex-col items-center bg-white dark:bg-surface-gray min-h-[65vh]">
       <div className={proseClasses}>
         <h1>{postOrPage.title}</h1>
-        <AuthorAndBrief postOrPage={postOrPage} />
+        <AuthorAndBrief
+          postOrPage={postOrPage}
+          author={postOrPageData.author}
+        />
         {"excerpt" in postOrPage && <p>{postOrPage.excerpt}</p>}
         {"cover" in postOrPage && (
-          <div className="mt-6 aspect-w-16 aspect-h-9">
+          <div
+            className="mt-6 aspect-w-16 aspect-h-9"
+            data-testid="cover-image"
+          >
             <Image
-              className="object-contain rounded-sm"
-              src={getObjectUrl(postOrPage.cover)}
+              className="object-cover rounded-sm"
+              src={postOrPage.cover}
               alt=""
               layout="fill"
               placeholder="blur"
@@ -73,7 +78,7 @@ const PostOrPageContent = ({
           onMount={onTocMount}
         />
 
-        <div className={`${proseClasses} mx-auto`}>
+        <div className={`${proseClasses} mx-auto`} data-testid="blog-content">
           {rehype()
             .data("settings", {
               fragment: true,

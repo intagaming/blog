@@ -9,9 +9,10 @@ import PostOrPageContent from "../components/post-or-page/PostOrPageContent";
 import { getTocMapping, TocMapping } from "../lib/tableOfContents";
 import { supabase } from "../utils/supabaseClient";
 import { definitions } from "../types/supabase";
-import { getObjectUrl } from "../utils/supabase";
 import { getDimensions } from "../lib/images";
 import { escapeQuote } from "../utils/general";
+
+export const TEST_SLUG = process.env.NEXT_TEST_SLUG;
 
 type Props = {
   postOrPageData: PostOrPageData;
@@ -20,7 +21,7 @@ type Props = {
   cover?: { src: string; width: number; height: number };
 };
 
-const PostAndPage = ({
+const PostOrPage = ({
   postOrPageData,
   domainUrl,
   tocMapping,
@@ -82,7 +83,7 @@ const PostAndPage = ({
   );
 };
 
-export default PostAndPage;
+export default PostOrPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data: posts } = await supabase
@@ -105,6 +106,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
     })),
   ];
 
+  if (TEST_SLUG) {
+    paths.push({
+      params: {
+        slug: TEST_SLUG,
+      },
+    });
+  }
+
   return {
     paths,
     fallback: true,
@@ -117,7 +126,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const { slug } = params;
 
-  let postOrPageData = await getPostDataBySlug(slug as string);
+  let postOrPageData = await getPostDataBySlug(
+    slug as string,
+    slug === TEST_SLUG
+  );
   if (!postOrPageData) {
     postOrPageData = await getPageDataBySlug(slug as string);
   }
@@ -130,7 +142,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   let cover = null;
   if ("cover" in postOrPageData.postOrPage) {
-    const src = getObjectUrl(postOrPageData.postOrPage.cover);
+    const src = postOrPageData.postOrPage.cover;
     const size = await getDimensions(src);
     cover = {
       src,

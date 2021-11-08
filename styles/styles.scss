@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  font-family: "JetBrains Mono", monospace;
+  @apply font-sans;
 }
 
 /*
@@ -42,40 +42,50 @@ body {
 
 // Styling ToC's generated elements
 .toc {
-  ul ul {
-    padding-left: 2ch;
-  }
+  @apply font-mono mx-auto w-[65ch] max-w-full lg:absolute lg:left-full lg:h-full lg:ml-4 lg:w-[calc((100vw-65ch)/2-5rem)] xl:w-[calc((100vw-65ch)/2-8rem)];
 
-  li {
-    &::before {
-      content: "[x] ";
-      @apply text-indigo-600/50 dark:text-indigo-600/50 font-bold;
+  aside {
+    @apply text-black dark:text-white bg-white dark:bg-black shadow-md p-4 rounded-md mb-5 text-sm overflow-hidden max-h-[75vh] overflow-y-auto lg:my-0 lg:sticky lg:top-20;
+
+    h2 {
+      @apply pb-4;
     }
 
-    a {
-      @apply opacity-50 hover:opacity-100 transition-opacity;
-    }
-  }
-
-  .tocActive {
-    &::before {
-      content: "[o] ";
-      @apply text-green-600 dark:text-green-600 font-bold;
+    ul ul {
+      padding-left: 2ch;
     }
 
-    > a {
-      @apply opacity-100;
-    }
-  }
+    li {
+      &::before {
+        content: "[x] ";
+        @apply text-indigo-600/30 font-bold;
+      }
 
-  .tocNearMiss {
-    &::before {
-      content: "[x] ";
-      @apply text-indigo-600/75 dark:text-indigo-600/75 font-bold;
+      a {
+        @apply opacity-30 hover:opacity-100 transition-opacity;
+      }
     }
 
-    > a {
-      @apply opacity-75;
+    .tocActive {
+      &::before {
+        content: "[o] ";
+        @apply text-green-600 font-bold;
+      }
+
+      > a {
+        @apply opacity-100;
+      }
+    }
+
+    .tocNearMiss {
+      &::before {
+        content: "[x] ";
+        @apply text-indigo-600/60 font-bold;
+      }
+
+      > a {
+        @apply opacity-60;
+      }
     }
   }
 }
@@ -91,15 +101,15 @@ body {
   @apply flex flex-col gap-3;
 
   .field > label {
-    @apply block text-white;
+    @apply block text-black dark:text-dark-white;
   }
 
-  .field > input {
-    @apply w-full text-black;
+  .field > input, .field-input {
+    @apply w-full text-black dark:bg-surface-gray dark:text-dark-white;
   }
 
   .field > textarea {
-    @apply w-full text-black;
+    @apply w-full text-black dark:bg-surface-gray dark:text-dark-white;
   }
 }
 
@@ -135,5 +145,13 @@ body {
     td {
       @apply p-2;
     }
+  }
+}
+
+.prose {
+  @apply text-black dark:text-dark-white dark:font-light;
+
+  h1, h2, h3, h4, h5, h6, p, code, div, strong, li {
+    @apply text-black dark:text-dark-white;
   }
 }

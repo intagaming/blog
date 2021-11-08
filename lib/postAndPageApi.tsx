@@ -19,19 +19,24 @@ import {
 } from "./unified";
 import { PostOrPageData } from "../types/postOrPage";
 import { getPlaceholder } from "./images";
-import { supabase } from "../utils/supabaseClient";
-import { getObjectUrl } from "../utils/supabase";
+import { supabase, supabaseSecret } from "../utils/supabaseClient";
+import { hackAuthorAvatarUrl, hackPostCoverUrl } from "../utils/supabase";
 import { definitions } from "../types/supabase";
 import { getAuthor } from "../hooks/supabase/author/useAuthorQuery";
 
 export const getPostBySlug = async (
-  slug: string
+  slug: string,
+  secret: boolean = false
 ): Promise<definitions["posts"] | null> => {
-  const { data } = await supabase
+  const { data } = await (secret ? supabaseSecret : supabase)
     .from<definitions["posts"]>("posts")
     .select()
     .eq("slug", slug);
-  return data[0] ?? null;
+  // TODO: remove the hack
+  if (data[0]) {
+    return hackPostCoverUrl(data[0]);
+  }
+  return null;
 };
 
 export const getPageBySlug = async (
@@ -88,14 +93,15 @@ const getTocHastFromMarkdown = async (markdown: string): Promise<Element> => {
  * Also returns the post data json.
  */
 export const getPostDataBySlug = async (
-  slug: string
+  slug: string,
+  secret: boolean = false
 ): Promise<PostOrPageData | null> => {
-  const json = await getPostBySlug(slug);
+  const json = await getPostBySlug(slug, secret);
   if (!json) return null;
   const node = await getHtmlNodeFromMarkdown(json.content);
   const toc = await getTocHastFromMarkdown(json.content);
-  const coverImagePlaceholder = await getPlaceholder(getObjectUrl(json.cover));
-  const author = await getAuthor(json.user_id);
+  const coverImagePlaceholder = await getPlaceholder(json.cover);
+  const author = hackAuthorAvatarUrl(await getAuthor(json.user_id)); // TODO: remove hack
 
   return {
     node,
@@ -113,7 +119,7 @@ export const getPageDataBySlug = async (
   if (!json) return null;
   const node = await getHtmlNodeFromMarkdown(json.content);
   const toc = await getTocHastFromMarkdown(json.content);
-  const author = await getAuthor(json.user_id);
+  const author = hackAuthorAvatarUrl(await getAuthor(json.user_id)); // TODO: remove hack
 
   return { node, postOrPage: json, toc, author };
 };

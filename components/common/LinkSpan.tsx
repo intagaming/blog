@@ -1,7 +1,6 @@
 import { LinkProps } from "next/link";
 import { ReactNode } from "react";
 import { Node } from "unist";
-import AnimatedLinkSpan from "./AnimatedLinkSpan";
 import LinkWrapper from "./LinkWrapper";
 
 type Props = {
@@ -23,7 +22,7 @@ export type LinkSpanWithNode = {
 
 const LinkSpan = ({ href, children }: Props): JSX.Element => (
   <LinkWrapper href={href}>
-    <AnimatedLinkSpan>{children}</AnimatedLinkSpan>
+    <span className="hover:underline text-primary">{children}</span>
   </LinkWrapper>
 );
 

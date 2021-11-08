@@ -28,26 +28,26 @@ const TopNavigation = (): JSX.Element => {
     const onRouteStart = () => {
       setExtend(false);
     };
-    router.events.on("routeChangeStart", onRouteStart);
+    router?.events.on("routeChangeStart", onRouteStart);
 
     return () => {
-      router.events.off("routeChangeStart", onRouteStart);
+      router?.events.off("routeChangeStart", onRouteStart);
     };
-  }, [router.events]);
+  }, [router?.events]);
 
   return (
     <>
       <div
-        className={`nightwind-prevent-block fixed text-white w-screen flex flex-col md:flex-row z-50 ${
+        className={`fixed text-white w-screen flex flex-col md:flex-row z-50 bg-black gap-3 ${
           extend ? "h-full md:h-auto" : ""
         }`}
       >
-        <div className="bg-black flex justify-between items-center px-4 h-10 md:h-14">
+        <div className="flex justify-between items-center px-4 h-10 md:h-14">
           <LinkWrapper href="/">
-            <span className="md:text-lg md:font-bold px-2 text-white">
-              <span className="text-indigo-600 font-extrabold">&lt;</span>
+            <span className="md:text-lg md:font-bold px-2 text-white font-mono">
+              <span className="text-primary font-extrabold">&lt;</span>
               An Hoang
-              <span className="text-indigo-600 font-extrabold">/&gt;</span>
+              <span className="text-primary font-extrabold">/&gt;</span>
             </span>
           </LinkWrapper>
           <div className="flex gap-6 md:hidden">
@@ -56,7 +56,7 @@ const TopNavigation = (): JSX.Element => {
           </div>
         </div>
         <ul
-          className={`md:flex flex-col md:flex-row md:flex-1 md:justify-start gap-6 justify-center items-center bg-black text-2xl md:text-base ${
+          className={`md:flex flex-col md:flex-row md:flex-1 md:justify-start gap-6 justify-center items-center text-2xl md:text-base ${
             extend ? "flex flex-1" : "hidden"
           }`}
         >
@@ -69,7 +69,7 @@ const TopNavigation = (): JSX.Element => {
           ))}
         </ul>
         <ul
-          className={`md:pr-10 bg-black md:flex h-20 md:h-auto justify-center items-center gap-6 text-3xl md:text-2xl ${
+          className={`md:pr-10 md:flex h-20 md:h-auto justify-center items-center gap-6 text-3xl md:text-2xl ${
             !extend ? "hidden" : "flex"
           }`}
         >

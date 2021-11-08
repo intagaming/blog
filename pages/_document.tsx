@@ -18,7 +18,7 @@ class MyDocument extends Document {
 
   render(): JSX.Element {
     return (
-      <Html className="nightwind">
+      <Html>
         <Head />
         <body>
           <Main />

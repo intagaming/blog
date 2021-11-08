@@ -57,11 +57,11 @@ const DashboardPosts = (): JSX.Element => {
   };
 
   return (
-    <div>
+    <div className="flex-1">
       <h2>Posts</h2>
 
       <Link href={"/dashboard/posts/write"}>
-        <button className="bg-green-700 p-2">New Post</button>
+        <button className="bg-green-700 text-dark-white p-2">New Post</button>
       </Link>
       {isLoading && <p>Please wait...</p>}
       <table className="list-table" {...getTableProps()}>

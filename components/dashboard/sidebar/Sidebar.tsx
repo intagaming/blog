@@ -14,21 +14,24 @@ const Sidebar = (): JSX.Element => {
   useOnClickOutside(ref, handleClickOutside);
 
   return (
-    // Mobile sidebar
-    <>
-      <div className="p-2">
-        <Menu onClick={() => setExpand(true)} checked={expand} />
+    <div ref={ref} className="md:h-screen">
+      <div className="p-2 md:hidden">
+        <Menu
+          onClick={() => setExpand((lastExpand) => !lastExpand)}
+          checked={expand}
+        />
       </div>
 
       <div
-        ref={ref}
         className={`${
-          expand ? "fixed" : "hidden"
-        } h-[100vh] flex flex-col w-[66vw] bg-black z-50`}
+          expand
+            ? "flex fixed top-0 left-0 w-[66vw]"
+            : "hidden md:flex md:w-[15vw]"
+        } flex-col h-full bg-white dark:bg-surface-gray z-50 border-r`}
       >
         <SidebarContent />
       </div>
-    </>
+    </div>
   );
 };
 

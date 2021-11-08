@@ -1,20 +1,19 @@
-import { GetStaticProps } from "next";
-import { NextSeo } from "next-seo";
-import Layout from "../components/layout/Layout";
-import PostCard from "../components/postcard/PostCard";
-import LinkSpan from "../components/common/LinkSpan";
-import { supabase } from "../utils/supabaseClient";
 import { definitions } from "../types/supabase";
+import { GetStaticProps } from "next";
+import { supabase } from "../utils/supabaseClient";
+import Home from "../components/pages/Home";
+import { hackAuthorAvatarUrl, hackPostCoverUrl } from "../utils/supabase";
+import { NextSeo } from "next-seo";
 import { getPlaceholder } from "../lib/images";
-import { getObjectUrl } from "../utils/supabase";
 
-type Props = {
+interface Props {
   posts: definitions["posts"][];
+  authors: { [authorId: string]: definitions["authors"] };
   domainUrl: string;
-  coverPlaceholders: { [slug: string]: string };
-};
+  blurDataURLs: { [postId: number]: string };
+}
 
-const Home = ({ posts, domainUrl, coverPlaceholders }: Props): JSX.Element => (
+const HomePage = ({ posts, authors, domainUrl, blurDataURLs }: Props) => (
   <>
     <NextSeo
       title="Blog"
@@ -35,65 +34,50 @@ const Home = ({ posts, domainUrl, coverPlaceholders }: Props): JSX.Element => (
         ],
       }}
     />
-    <Layout>
-      <div className="nightwind-prevent nightwind-prevent-block bg-black px-[6vw] py-20 flex flex-col gap-6 md:items-center">
-        <h1 className="text-3xl text-white font-bold text-center">Hello!</h1>
-        <p className="text-gray-300 ">
-          My blog rants about universities and document thought process.
-          <br />
-          <LinkSpan href="/about">Read more about me.</LinkSpan>
-        </p>
-      </div>
-
-      <div className="bg-white dark:bg-[#121212] px-[4vw] py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {posts.map((post) => (
-          <PostCard
-            key={post.slug}
-            post={post}
-            coverPlaceholder={coverPlaceholders[post.slug]}
-          />
-        ))}
-      </div>
-    </Layout>
+    <Home posts={posts} authors={authors} blurDataURLs={blurDataURLs} />
   </>
 );
 
-export default Home;
+export default HomePage;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await supabase
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const { data: postsData } = await supabase
     .from<definitions["posts"]>("posts")
     .select()
-    .order("published_at", { ascending: false });
+    .order("published_at", { ascending: false })
+    .range(0, 9);
+  // TODO: remove the cover url hack
+  const posts = postsData.map((postData) => hackPostCoverUrl(postData));
 
-  if (data.length === 0) {
-    return {
-      // FIXME
-      //  This notFound here does not make sense. If there's
-      //  no posts available, it should shows empty. But this
-      //  works for now.
-      notFound: true,
-    };
-  }
+  const { data: authorsData } = await supabase
+    .from<definitions["authors"]>("authors")
+    .select();
+  const authors = {};
+  authorsData.forEach((authorData) => {
+    // TODO: remove the avatar url hack
+    authors[authorData.user_id] = hackAuthorAvatarUrl(authorData);
+  });
 
   const domainUrl =
     process.env.NEXT_PUBLIC_DOMAIN_URL || "http://localhost:3000";
 
-  const coverPlaceholders = {};
-  const placeholderPromises: Promise<void>[] = [];
-  data.forEach((post) => {
-    placeholderPromises.push(
-      (async () => {
-        coverPlaceholders[post.slug] = await getPlaceholder(
-          getObjectUrl(post.cover)
-        );
-      })()
-    );
+  const blurDataURLs = {};
+  const placeholderPromises = [];
+  posts.forEach((post) => {
+    const promise = async () => {
+      blurDataURLs[post.id] = await getPlaceholder(post.cover);
+    };
+    placeholderPromises.push(promise());
   });
   await Promise.all(placeholderPromises);
 
   return {
-    props: { posts: data, domainUrl, coverPlaceholders },
-    revalidate: 60,
+    props: {
+      posts,
+      authors,
+      domainUrl,
+      blurDataURLs,
+    },
+    revalidate: 5,
   };
 };

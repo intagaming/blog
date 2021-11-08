@@ -46,11 +46,11 @@ const DashboardPages = (): JSX.Element => {
   };
 
   return (
-    <div>
+    <div className="flex-1">
       <h2>Pages</h2>
 
       <Link href={"/dashboard/pages/write"}>
-        <button className="bg-green-700 p-2">New Page</button>
+        <button className="bg-green-700 text-dark-white p-2">New Page</button>
       </Link>
       {isLoading && <p>Please wait...</p>}
       <table className="list-table" {...getTableProps()}>

@@ -1,0 +1,64 @@
+name: Test workflow
+on:
+  - push
+jobs:
+  install:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.20.3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'pnpm'
+      - run: pnpm install
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+
+  unit-testing:
+    runs-on: ubuntu-20.04
+    needs: install
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.20.3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'pnpm'
+      - run: pnpm install
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+      - name: Run tests
+        run: pnpm test
+
+  e2e-testing:
+    runs-on: ubuntu-20.04
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.20.3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'pnpm'
+      - run: pnpm install
+      - name: E2E Testing
+        uses: cypress-io/github-action@v2
+        env:
+          NEXT_PUBLIC_DOMAIN_URL: 'http://localhost:3000'
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_TEST_SLUG: ${{ secrets.NEXT_TEST_SLUG }}
+          NEXT_SUPABASE_SECRET_KEY: ${{ secrets.NEXT_SUPABASE_SECRET_KEY }}
+        with:
+          install: false
+          build: pnpm build
+          start: pnpm start
+          wait-on: 'http://localhost:3000'
