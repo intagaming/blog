@@ -4,14 +4,16 @@ import { supabase } from "../utils/supabaseClient";
 import Home from "../components/pages/Home";
 import { hackAuthorAvatarUrl, hackPostCoverUrl } from "../utils/supabase";
 import { NextSeo } from "next-seo";
+import { getPlaceholder } from "../lib/images";
 
 interface Props {
   posts: definitions["posts"][];
   authors: { [authorId: string]: definitions["authors"] };
   domainUrl: string;
+  blurDataURLs: { [postId: number]: string };
 }
 
-const HomePage = ({ posts, authors, domainUrl }: Props) => (
+const HomePage = ({ posts, authors, domainUrl, blurDataURLs }: Props) => (
   <>
     <NextSeo
       title="Blog"
@@ -32,7 +34,7 @@ const HomePage = ({ posts, authors, domainUrl }: Props) => (
         ],
       }}
     />
-    <Home posts={posts} authors={authors} />
+    <Home posts={posts} authors={authors} blurDataURLs={blurDataURLs} />
   </>
 );
 
@@ -59,11 +61,22 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   const domainUrl =
     process.env.NEXT_PUBLIC_DOMAIN_URL || "http://localhost:3000";
 
+  const blurDataURLs = {};
+  const placeholderPromises = [];
+  posts.forEach((post) => {
+    const promise = async () => {
+      blurDataURLs[post.id] = await getPlaceholder(post.cover);
+    };
+    placeholderPromises.push(promise());
+  });
+  await Promise.all(placeholderPromises);
+
   return {
     props: {
       posts,
       authors,
       domainUrl,
+      blurDataURLs,
     },
     revalidate: 5,
   };
