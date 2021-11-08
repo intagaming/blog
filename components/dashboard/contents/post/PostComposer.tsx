@@ -1,25 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { definitions } from "../../../../types/supabase";
 import { useAuthUser } from "../../../../hooks/auth/useAuthUser";
-import Editor from "rich-markdown-editor";
 import ImagePicker from "./ImagePicker";
 import useTogglePublishPostMutation from "../../../../hooks/supabase/post/useTogglePublishPostMutation";
 import { toast } from "react-hot-toast";
 import { useQueryClient } from "react-query";
 import { postsKey } from "../../../../hooks/supabase/post/usePostsQuery";
 import slugify from "slugify";
-import { RefreshIcon } from "@heroicons/react/solid";
 import useUploadObjectMutation from "../../../../hooks/supabase/storage/useUploadObjectMutation";
 import { getObjectUrl } from "../../../../utils/supabase";
 import useDeletePostMutation from "../../../../hooks/supabase/post/useDeletePostMutation";
 import { useRouter } from "next/router";
 import Modal from "../../../dialog/Modal";
-import { removeTrailingBackslash } from "../../../../utils/general";
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
-import { AiOutlineFullscreen } from "react-icons/ai";
+import TitleField from "../../../common/composer/fields/TitleField";
+import SlugField from "../../../common/composer/fields/SlugField";
+import ContentField from "../../../common/composer/fields/ContentField";
 
 interface IFormInputs {
   title: string;
@@ -63,8 +61,6 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
       content: post?.content,
     },
   });
-
-  const editorRef = useRef<Editor>();
 
   const submit: SubmitHandler<IFormInputs> = (data) => {
     const composedPost: ComposedPost = {
@@ -153,8 +149,6 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
     togglePublish();
   };
 
-  const contentFullScreenHandle = useFullScreenHandle();
-
   return (
     <div className="flex flex-col gap-2 md:px-20 md:py-4">
       <h2 className="text-xl">Composer</h2>
@@ -198,29 +192,13 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
         )}
 
         <div className="flex flex-col md:flex-row justify-between gap-3">
-          <div className="field flex-1">
-            <label htmlFor="title">Title</label>
-            <input type="text" {...register("title")} />
-            <p>{errors.title?.message}</p>
-          </div>
+          <TitleField register={register} errors={errors} />
 
-          <div className="field flex-1">
-            <label htmlFor="slug">Slug</label>
-            <div className="flex w-full bg-white">
-              <input
-                className="w-full text-black"
-                type="text"
-                {...register("slug")}
-              />
-              <button
-                onClick={handleGenerateSlug}
-                className="w-10 p-2 border-2"
-              >
-                <RefreshIcon className="text-black" />
-              </button>
-            </div>
-            <p>{errors.slug?.message}</p>
-          </div>
+          <SlugField
+            register={register}
+            errors={errors}
+            handleGenerateSlug={handleGenerateSlug}
+          />
         </div>
 
         <div className="flex flex-col md:flex-row gap-3">
@@ -240,37 +218,12 @@ const PostComposer = ({ post, onCommit }: Props): JSX.Element => {
           </div>
         </div>
 
-        <div className="field">
-          <label htmlFor="content">Content</label>
-          <button
-            onClick={contentFullScreenHandle.enter}
-            className="p-2 border"
-          >
-            <AiOutlineFullscreen />
-          </button>
-          <FullScreen handle={contentFullScreenHandle}>
-            <div
-              className={`${
-                contentFullScreenHandle.active ? "h-screen" : "h-[80vh]"
-              } bg-white overflow-auto border`}
-              onClick={(e) => {
-                if (e.target !== e.currentTarget) return;
-                // When clicking the background of this div, focus editor at the end.
-                editorRef.current.focusAtEnd();
-              }}
-            >
-              <Editor
-                ref={editorRef}
-                defaultValue={post?.content}
-                uploadImage={handleUploadImage}
-                onChange={(getFn) =>
-                  setValue("content", removeTrailingBackslash(getFn()))
-                }
-              />
-            </div>
-          </FullScreen>
-          <p>{errors.content?.message}</p>
-        </div>
+        <ContentField
+          errors={errors}
+          handleUploadImage={handleUploadImage}
+          setValue={setValue}
+          defaultValue={post?.content}
+        />
 
         <button
           className="bg-indigo-700 text-dark-white p-2"
